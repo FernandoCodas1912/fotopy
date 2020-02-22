@@ -1,0 +1,78 @@
+-- lista de cambios --
+19-10
+    crear servidor web eshost
+    levantar el proyecto
+    modificamos footer plugin version
+    actualizamos la version del framework para que funcione el bk bd
+
+
+
+12-10 
+    cambios en la bd, se add campo tipoventa a tabla venta
+    se creo modulo de comprobantes
+    en ventas al elejir comprobante ya calcula solo la serie y el ultimo nro
+    en ventas se puede elegir ticket factura o boleta
+    en ventas, al guardar, ya le suma 1 al ultimo nro de comprobante.
+    se puede editar el ultimo nro y la seria en comprobantes
+    se oculto boton para agregar nuevo comprobante, el id es importante
+    se oculto para eliminar el comprobante, esto no es aplicable
+
+
+
+
+
+
+10-08   Cambios en la bd. se agrega campo tipoventa en tabla venta
+        Se modifico y adapto los controladores venta al nuevo campo
+        Se adapto timepicker
+        Se creo nuevo controlador de presupuestos
+        Se modifico menu, estira controlador de presupuestos
+        se adaptaron varios archivos para cargar y leer presupuestos
+        Se agrego modulo para copia de seguridad del sistema
+
+
+-- lista de faltantes --
+
+falta modulo de empleados para poder crear usuarios.. campos basicos
+
+agregar modulo copia de seguridad de la base de datos ok 
+
+
+*falta modulo de comprobantes PARA CARGAR serie y nro ok
+
+
+* ventas no guarda nrocomprobante autogenerado ok
+
+* Falta que el presupuesto se pueda editar y convertir a venta.
+* Falta adaptar el dashboard con los datos estadisticos
+* sitio web debe adaptarse, con un boton para pedir presupuestos, debe abrir un modal(solicitante, email,celular, producto y precio). y debe enviar un correo
+* sitio web mejorar caracteres especiales
+* desarrollar modulo de presupuestos, con los estados, atendido, reservado, terminado
+* sitio web para los cambios de opciones de sus combos, los nombres mas especificos. o codificarlos
+* averiguar los datos necesarios, solo los necesarios para la reserva
+* copiar archivo tesis.docx a carpeta fotopy y levantar a github ok
+-- lista de problemas o bugs --
+
+-- lista de mejoras posibles ---
+* desarrollar la lista de actividades a realizar desde el inicio de la tesis, y el proyecto fotopy las fechas deberian concordar con el progreso actual
+* Crear diagramas gantt y pert camino critico en base a una lista detallada de actividades
+
+
+
+faltantes
+
+MODULO DE PRESUPUESTOS COPIAR DE GESTOCK
+MODULO APERTURA CIERRE CAJA COPIAR DE GESTOCK
+MODULO MOVIMIENTOS
+
+CALENDARIO, HACER FUNCIONAR CRUD 
+CREAR MANUAL
+
+07/09/19
+Verificacion de la BD - Se elimina la entidad PAIS y se deja PAISES (consultar sobre el 'estado' y 'gentilicio')
+COnsultar que es boleta 'en negro'
+COnsultar que campos mas requiere en la BD / Caja
+Add a cabecera de VENTA condicion de venta, RUC, dejamos cliente en fCTURA o colocamos como razon social?, direccion aparece en factura pero no en la BD, preguntar sobre TIMBRADO, y liquidacion 10% en vez de descuento??
+Eliminar ciudad de BD????? y reemplazar por domicilio GPS del cliente de la ccasa y lugar de evento (donde se almacenaria en BD?)
+En vista de NUEVA VENTA aparece FACTURA y no boleta
+Add tipo_usuario a empleado y caargo dejar como tal
