@@ -16,6 +16,7 @@ class Usuarios_model extends CI_Model {
 			return false;
 		}
 	}
+
 	//este metodo es para mostrar todos los campos de la tabla
 	public function getUsuarios(){
 		$this->db->select("u.*, t.descripcion as perfil, e.nomape as nombre"); //selecc campos

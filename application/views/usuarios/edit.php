@@ -39,16 +39,16 @@
             <select id="projectinput5" name="edit_id_perfil" class="form-control" required="">
 
                 <option value="" selected="" disabled="">Seleccione</option>
-                <?php foreach($tipos as $perfil):?>
+                <?php foreach($perfiles as $perfil):?>
                     <?php 
-                    if ($usuarios->id_tipo_usuario==$perfil->id_tipo_usuario){
+                    if ($usuarios->id_perfil==$perfil->id_perfil){
                         $selected="selected";
                       } else {
                         $selected="";
                       }
                     ?>
                
-                  <option value="<?php echo $perfil->id_tipo_usuario;?>"<?php echo $selected;?>> <?php echo $perfil->descripcion; ?></option>
+                  <option value="<?php echo $perfil->id_perfil;?>"<?php echo $selected;?>> <?php echo $perfil->descripcion; ?></option>
               <?php endforeach; ?>
           </select>
       </div>

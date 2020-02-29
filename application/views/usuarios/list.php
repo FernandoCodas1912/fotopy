@@ -162,12 +162,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="projectinput5">Tipo de Usuario</label>
+                                                <label for="projectinput5">Perfil</label>
                                                 <select id="projectinput5" name="id_perfil" class="form-control" required="">
 
                                                     <option value="" selected="" disabled="">Seleccione</option>
-                                                    <?php foreach($tipos as $perfil):?>
-                                                      <option value="<?php echo $perfil->id_tipo_usuario;?>"> <?php echo $perfil->descripcion; ?></option>
+                                                    <?php foreach($perfiles as $perfil):?>
+                                                      <option value="<?php echo $perfil->id_perfil;?>"> <?php echo $perfil->descripcion; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>

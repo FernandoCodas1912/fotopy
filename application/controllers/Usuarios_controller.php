@@ -11,7 +11,7 @@ class Usuarios_controller extends CI_Controller
 			redirect(base_url());
 		}
 		$this->load->model("Usuarios_model"); // esto abre el modelo
-		$this->load->model("Tipos_model"); // esto abre el modelo
+		$this->load->model("Perfiles_model"); // esto abre el modelo
 		$this->load->model("Empleados_model"); // esto abre el modelo
 	}
 	//esta funcion es la primera que se carga
@@ -20,7 +20,7 @@ class Usuarios_controller extends CI_Controller
 		//cargamos un array usando el modelo
 		$data = array(
 			'usuarios'=> $this->Usuarios_model->getUsuarios(),
-			'tipos'=> $this->Tipos_model->getTipos(),
+			'perfiles'=> $this->Perfiles_model->getPerfiles(),
 			'empleados'=> $this->Empleados_model->getEmpleados(),
 		);
 		//llamamos a las vistas para mostrar
@@ -107,7 +107,7 @@ class Usuarios_controller extends CI_Controller
 
 		$data = array(
 			'usuarios'=> $this->Usuarios_model->getUsuario($id),
-			'tipos'=> $this->Tipos_model->getTipos(),
+			'perfiles'=> $this->Perfiles_model->getPerfiles(),
 			'empleados'=> $this->Empleados_model->getEmpleados(),
 	
 		);
