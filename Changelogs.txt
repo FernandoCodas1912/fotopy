@@ -1,5 +1,12 @@
 -- lista de cambios --
 
+29-02-2020
+    Added sweet alert
+    Added modal apertura caja
+    Cambio la bd
+
+
+
 22-02-2020
     Modulo de Perfiles de usuarios ok
         copiar controlador de categorias y renombrar a Perfiles
