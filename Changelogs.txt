@@ -1,4 +1,26 @@
 -- lista de cambios --
+
+22-02-2020
+    Modulo de Perfiles de usuarios ok
+        copiar controlador de categorias y renombrar a Perfiles
+        copiar modelo de categorias y renombrar a Perfiles
+    Modal Apertura Cierre y de Caja
+    Modal Cobrar contado
+    Modulo de movimientos
+    Control de Versiones del codigo ok
+       
+
+09-11
+    al iniciar tocar modulos que afecten caja debe aparecer modal de apertura de Caja, guardar en movimientos.
+    las ventas al contado deben poder ser cobradas
+    cuando se selecciona comprobante factura. debe generar la factura preimpresa con iva 10
+    las cobranzas hechas deben guardarse en una tabla de movimientos
+    acceder a estos movimientos desde el menu cobranzas
+
+
+
+
+
 19-10
     crear servidor web eshost
     levantar el proyecto
