@@ -64,10 +64,13 @@
             <!-- User -->
             <div class="user-box">
                 <div class="user-img">
-                    <img src="<?php echo base_url(); ?>assets/images/users/fer.jpg" alt="user-img" title="Administrador" class="img-circle img-thumbnail img-responsive">
+                    <img src="<?php echo base_url(); ?>assets/images/users/fer.jpg" alt="user-img" title="Administrador"
+                        class="img-circle img-thumbnail img-responsive">
                     <div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>
                 </div>
-                <h5><a href="#"><?php echo $this->session->userdata("id_usuario") . "-" . $this->session->userdata("username"); ?></a> </h5>
+                <h5><a
+                        href="#"><?php echo $this->session->userdata("id_usuario") . "-" . $this->session->userdata("username"); ?></a>
+                </h5>
             </div>
             <!-- End User -->
 
@@ -76,26 +79,32 @@
                 <ul>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>" class="waves-effect"><i class="fa fa-calendar"></i> <span> Actividades </span> </a>
+                        <a href="<?php echo base_url(); ?>" class="waves-effect"><i class="fa fa-calendar"></i> <span>
+                                Actividades </span> </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect"><i class="fa fa-calendar-plus-o"></i> <span> Reservas </span> </a>
+                        <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect"><i
+                                class="fa fa-calendar-plus-o"></i> <span> Reservas </span> </a>
                     </li>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-camera"></i> <span> Productos/Servicios </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-camera"></i> <span>
+                                Productos/Servicios </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Servicios_controller">Gestionar Productos/Servicios </a></li>
+                            <li><a href="<?php echo base_url(); ?>Servicios_controller">Gestionar Productos/Servicios
+                                </a></li>
                             <li><a href="<?php echo base_url(); ?>Categorias_controller">Gestionar Categorias </a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect"><i class="fa fa-send"></i> <span> Presupuestos </span> </a>
+                        <a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect"><i
+                                class="fa fa-send"></i> <span> Presupuestos </span> </a>
                     </li>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-dollar (alias)"></i> <span> Ventas </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-dollar (alias)"></i> <span>
+                                Ventas </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Ventas_controller/add">Nueva Venta </a></li>
                             <li><a href="<?php echo base_url(); ?>Ventas_controller">Gestionar Ventas </a></li>
@@ -103,20 +112,20 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="<?php echo base_url(); ?>Comprobantes_controller" class="waves-effect"><i class="fa fa-newspaper-o"></i> <span> Comprobantes </span> </a>
-                    </li>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span> Mantenimientos </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span>
+                                Mantenimientos </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Empleados_controller">Empleado </a></li>
+                            <li><a href="<?php echo base_url(); ?>Comprobantes_controller">Comprobantes</a></li>
+                            <li><a href="<?php echo base_url(); ?>Empleados_controller">Empleados </a></li>
                             <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipo de Evento </a></li>
                             <li><a href="<?php echo base_url(); ?>Horarios_controller">Horario Reserva </a></li>
                         </ul>
                     </li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-phone"></i> <span> Contactos </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-phone"></i> <span> Personas
+                            </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Clientes_controller">Clientes</a></li>
                             <li><a href="<?php echo base_url(); ?>Proveedores_controller">Proveedores </a></li>
@@ -124,7 +133,8 @@
                     </li>
 
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-circle"></i> <span> Usuarios </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-circle"></i> <span>
+                                Usuarios </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Usuarios_controller">Gestionar Usuarios </a></li>
                             <li><a href="<?php echo base_url(); ?>Usuarios_controller">Permisos por Perfil</a></li>
@@ -132,7 +142,8 @@
                         </ul>
                     </li>
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Tesoreria </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Tesoreria
+                            </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Aperturas_controller">Apertura/Cierre Caja </a></li>
                             <li><a href="<?php echo base_url(); ?>Movimientos_controller">Movimientos </a></li>
@@ -140,7 +151,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Bk" class="waves-effect"><i class="fa fa-refresh"></i> <span> Copia de Seguridad </span> </a>
+                        <a href="<?php echo base_url(); ?>Bk" class="waves-effect"><i class="fa fa-refresh"></i> <span>
+                                Copia de Seguridad </span> </a>
                     </li>
 
                 </ul>
