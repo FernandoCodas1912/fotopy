@@ -78,12 +78,8 @@
                     <li>
                         <a href="<?php echo base_url(); ?>" class="waves-effect"><i class="fa fa-calendar"></i> <span> Actividades </span> </a>
                     </li>
-
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar-plus-o"></i> <span> Reservas </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Reservas_controller">Gestionar Reservas</a></li>
-                        </ul>
+                    <li>
+                        <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect"><i class="fa fa-calendar-plus-o"></i> <span> Reservas </span> </a>
                     </li>
 
                     <li class="has_sub">
@@ -94,14 +90,9 @@
                         </ul>
                     </li>
 
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Presupuestos </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Presupuestos_controller">Gestionar Presupuestos</a></li>
-                        </ul>
+                    <li>
+                        <a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect"><i class="fa fa-send"></i> <span> Presupuestos </span> </a>
                     </li>
-
-                 
 
                     <li class="has_sub">
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-dollar (alias)"></i> <span> Ventas </span> <span class="menu-arrow"></span></a>
@@ -112,17 +103,8 @@
                         </ul>
                     </li>
 
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-line-chart"></i> <span> Cobranzas </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Cobros_controller">Gestionar Cobranzas </a></li>
-                        </ul>
-                    </li>
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-newspaper-o"></i> <span> Comprobantes </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Comprobantes_controller">Gestionar Comprobantes </a></li>
-                        </ul>
+                    <li>
+                        <a href="<?php echo base_url(); ?>Comprobantes_controller" class="waves-effect"><i class="fa fa-newspaper-o"></i> <span> Comprobantes </span> </a>
                     </li>
 
                     <li class="has_sub">
@@ -147,6 +129,14 @@
                             <li><a href="<?php echo base_url(); ?>Usuarios_controller">Gestionar Usuarios </a></li>
                             <li><a href="<?php echo base_url(); ?>Usuarios_controller">Permisos por Perfil</a></li>
                             <li><a href="<?php echo base_url(); ?>Perfiles_controller">Gestionar Perfiles </a></li>
+                        </ul>
+                    </li>
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Tesoreria </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="<?php echo base_url(); ?>Aperturas_controller">Apertura/Cierre Caja </a></li>
+                            <li><a href="<?php echo base_url(); ?>Movimientos_controller">Movimientos </a></li>
+                            <li><a href="<?php echo base_url(); ?>Cobros_controller">Gestionar Cobranzas </a></li>
                         </ul>
                     </li>
                     <li>
