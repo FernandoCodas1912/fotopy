@@ -16,7 +16,7 @@ class Perfiles_model extends CI_MOdel
 
     public function getPerfil($id)
     {
-        $this->db->where('id_perfil', $id);
+        $this->db->where('id_perfil_usuario', $id);
         $resultado = $this->db->get($this->tabla);
 
         return $resultado->row();
@@ -29,7 +29,7 @@ class Perfiles_model extends CI_MOdel
 
     public function update($id, $data)
     {
-        $this->db->where('id_perfil', $id);
+        $this->db->where('id_perfil_usuario', $id);
 
         return $this->db->update($this->tabla, $data);
     }

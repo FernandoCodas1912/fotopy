@@ -27,5 +27,21 @@ $(document).ready(function(){
           }
       });
     })
+
+
+    //esto es para abrir modal cambio clave
+    $(".btn-cambio_clave").on("click", function(){
+      var id= $(this).val();
+      $('#edit_id_empleado').attr('disabled', true);
+      $('#edit_username').attr('disabled', true);
+      $.ajax({
+        url: base_url + "Usuarios_controller/cambio_clave/" + id,
+        type: "POST",
+        success:function(resp){
+          $("#modal-cambio_clave .modal-body").html(resp);
+           // alert(resp);
+          }
+      });
+    })
 });
 </script>

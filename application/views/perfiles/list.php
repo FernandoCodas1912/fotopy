@@ -6,7 +6,7 @@
 	<div class="content">
 
 		<?php
-		if($this->session->flashdata("success")): ?>
+        if ($this->session->flashdata('success')): ?>
 			<div class="alert alert-success" role="alert">
 				<button type="button" class="close" data-dismiss="alert">
 					&times;
@@ -15,13 +15,13 @@
 					¡Buen Trabajo!
 				</strong>
 				<p>
-					<?php echo $this->session->flashdata("success")?>
+					<?php echo $this->session->flashdata('success'); ?>
 				</p>
 			</div>
 
 		<?php endif; ?>
 		<?php
-		if($this->session->flashdata("error")): ?>
+        if ($this->session->flashdata('error')): ?>
 			<div class="alert alert-danger" role="alert">
 				<button type="button" class="close" data-dismiss="alert">
 					&times;
@@ -30,7 +30,7 @@
 					¡Error!
 				</strong>
 				<p>
-					<?php echo $this->session->flashdata("error")?>
+					<?php echo $this->session->flashdata('error'); ?>
 				</p>
 			</div>
 		<?php endif; ?>
@@ -58,44 +58,41 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php if(!empty($perfiles)):?>
-									<?php foreach($perfiles as $perfil):?>
+								<?php if (!empty($perfiles)):?>
+									<?php foreach ($perfiles as $perfil):?>
 										<tr>
-											<td><?php echo $perfil->id_perfil;?></td>
-											<td><?php echo $perfil->descripcion;?></td>
-											<?php 
+											<td><?php echo $perfil->id_perfil_usuario; ?></td>
+											<td><?php echo $perfil->descripcion; ?></td>
+											<?php
 
-											$estado = $perfil->estado;
-											if($estado == 1)
-											{
-												$estado2     = "Activo";$label_class = 'label-success';
-											}
-											else
-											{
-												if($estado == 2)
-												{
-													$estado2     = "Inactivo";$label_class = 'label-warning';
-												}
-												else
-												{
-													$estado2     = "Anulado";$label_class = 'label-danger';
-												}
-											}
-											?>
-											<td><span class="label <?php echo $label_class;?>"><?php echo $estado2; ?></span></td>
+                                            $estado = $perfil->estado;
+                                            if ($estado == 1) {
+                                                $estado2 = 'Activo';
+                                                $label_class = 'label-success';
+                                            } else {
+                                                if ($estado == 2) {
+                                                    $estado2 = 'Inactivo';
+                                                    $label_class = 'label-warning';
+                                                } else {
+                                                    $estado2 = 'Anulado';
+                                                    $label_class = 'label-danger';
+                                                }
+                                            }
+                                            ?>
+											<td><span class="label <?php echo $label_class; ?>"><?php echo $estado2; ?></span></td>
 											<td>
 												<!-- usa del modelo la funcion correspondiente -->
-												<button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $perfil->id_perfil;?>" title="Ver Detalles de la perfil">
+												<button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $perfil->id_perfil_usuario; ?>" title="Ver Detalles de la perfil">
 													<i class="fa fa-eye">
 													</i> Ver
 												</button>
 												<!-- usa del modelo la funcion correspondiente -->
-												<button type="button" class="btn btn-warning btn-sm btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $perfil->id_perfil;?>" title="Editar Detalles de la perfil">
+												<button type="button" class="btn btn-warning btn-sm btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $perfil->id_perfil_usuario; ?>" title="Editar Detalles de la perfil">
 													<i class="fa fa-pencil">
 													</i> Editar
 												</button>
 
-												<a href="<?php echo base_url();?>Perfiles_controller/delete/<?php echo $perfil->id_perfil;?>" class="btn btn-sm btn-danger btn-delete" title="Inactivar perfil">
+												<a href="<?php echo base_url(); ?>Perfiles_controller/delete/<?php echo $perfil->id_perfil_usuario; ?>" class="btn btn-sm btn-danger btn-delete" title="Inactivar perfil">
 													<i class="fa fa-trash-o">
 													</i> Anular
 												</a>
@@ -123,7 +120,7 @@
                             <h5 class="modal-title" id="exampleModalLabel2">NUEVO PERFIL</h5>
                         </div>
                         <div class="modal-body">
-                            <form class="form" action="<?php echo base_url();?>Perfiles_controller/store" method="POST" id="formAdd" name="formAdd" >
+                            <form class="form" action="<?php echo base_url(); ?>Perfiles_controller/store" method="POST" id="formAdd" name="formAdd" >
                                 <div class="form-body">
                                     <div class="form-group">
                                         <label for="timesheetinput1">Nombre del Perfil</label>
@@ -177,7 +174,7 @@
                     </button>
                     <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL PERFIL</h5>
                 </div>
-                <form action="<?php echo base_url();?>Perfiles_controller/update" method="POST" id="formEdit" name="formEdit" >
+                <form action="<?php echo base_url(); ?>Perfiles_controller/update" method="POST" id="formEdit" name="formEdit" >
                     <div class="modal-body">
                   	<!-- AQUI SE CARGA DESDE EL CONTROLADOR -->
                     </div><!-- end div class modal body--> 
