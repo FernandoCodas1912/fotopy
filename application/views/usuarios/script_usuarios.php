@@ -1,17 +1,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
-     var base_url= "<?php echo base_url();?>";
+     var base_url= "<?php echo base_url(); ?>";
     
     //esto es para abrir modal ver
     $(".btn-ver").on("click", function(){
       var id= $(this).val();
-      //alert(id);
       $.ajax({
         url: base_url + "Usuarios_controller/view/" + id,
         type: "POST",
         success:function(resp){
           $("#modal-ver .modal-body").html(resp);
-            //alert(resp);
+            // alert(resp);
           }
       });
     })
@@ -19,7 +18,6 @@ $(document).ready(function(){
     //esto es para abrir modal editar
     $(".btn-editar").on("click", function(){
       var id= $(this).val();
-     // alert(id);
       $.ajax({
         url: base_url + "Usuarios_controller/edit/" + id,
         type: "POST",

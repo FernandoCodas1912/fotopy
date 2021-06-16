@@ -66,7 +66,7 @@ class Usuarios_controller extends CI_Controller
 				$data = array(
 					'id_empleado' 		=>	$_POST['id_empleado'] ,
 					'username'    		=>	$_POST['username'] ,
-					'id_tipo_usuario' 		=>	$_POST['id_perfil'] ,
+					'id_perfil_usuario' 		=>	$_POST['id_perfil'] ,
 					'date_add'		 	=>	$FechaAltaUSuario,
 					'estado'	 		=>	1 ,
 					'password'				=>	sha1($_POST['clave'])
@@ -143,7 +143,7 @@ class Usuarios_controller extends CI_Controller
 					//'NomApeUsuario' 	=>	strtoupper($_POST['NomApeUsuario']),
 					'username'    		=>	$_POST['edit_username'] ,
 					//'DirUsuario' 		=>	strtoupper($_POST['DirUsuario']) ,
-					'id_tipo_usuario' 		=>	$_POST['edit_id_perfil'] ,
+					'id_perfil_usuario' 		=>	$_POST['edit_id_perfil'] ,
 					'id_empleado' 		=>	$_POST['edit_id_empleado'] ,
 					//'UltModUsuario'		=>  $fechaUpdate
 					'estado' 		=>	1 

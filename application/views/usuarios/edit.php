@@ -5,15 +5,15 @@
             <select id="projectinput5" name="edit_id_empleado" class="form-control" required>
 
                 <option value="" selected="" disabled="">Seleccione</option>
-                <?php foreach($empleados as $empleado):?>
-                    <?php 
-                    if ($usuarios->id_empleado==$empleado->id_empleado){
-                        $selected="selected";
-                      } else {
-                        $selected="";
-                      }
+                <?php foreach ($empleados as $empleado):?>
+                    <?php
+                    if ($usuarios->id_empleado == $empleado->id_empleado) {
+                        $selected = 'selected';
+                    } else {
+                        $selected = '';
+                    }
                     ?>
-                  <option value="<?php echo $empleado->id_empleado;?>"<?php echo $selected;?> > <?php echo $empleado->nomape; ?></option>
+                  <option value="<?php echo $empleado->id_empleado; ?>"<?php echo $selected; ?> > <?php echo $empleado->nomape; ?></option>
               <?php endforeach; ?>
           </select>
       </div>
@@ -39,16 +39,16 @@
             <select id="projectinput5" name="edit_id_perfil" class="form-control" required="">
 
                 <option value="" selected="" disabled="">Seleccione</option>
-                <?php foreach($perfiles as $perfil):?>
-                    <?php 
-                    if ($usuarios->id_perfil==$perfil->id_perfil){
-                        $selected="selected";
-                      } else {
-                        $selected="";
-                      }
+                <?php foreach ($perfiles as $perfil):?>
+                    <?php
+                    if ($usuarios->id_perfil_usuario == $perfil->id_perfil_usuario) {
+                        $selected = 'selected';
+                    } else {
+                        $selected = '';
+                    }
                     ?>
                
-                  <option value="<?php echo $perfil->id_perfil;?>"<?php echo $selected;?>> <?php echo $perfil->descripcion; ?></option>
+                  <option value="<?php echo $perfil->id_perfil_usuario; ?>"<?php echo $selected; ?>> <?php echo $perfil->descripcion; ?></option>
               <?php endforeach; ?>
           </select>
       </div>

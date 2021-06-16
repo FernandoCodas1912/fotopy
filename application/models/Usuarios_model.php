@@ -21,7 +21,7 @@ class Usuarios_model extends CI_Model {
 	public function getUsuarios(){
 		$this->db->select("u.*, t.descripcion as perfil, e.nomape as nombre"); //selecc campos
 		$this->db->from("usuario u"); //desde tabla con alias
-		$this->db->join("tipo_usuario t", "u.id_tipo_usuario=t.id_tipo_usuario");//une los campos por su pk=fk
+		$this->db->join("perfil_usuario t", "u.id_perfil_usuario=t.id_perfil_usuario");//une los campos por su pk=fk
 		$this->db->join("empleado e", "e.id_empleado=u.id_empleado");//une los campos por su pk=fk
 		//$this->db->where("u.estado", "1");
 		$resultados= $this->db->get();
@@ -38,7 +38,7 @@ class Usuarios_model extends CI_Model {
 	public function getUsuario($id){
 		$this->db->select("u.*, t.descripcion as perfil, e.nomape as nombre"); //selecc campos
 		$this->db->from("usuario u"); //desde tabla con alias
-		$this->db->join("tipo_usuario t", "u.id_tipo_usuario=t.id_tipo_usuario");//une los campos por su pk=fk
+		$this->db->join("perfil_usuario t", "u.id_perfil_usuario=t.id_perfil_usuario");//une los campos por su pk=fk
 		$this->db->join("empleado e", "e.id_empleado=u.id_empleado");//une los campos por su pk=fk
 		$this->db->where("id_usuario",$id);
 		$resultado= $this->db->get();

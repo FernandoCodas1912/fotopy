@@ -104,4 +104,4 @@ COnsultar que campos mas requiere en la BD / Caja
 Add a cabecera de VENTA condicion de venta, RUC, dejamos cliente en fCTURA o colocamos como razon social?, direccion aparece en factura pero no en la BD, preguntar sobre TIMBRADO, y liquidacion 10% en vez de descuento??
 Eliminar ciudad de BD????? y reemplazar por domicilio GPS del cliente de la ccasa y lugar de evento (donde se almacenaria en BD?)
 En vista de NUEVA VENTA aparece FACTURA y no boleta
-Add tipo_usuario a empleado y caargo dejar como tal
+Add perfil_usuario a empleado y caargo dejar como tal

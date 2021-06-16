@@ -6,7 +6,7 @@
 	<div class="content">
 
 		<?php
-		if($this->session->flashdata("success")): ?>
+        if ($this->session->flashdata('success')): ?>
 			<div class="alert alert-success" role="alert">
 				<button type="button" class="close" data-dismiss="alert">
 					&times;
@@ -15,13 +15,13 @@
 					¡Buen Trabajo!
 				</strong>
 				<p>
-					<?php echo $this->session->flashdata("success")?>
+					<?php echo $this->session->flashdata('success'); ?>
 				</p>
 			</div>
 
 		<?php endif; ?>
 		<?php
-		if($this->session->flashdata("error")): ?>
+        if ($this->session->flashdata('error')): ?>
 			<div class="alert alert-danger" role="alert">
 				<button type="button" class="close" data-dismiss="alert">
 					&times;
@@ -30,7 +30,7 @@
 					¡Error!
 				</strong>
 				<p>
-					<?php echo $this->session->flashdata("error")?>
+					<?php echo $this->session->flashdata('error'); ?>
 				</p>
 			</div>
 		<?php endif; ?>
@@ -57,54 +57,51 @@
                                                     </tr>
                                                 </thead>
 							<tbody>
-                                                    <?php if(!empty($usuarios)):?>
-                                                    <?php foreach($usuarios as $usuario):?>
+                                                    <?php if (!empty($usuarios)):?>
+                                                    <?php foreach ($usuarios as $usuario):?>
                                                         <tr>
-                                                            <td><?php echo $usuario->id_usuario;?></td>
-                                                            <td><?php echo $usuario->username;?></td>
-                                                            <td><?php echo $usuario->nombre;?></td>
-                                                            <td><?php echo $usuario->perfil;?></td>
-                                                            <?php 
+                                                            <td><?php echo $usuario->id_usuario; ?></td>
+                                                            <td><?php echo $usuario->username; ?></td>
+                                                            <td><?php echo $usuario->nombre; ?></td>
+                                                            <td><?php echo $usuario->perfil; ?></td>
+                                                            <?php
                                                                 $date_added = $usuario->date_add;
                                                                 $date_added = date('d-M-Y H:i:s', strtotime($date_added));
-                                                                
+
                                                                 $date_mod = $usuario->date_mod;
                                                                 $date_mod = date('d-M-Y H:i:s', strtotime($date_mod));
 
                                                                 $estado = $usuario->estado;
 
-                                                                if($estado == 1)
-                                                                {
-                                                                    $estado2     = "Activo";$label_class = 'label-success';
-                                                                }
-                                                                else
-                                                                {
-                                                                    if($estado == 2)
-                                                                    {
-                                                                        $estado2     = "Inactivo";$label_class = 'label-warning';
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        $estado2     = "Anulado";$label_class = 'label-danger';
+                                                                if ($estado == 1) {
+                                                                    $estado2 = 'Activo';
+                                                                    $label_class = 'label-success';
+                                                                } else {
+                                                                    if ($estado == 2) {
+                                                                        $estado2 = 'Inactivo';
+                                                                        $label_class = 'label-warning';
+                                                                    } else {
+                                                                        $estado2 = 'Anulado';
+                                                                        $label_class = 'label-danger';
                                                                     }
                                                                 }
                                                             ?>
-                                                            <td><?php echo $date_added;?></td>
-                                                            <td><?php echo $date_mod;?></td>
-                                                            <td><span class="label <?php echo $label_class;?>"><?php echo $estado2; ?></span></td>
+                                                            <td><?php echo $date_added; ?></td>
+                                                            <td><?php echo $date_mod; ?></td>
+                                                            <td><span class="label <?php echo $label_class; ?>"><?php echo $estado2; ?></span></td>
                                                             <td>
                                                                  <!-- usa del modelo la funcion correspondiente -->
-                                                                        <button type="button" class="btn btn-success btn-xs btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $usuario->id_usuario;?>" title="Ver Detalles">
+                                                                        <button type="button" class="btn btn-success btn-xs btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $usuario->id_usuario; ?>" title="Ver Detalles">
                                                                             <i class="fa fa-eye">
                                                                             </i> Ver
                                                                         </button>
                                                                         <!-- usa del modelo la funcion correspondiente -->
-                                                                        <button type="button" class="btn btn-warning btn-xs btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $usuario->id_usuario;?>" title="Editar Detalles">
+                                                                        <button type="button" class="btn btn-warning btn-xs btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $usuario->id_usuario; ?>" title="Editar Detalles">
                                                                             <i class="fa fa-pencil">
                                                                             </i> Editar
                                                                         </button>
 
-                                                                <a href="<?php echo base_url();?>Usuarios_controller/delete/<?php echo $usuario->id_usuario;?>" class="btn btn-xs btn-danger btn-delete" title="Inactivar Usuario">
+                                                                <a href="<?php echo base_url(); ?>Usuarios_controller/delete/<?php echo $usuario->id_usuario; ?>" class="btn btn-xs btn-danger btn-delete" title="Inactivar Usuario">
                                                                     <i class="fa fa-trash-o">
                                                                     </i> Anular
                                                                 </a>
@@ -132,7 +129,7 @@
                             <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL USUARIO</h5>
                         </div>
                         <div class="modal-body">
-                            <form class="form" action="<?php echo base_url();?>Usuarios_controller/store" method="POST" id="formAdd" name="formAdd" >
+                            <form class="form" action="<?php echo base_url(); ?>Usuarios_controller/store" method="POST" id="formAdd" name="formAdd" >
                                 <div class="form-body">
                                     <div class="form-group">
                                         <div class="form-group">
@@ -140,8 +137,8 @@
                                                 <select id="projectinput5" name="id_empleado" class="form-control" required>
 
                                                     <option value="" selected="" disabled="">Seleccione</option>
-                                                    <?php foreach($empleados as $empleado):?>
-                                                      <option value="<?php echo $empleado->id_empleado;?>"> <?php echo $empleado->nomape; ?></option>
+                                                    <?php foreach ($empleados as $empleado):?>
+                                                      <option value="<?php echo $empleado->id_empleado; ?>"> <?php echo $empleado->nomape; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -166,8 +163,8 @@
                                                 <select id="projectinput5" name="id_perfil" class="form-control" required="">
 
                                                     <option value="" selected="" disabled="">Seleccione</option>
-                                                    <?php foreach($perfiles as $perfil):?>
-                                                      <option value="<?php echo $perfil->id_perfil;?>"> <?php echo $perfil->descripcion; ?></option>
+                                                    <?php foreach ($perfiles as $perfil):?>
+                                                      <option value="<?php echo $perfil->id_perfil_usuario; ?>"> <?php echo $perfil->descripcion; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -219,7 +216,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title">DETALLES DEL PRODUCTO/SERVICIO</h5>
+                    <h5 class="modal-title">FICHA DEL USUARIO</h5>
                 </div>
                 <div class="modal-body">
                     <!--/ CARGA CONTENIDO DESDE VISTA -->
@@ -240,9 +237,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL PRODUCTO/SERVICIO</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL USUARIO </h5>
                 </div>
-                <form action="<?php echo base_url();?>Usuarios_controller/update" method="POST" id="formEdit" name="formEdit" >
+                <form action="<?php echo base_url(); ?>Usuarios_controller/update" method="POST" id="formEdit" name="formEdit" >
                     <div class="modal-body">
                   	<!-- AQUI SE CARGA DESDE EL CONTROLADOR -->
                     </div><!-- end div class modal body--> 

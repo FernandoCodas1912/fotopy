@@ -5,7 +5,7 @@
              Generado en <strong>
                  {elapsed_time}
 
-             </strong> segundos | <?php echo 'Version ' . CI_VERSION; ?>
+             </strong> segundos | <?php echo 'Version '.CI_VERSION; ?>
          </footer>
          </div><!-- end content page -->
          <!-- ============================================================== -->
@@ -85,7 +85,7 @@ jQuery('.fecha-autoclose').datepicker({
 jQuery('#datepicker-inline').datepicker();
 
 jQuery('#datepicker-multiple-date').datepicker({
-    format: ,
+    format:"yyyy-mm-dd",
     clearBtn: true,
     multidate: true,
     multidateSeparator: ","
