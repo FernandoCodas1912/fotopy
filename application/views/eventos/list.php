@@ -39,17 +39,16 @@
 			<div class="col-lg-12">
 				<div class="card-box">
 					<div class="col-md-2 pull-right">
-						<a href="" class="btn btn-success btn-md btn-block"  data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nuevo Comprobante</span> </a>
+						<a href="" class="btn btn-success btn-md btn-block"  data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nuevo Tipo Evento</span> </a>
 					</div>
-					<h4 class="header-title m-t-0 m-b-30"> Listado de Comprobantes</h4>
+					<h4 class="header-title m-t-0 m-b-30"> Listado de Tipo Evento</h4>
 					<div class="table-responsive">
 						<table class="table" id="example3">
 							<thead>
 								<tr>
 									<th>Id</th>
-                                    <th>Comprobante</th>
-									<th>Serie</th>
-									<th>Ult.Nro</th>
+									<!-- <th>Codigo</th> -->
+                                    <th>Descripcion</th>
 								<!-- 	<th>Detalle</th>
 									<th>Stock</th>
 									<th>Precio Compra</th>
@@ -59,16 +58,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php if(!empty($comprobantes)):?>
-									<?php foreach($comprobantes as $comprobante):?>
+								<?php if(!empty($eventos)):?>
+									<?php foreach($eventos as $evento):?>
 										<tr>
-											<td><?php echo $comprobante->id_comprobante;?></td>
-											<td><?php echo $comprobante->descripcion;?></td>
-											<td><?php echo $comprobante->serie_comprobante;?></td>
-											<td><?php echo $comprobante->ultimo_nro;?></td>
+											<td><?php echo $evento->id_tipoevento;?></td>
+											<td><?php echo $evento->descripcion;?></td>
 											<?php 
 
-											$estado = $comprobante->estado_comprobante;
+											$estado = $evento->estado;
 											if($estado == 1)
 											{
 												$estado2     = "Activo";$label_class = 'label-success';
@@ -88,20 +85,20 @@
 											<td><span class="label <?php echo $label_class;?>"><?php echo $estado2; ?></span></td>
 											<td>
 												<!-- usa del modelo la funcion correspondiente -->
-												<button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $comprobante->id_comprobante;?>" title="Ver Detalles del comprobante">
+												<button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $evento->id_tipoevento;?>" title="Ver Detalles del Tipo Evento">
 													<i class="fa fa-eye">
 													</i> Ver
 												</button>
 												<!-- usa del modelo la funcion correspondiente -->
-												<button type="button" class="btn btn-warning btn-sm btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $comprobante->id_comprobante;?>" title="Editar Detalles del comprobante">
+												<button type="button" class="btn btn-warning btn-sm btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $evento->id_tipoevento;?>" title="Editar Detalles del Tipo Evento">
 													<i class="fa fa-pencil">
 													</i> Editar
 												</button>
 
-												 <a href="<?php echo base_url();?>Comprobantes_controller/delete/<?php echo $comprobante->id_comprobante;?>" class="btn btn-sm btn-danger btn-delete" title="Inactivar comprobante">
+												<a href="<?php echo base_url();?>Eventos_controller/delete/<?php echo $evento->id_tipoevento;?>" class="btn btn-sm btn-danger btn-delete" title="Inactivar categoria">
 													<i class="fa fa-trash-o">
 													</i> Anular
-												</a> 
+												</a>
 											</td>
 										</tr>
 									<?php endforeach; ?>
@@ -123,33 +120,15 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h5 class="modal-title" id="exampleModalLabel2">NUEVO COMPROBANTE</h5>
+                            <h5 class="modal-title" id="exampleModalLabel2">NUEVO TIPO EVENTO</h5>
                         </div>
                         <div class="modal-body">
-                            <form class="form" action="<?php echo base_url();?>Comprobantes_controller/store" method="POST" id="formAdd" name="formAdd" >
+                            <form class="form" action="<?php echo base_url();?>Eventos_controller/store" method="POST" id="formAdd" name="formAdd" >
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label for="timesheetinput1">Nombre del Comprobante</label>
+                                        <label for="timesheetinput1">Nombre del Tipo Evento</label>
                                         <div class="position-relative has-icon-left">
-                                            <input type="text" id="timesheetinput1" class="form-control" placeholder="Descripcion completa del Comprobante" name="descripcion" required="">
-                                            <div class="form-control-position">
-                                                <i class="icon-android-cart"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="timesheetinput1">Serie del Comprobante</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="text" id="timesheetinput1" class="form-control" placeholder="Serie  del Comprobante" name="serie_comprobante" required="">
-                                            <div class="form-control-position">
-                                                <i class="icon-android-cart"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="timesheetinput1">Ult. Nro. del Comprobante</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="text" id="timesheetinput1" class="form-control" placeholder="Ult. Nro. del Comprobante" name="ultimo_nro" required="">
+                                            <input type="text" id="timesheetinput1" class="form-control" placeholder="Descripcion completa del Tipo Evento" name="descripcion" required="">
                                             <div class="form-control-position">
                                                 <i class="icon-android-cart"></i>
                                             </div>
@@ -175,7 +154,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title">DETALLES DEL COMPROBANTE</h5>
+                    <h5 class="modal-title">DETALLES DEL TIPO EVENTO</h5>
                 </div>
                 <div class="modal-body">
                     <!--/ CARGA CONTENIDO DESDE VISTA -->
@@ -196,9 +175,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL COMPROBANTE</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL TIPO EVENTO</h5>
                 </div>
-                <form action="<?php echo base_url();?>Comprobantes_controller/update" method="POST" id="formEdit" name="formEdit" >
+                <form action="<?php echo base_url();?>Eventos_controller/update" method="POST" id="formEdit" name="formEdit" >
                     <div class="modal-body">
                   	<!-- AQUI SE CARGA DESDE EL CONTROLADOR -->
                     </div><!-- end div class modal body--> 

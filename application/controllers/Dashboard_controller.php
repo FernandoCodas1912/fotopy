@@ -17,7 +17,7 @@ class Dashboard_controller extends CI_Controller
 	public function index()
 	{
 		$data = array(
-			'AperturaCierreCaja' => $this->Movimientos_model->getAperturaCierreCaja("1"),
+			'AperturaCierreCaja' => $this->Movimientos_model->getAperturaCierreCaja("0"),
 		);
 		//echo var_dump($data);
 		//si ya esta logueado, que me cargue el controlador Dashboard

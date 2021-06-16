@@ -39,7 +39,7 @@ class Servicios_controller extends CI_Controller {
 		$this->form_validation->set_rules("codigobarra","Codigo","required|is_unique[producto_servicio.codigobarra]");
 		$this->form_validation->set_rules("descripcion","Nombre del Producto o Servicio","required");
 		$this->form_validation->set_rules("id_categoria","Categoria","required");
-		$this->form_validation->set_rules("stock","Stock","required");
+		// $this->form_validation->set_rules("stock","Stock","required");
 //este metodo retorna un valor verdadero
 		if($this->form_validation->run() == TRUE) {
 			$data = array(
@@ -47,7 +47,7 @@ class Servicios_controller extends CI_Controller {
 				'codigobarra' 	=> $this->input->post("codigobarra"),
 				'descripcion' 	=>strtoupper($_POST['descripcion']) ,
 				'id_categoria' 	=> $this->input->post("id_categoria"),
-				'stock'		 	=> $this->input->post("stock"),
+				// 'stock'		 	=> $this->input->post("stock"),
 				'precio_compra' => $this->input->post("precio_compra"),
 				'precio_venta'  => $this->input->post("precio_venta"),
 				'impuesto' => "10",

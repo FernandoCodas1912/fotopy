@@ -105,19 +105,19 @@ class Comprobantes_controller extends CI_Controller {
 			);
 			if($this->Comprobantes_model->update($id,$data))
 			{
-				$this->session->set_flashdata('success', 'Actualizado correctamente!');
+				$this->session->set_flashdata('success', 'Actualizado correctamente');
 						redirect(base_url()."Comprobantes_controller", "refresh");
 			}
 			else
 			{
-				$this->session->set_flashdata('error', 'Errores al Intentar Actualizar en la Bd!');
+				$this->session->set_flashdata('error', 'Errores al intentar actualizar en la Base de Datos');
 					redirect(base_url()."Comprobantes_controller", "refresh");
 			}
 		}
 		else
 		{	
 			//si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
-			$this->session->set_flashdata('error', 'Errores de Validacion al Intentar Actualizar!');
+			$this->session->set_flashdata('error', 'Errores de validación al intentar actualizar');
 					redirect(base_url()."Comprobantes_controller", "refresh");
 			//$this->edit($id);
 		}
@@ -131,13 +131,13 @@ class Comprobantes_controller extends CI_Controller {
 		);
 		if($this->Comprobantes_model->update($id,$data))
 			{
-				$this->session->set_flashdata('success', 'Anulado correctamente!');
+				$this->session->set_flashdata('success', 'Anulado correctamente');
 				//retornamos a la vista para que se refresque
 				redirect(base_url()."Comprobantes_controller", "refresh");
 			}
 			else
 			{
-				$this->session->set_flashdata('error', 'Errores al Intentar Anular!');
+				$this->session->set_flashdata('error', 'Errores al intentar anular!');
 				redirect(base_url()."Comprobantes_controller", "refresh");
 			}
 		}	

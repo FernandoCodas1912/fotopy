@@ -39,14 +39,16 @@
 			<div class="col-lg-12">
 				<div class="card-box">
 					<div class="col-md-2 pull-right">
-						<a href="" class="btn btn-success"  data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Generar Nueva Reserva</span> </a>
+						<a href="" class="btn btn-success"  data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nueva Reserva</span> </a>
 					</div>
 					<h4 class="header-title m-t-0 m-b-30"> Listado de Reservas</h4>
 					<div class="table-responsive">
 						<table class="table" id="example3">
 							<thead>
 								<tr>
-									<th>Id</th>
+                                    <th>Id</th>
+                                    <th>Cliente</th>
+                                    <th>Telefono/Celular</th>
 									<th>Servicio Solicitado</th>
 									<th>Fecha</th>
 									<th>Hora</th>

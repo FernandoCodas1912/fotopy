@@ -78,32 +78,56 @@
             <div id="sidebar-menu">
                 <ul>
 
-                    <li>
-                        <a href="<?php echo base_url(); ?>" class="waves-effect"><i class="fa fa-calendar"></i> <span>
-                                Actividades </span> </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect"><i
-                                class="fa fa-calendar-plus-o"></i> <span> Reservas </span> </a>
-                    </li>
-
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-camera"></i> <span>
-                                Productos/Servicios </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span>
+                                Mantenimientos </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Servicios_controller">Gestionar Productos/Servicios
+                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipo de Evento </a></li>
+                            <li><a href="<?php echo base_url(); ?>Categorias_controller">Categoria de Evento </a></li> 
                                 </a></li>
-                            <li><a href="<?php echo base_url(); ?>Categorias_controller">Gestionar Categorias </a></li>
+                                <li><a href="<?php echo base_url(); ?>Productos_controller">Productos </a></li>
+                                <li><a href="<?php echo base_url(); ?>Servicios_controller">Servicios </a></li>
+                            <!-- <li class="has_sub">
+                                    <a href="javascript:void(0);" class="waves-effect"> <span>
+                                    Productos/Servicios </span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled">
+                                <li><a href="<?php echo base_url(); ?>Servicios_controller">Gestionar Productos/Servicios
+                                
+                                </ul>
+                            </li> -->
+                                
+                                <li><a href="<?php echo base_url(); ?>Clientes_controller">Clientes</a></li>
+                                <li><a href="<?php echo base_url(); ?>Proveedores_controller">Proveedores </a></li>
+                                <li><a href="<?php echo base_url(); ?>Staffs_controller">Personal del Staff </a></li>
+                                <li><a href="<?php echo base_url(); ?>MedioCobros_controller">Medio de Cobro</a></li>
+                                <li><a href="<?php echo base_url(); ?>TipoCobros_controller">Tipo de Cobro</a></li>
+                                <li><a href="<?php echo base_url(); ?>Comprobantes_controller">Tipo de Comprobante</a></li>
+                            
+                            <!-- <li><a href="<?php echo base_url(); ?>Horarios_controller">Horario Reserva </a></li> -->
                         </ul>
                     </li>
 
                     <li>
-                        <a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect"><i
-                                class="fa fa-send"></i> <span> Presupuestos </span> </a>
+                        <a href="<?php echo base_url(); ?>" class="waves-effect"><i class="fa fa-calendar"></i> <span>
+                                Planificación </span> </a>
                     </li>
-
+                    <!-- <li>
+                        <a href="<?php echo base_url(); ?>Aperturas_controller"><i class="fa fa-calendar"></i> <span>
+                                Calendario </span></a>
+                    </li> -->
+                    <!-- <li>
+                        <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect"><i
+                                class="fa fa-calendar-plus-o"></i> <span> Reservas </span> </a>
+                    </li> -->
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-dollar (alias)"></i> <span>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Operaciones Contables
+                            </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="<?php echo base_url(); ?>Aperturas_controller">Apertura/Cierre Caja </a></li>
+                            <li><a href="<?php echo base_url(); ?>Movimientos_controller">Movimientos </a></li>
+                            <li><a href="<?php echo base_url(); ?>Cobros_controller">Gestionar Cobranzas </a></li>
+                            <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"> <span>
                                 Ventas </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Ventas_controller/add">Nueva Venta </a></li>
@@ -111,49 +135,88 @@
                             <li><a href="<?php echo base_url(); ?>Ventas_controller/reporte">Reporte por Fecha</a></li>
                         </ul>
                     </li>
-
-
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span>
-                                Mantenimientos </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Comprobantes_controller">Comprobantes</a></li>
-                            <li><a href="<?php echo base_url(); ?>Empleados_controller">Empleados </a></li>
-                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipo de Evento </a></li>
-                            <li><a href="<?php echo base_url(); ?>Horarios_controller">Horario Reserva </a></li>
                         </ul>
+                        
                     </li>
+
+                    <!-- <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-camera"></i> <span>
+                                Productos/Servicios </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            
+                            
+                        </ul>
+                    </li> -->
+
+
+                    <!-- <li>
+                        <a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect"><i
+                                class="fa fa-send"></i> <span> Presupuestos </span> </a>
+                    </li> -->
+
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-phone"></i> <span> Personas
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file"></i> <span> Reportes
                             </span> <span class="menu-arrow"></span></a>
+
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Clientes_controller">Clientes</a></li>
-                            <li><a href="<?php echo base_url(); ?>Proveedores_controller">Proveedores </a></li>
+                             <li>
+                        <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect">
+                         <span> Reservas </span> </a>
+                    </li>
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"></i> <span>
+                                Presupuestos </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect"> 
+                            <span> Impresión de contrato </span> </a></li>
+                        </ul>
+                    </li>
                         </ul>
                     </li>
 
+                    <!-- <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-dollar (alias)"></i> <span>
+                                Ventas </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="<?php echo base_url(); ?>Ventas_controller/add">Nueva Venta </a></li>
+                            <li><a href="<?php echo base_url(); ?>Ventas_controller">Gestionar Ventas </a></li>
+                            <li><a href="<?php echo base_url(); ?>Ventas_controller/reporte">Reporte por Fecha</a></li>
+                        </ul>
+                    </li> -->
+
+
+                    
+                    
+
                     <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user-circle"></i> <span>
-                                Usuarios </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-shield"></i> <span>
+                                Seguridad </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Usuarios_controller">Gestionar Usuarios </a></li>
                             <li><a href="<?php echo base_url(); ?>Usuarios_controller">Permisos por Perfil</a></li>
                             <li><a href="<?php echo base_url(); ?>Perfiles_controller">Gestionar Perfiles </a></li>
-                        </ul>
-                    </li>
-                    <li class="has_sub">
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span> Tesoreria
-                            </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Aperturas_controller">Apertura/Cierre Caja </a></li>
-                            <li><a href="<?php echo base_url(); ?>Movimientos_controller">Movimientos </a></li>
-                            <li><a href="<?php echo base_url(); ?>Cobros_controller">Gestionar Cobranzas </a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url(); ?>Bk" class="waves-effect"><i class="fa fa-refresh"></i> <span>
+                            <li>
+                        <a href="<?php echo base_url(); ?>Bk" class="waves-effect"></i> <span>
                                 Copia de Seguridad </span> </a>
                     </li>
+                        </ul>
+                    </li>
+
+                    <li class="has_sub">
+                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bar-chart-o"></i> <span>
+                                Patrimonio </span> <span class="menu-arrow"></span></a>
+                        <ul class="list-unstyled">
+                            <li><a href="<?php echo base_url(); ?>Usuarios_controller">Gestionar Usuarios </a></li>
+                            <li><a href="<?php echo base_url(); ?>Usuarios_controller">Permisos por Perfil</a></li>
+                            <li><a href="<?php echo base_url(); ?>Perfiles_controller">Gestionar Perfiles </a></li>
+                            <li>
+                        <a href="<?php echo base_url(); ?>Bk" class="waves-effect"></i> <span>
+                                Copia de Seguridad </span> </a>
+                    </li>
+                        </ul>
+                    </li>
+                    
+                    
 
                 </ul>
                 <div class="clearfix"></div>

@@ -56,8 +56,8 @@ class Clientes_controller extends CI_Controller
 				'email'		 	=> $this->input->post("email"),
 				'date_add' 		=> date("Y-m-d H:i:s"),
 				'id_ciudad' 	=> $this->input->post("id_ciudad"),
-				'id_pais' 	=> $this->input->post("id_pais"),
-				'estado' => "1"
+				'id_pais' 		=> $this->input->post("id_pais"),
+				'estado' 		=> "1"
 			);
 			if ($this->Clientes_model->save($data)) {
 				$this->session->set_flashdata("success", "Datos Guardados");
@@ -111,8 +111,8 @@ class Clientes_controller extends CI_Controller
 				'direccion' 	=> strtoupper($_POST['edit_direccion']),
 				'email'		 	=> $this->input->post("edit_email"),
 				'id_ciudad' 	=> $this->input->post("edit_id_ciudad"),
-				'id_pais' 	=> $this->input->post("edit_id_pais"),
-				'estado' => "1"
+				'id_pais' 		=> $this->input->post("edit_id_pais"),
+				'estado' 		=> "1"
 
 			);
 			if ($this->Clientes_model->update($id, $data)) {

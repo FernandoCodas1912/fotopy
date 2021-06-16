@@ -1,7 +1,7 @@
          </div>
          <!--end content -->
          <footer class="footer">
-             2018 - <?php echo date('Y'); ?> © FOTOPY |
+             2018 - <?php echo date('Y'); ?> © CO-ZAM |
              Generado en <strong>
                  {elapsed_time}
 
@@ -37,6 +37,7 @@
          <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
          <script src="<?php echo base_url(); ?>assets/plugins/fullcalendar/dist/fullcalendar.min.js"></script>
          <script src="<?php echo base_url(); ?>assets/pages/jquery.fullcalendar.js"></script>
+         <script src="<?php echo base_url(); ?>assets/plugins/fullcalendar/dist/lang/es.js"></script>
          <script src="<?php echo base_url(); ?>assets/plugins/jquery-print/jquery.print.js"></script>
 
          <!-- Datatables-->
@@ -84,7 +85,7 @@ jQuery('.fecha-autoclose').datepicker({
 jQuery('#datepicker-inline').datepicker();
 
 jQuery('#datepicker-multiple-date').datepicker({
-    format: "mm/dd/yyyy",
+    format: ,
     clearBtn: true,
     multidate: true,
     multidateSeparator: ","

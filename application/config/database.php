@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
@@ -72,28 +71,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | the query builder class.
 */
 $active_group = 'default';
-$query_builder = true;
+$query_builder = TRUE;
 
-$db['default'] = [
-    'dsn' => '',
-    'hostname' => 'localhost',
-    'username' => 'pma',
-    'password' => '12345678',
-    'database' => 'fotopy',
-    'dbdriver' => 'mysqli',
-    'dbprefix' => '',
-    'pconnect' => false,
-    //'db_debug' => (ENVIRONMENT !== 'production'),
-    'db_debug' => true,
-    'cache_on' => false,
-    'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
-    'swap_pre' => '',
-    'encrypt' => false,
-    'compress' => false,
-    'stricton' => false,
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '12345678',
+	'database' => 'fotopy',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	//'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => TRUE,
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
 
-    'failover' => [],
-    'save_queries' => true,
-];
+
+	'failover' => array(),
+	'save_queries' => TRUE
+);

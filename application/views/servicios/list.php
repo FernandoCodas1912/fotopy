@@ -50,7 +50,7 @@
 									<th>Codigo</th>
 									<th>Categoria</th>
 									<th>Detalle</th>
-									<th>Stock</th>
+									<!-- <th>Stock</th> -->
 									<th>Precio Compra</th>
 									<th>Precio Venta</th>
 									<th>Estado</th>
@@ -65,7 +65,7 @@
 											<td><?php echo $servicio->codigobarra;?></td>
 											<td><?php echo $servicio->categoria;?></td>
 											<td><?php echo $servicio->descripcion;?></td>
-											<td><?php echo $servicio->stock;?></td>
+											<!-- <td><?php echo $servicio->stock;?></td> -->
 											<td><?php echo $servicio->precio_compra;?></td>
 											<td><?php echo $servicio->precio_venta;?></td>
 											<?php 
