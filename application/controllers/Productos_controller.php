@@ -20,7 +20,7 @@ class Productos_controller extends CI_Controller
     {
         $data = [
             'productos' => $this->Productos_model->getAll(),
-            'categorias' => $this->Categorias_model->getAll(),
+            'categorias' => $this->Categorias_model->getAllProducto(),
         ];
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');
@@ -76,7 +76,7 @@ class Productos_controller extends CI_Controller
     {
         $data = [
             'productos' => $this->Productos_model->getById($id),
-            'categorias' => $this->Categorias_model->getAll(),
+            'categorias' => $this->Categorias_model->getAllProducto(),
         ];
         $this->load->view('productos/edit', $data);
     }

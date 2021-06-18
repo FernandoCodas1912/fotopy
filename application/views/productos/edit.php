@@ -65,8 +65,6 @@
                         echo ' <option  value="5">Iva 5%</option>';
                         echo ' <option value="10">Iva 10%</option>';
                         echo ' <option selected value="0">Exento</option>';
-                    } else {
-                        $selected = '';
                     }
                     ?>
 

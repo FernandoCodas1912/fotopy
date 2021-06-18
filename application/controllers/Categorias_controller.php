@@ -42,6 +42,7 @@ class Categorias_controller extends CI_Controller
         if ($this->form_validation->run() == true) {
             $data = [
                 'descripcion' => strtoupper($_POST['descripcion']),
+                'tipo' => $_POST['tipo'],
                 'estado' => '1',
             ];
 
@@ -92,6 +93,7 @@ class Categorias_controller extends CI_Controller
             //indicar campos de la tabla a modificar
             $data = [
                 'descripcion' => strtoupper($_POST['edit_descripcion']),
+                'tipo' => strtoupper($_POST['edit_tipo']),
                 'estado' => '1',
             ];
             if ($this->Categorias_model->update($id, $data)) {
