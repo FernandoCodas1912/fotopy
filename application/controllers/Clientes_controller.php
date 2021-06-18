@@ -53,10 +53,10 @@ class Clientes_controller extends CI_Controller
                 'telefono' => $this->input->post('telefono'),
                 'direccion' => strtoupper($_POST['direccion']),
                 'email' => $this->input->post('email'),
-                'date_add' => date('Y-m-d H:i:s'),
                 'id_ciudad' => $this->input->post('id_ciudad'),
                 'id_pais' => $this->input->post('id_pais'),
                 'estado' => '1',
+                'date_add' => date('Y-m-d H:i:s'),
             ];
             if ($this->Clientes_model->save($data)) {
                 $this->session->set_flashdata('success', 'Datos Guardados');
@@ -113,6 +113,7 @@ class Clientes_controller extends CI_Controller
                 'id_ciudad' => $this->input->post('edit_id_ciudad'),
                 'id_pais' => $this->input->post('edit_id_pais'),
                 'estado' => '1',
+                'date_mod' => date('Y-m-d H:i:s'),
             ];
             if ($this->Clientes_model->update($id, $data)) {
                 $this->session->set_flashdata('success', 'Actualizado correctamente!');
@@ -134,6 +135,7 @@ class Clientes_controller extends CI_Controller
     {
         $data = [
             'estado' => '3',
+            'date_mod' => date('Y-m-d H:i:s'),
         ];
         if ($this->Clientes_model->update($id, $data)) {
             $this->session->set_flashdata('success', 'Anulado correctamente!');

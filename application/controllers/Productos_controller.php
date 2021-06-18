@@ -20,7 +20,7 @@ class Productos_controller extends CI_Controller
     {
         $data = [
             'productos' => $this->Productos_model->getAll(),
-            'categorias' => $this->Categorias_model->getAllProducto(),
+            'categorias' => $this->Categorias_model->getAllProductos(),
         ];
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');
@@ -57,6 +57,8 @@ class Productos_controller extends CI_Controller
                 'stock_minimo' => $this->input->post('stock_minimo'),
                 'tipo' => '1', //1 es producto
                 'estado' => '1',
+                'date_add' => date('Y-m-d H:i:s'),
+                'date_mod' => date('Y-m-d H:i:s'),
             ];
             if ($this->Productos_model->save($data)) {
                 $this->session->set_flashdata('success', 'Datos Guardados');
@@ -76,7 +78,7 @@ class Productos_controller extends CI_Controller
     {
         $data = [
             'productos' => $this->Productos_model->getById($id),
-            'categorias' => $this->Categorias_model->getAllProducto(),
+            'categorias' => $this->Categorias_model->getAllProductos(),
         ];
         $this->load->view('productos/edit', $data);
     }
@@ -89,9 +91,9 @@ class Productos_controller extends CI_Controller
         $edit_codigobarra = $this->input->post('edit_codigobarra');
 
         //traemos datos para no duplicarlos
-        $producto = $this->Productos_model->getById($id);
+        $productoBd = $this->Productos_model->getById($id);
 
-        if ($edit_codigobarra == $producto->codigobarra) {
+        if ($edit_codigobarra == $productoBd->codigobarra) {
             $unique = '';
         } else {
             //si encontro datos, emitira mensaje que ya existe.. llamando a tabla y luego campo
@@ -114,6 +116,7 @@ class Productos_controller extends CI_Controller
                 'stock_minimo' => $this->input->post('edit_stock_minimo'),
                 'tipo' => '1', //1 es producto
                 'estado' => '1',
+                'date_mod' => date('Y-m-d H:i:s'),
             ];
             if ($this->Productos_model->update($id, $data)) {
                 $this->session->set_flashdata('success', 'Actualizado correctamente!');
@@ -134,6 +137,7 @@ class Productos_controller extends CI_Controller
     {
         $data = [
         'estado' => '3',
+        'date_mod' => date('Y-m-d H:i:s'),
         ];
         if ($this->Productos_model->update($id, $data)) {
             $this->session->set_flashdata('success', 'Anulado correctamente');

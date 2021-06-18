@@ -1,5 +1,4 @@
  <script type="text/javascript">
-   $(document).ready(function() {
      var base_url = "<?php echo base_url(); ?>";
 
      $(document).on("click", ".btn-check", function() {
@@ -83,5 +82,4 @@
        $("#modal-print .modal-body").print();
      });
 
-   });
  </script>
