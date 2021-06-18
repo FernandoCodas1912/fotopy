@@ -6,12 +6,39 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Categorias_model extends CI_MOdel
 {
     public $tabla = 'categoria';
-    public $IdTabla = 'id_categoria';
+    public $idTabla = 'id_categoria';
 
     //esta funcion retorna todos los registros de nuestra tabla
     public function getAll()
     {
         $this->db->where('estado', '1');
+        $resultados = $this->db->get($this->tabla);
+
+        return $resultados->result();
+    }
+
+    public function getAllEvento()
+    {
+        $this->db->where('estado', '1');
+        $this->db->where('tipo', '1');
+        $resultados = $this->db->get($this->tabla);
+
+        return $resultados->result();
+    }
+
+    public function getAllServicio()
+    {
+        $this->db->where('estado', '1');
+        $this->db->where('tipo', '2');
+        $resultados = $this->db->get($this->tabla);
+
+        return $resultados->result();
+    }
+
+    public function getAllProducto()
+    {
+        $this->db->where('estado', '1');
+        $this->db->where('tipo', '3');
         $resultados = $this->db->get($this->tabla);
 
         return $resultados->result();

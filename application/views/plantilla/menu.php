@@ -84,7 +84,7 @@
                         <ul class="list-unstyled">
                             <li><a href="<?php echo base_url(); ?>Eventos_controller">Eventos</a></li>
                             <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipos de Eventos</a></li>
-                            <li><a href="<?php echo base_url(); ?>Categorias_controller">Categoria de Evento </a></li> 
+                            <li><a href="<?php echo base_url(); ?>Categorias_controller">Categorias </a></li> 
                                 </a></li>
                                 <li><a href="<?php echo base_url(); ?>Productos_controller">Productos </a></li>
                                 <li><a href="<?php echo base_url(); ?>Servicios_controller">Servicios </a></li>
