@@ -26,8 +26,6 @@ class Productos_model extends CI_Model
         $this->db->select('p.*, c.descripcion as categoria');
         $this->db->from('producto_servicio p'); //desde tabla con alias
         $this->db->join('categoria c', 'c.id_categoria=p.id_categoria'); //une los campos por su pk=fk
-        $this->db->where('p.tipo', '1'); //1 es producto tipo 2 es servicio
-        $this->db->where('p.estado', '1'); //1 es activo 2 inactivo 3 anulado
         $this->db->where('p.id_producto', $id); //1 es activo 2 inactivo 3 anulado
         $result = $this->db->get();
 

@@ -1,6 +1,5 @@
 <script type="text/javascript">
-$(document).ready(function(){
-     var base_url= "<?php echo base_url();?>";
+     var base_url= "<?php echo base_url(); ?>";
     
     //esto es para abrir modal ver
     $(".btn-ver").on("click", function(){
@@ -29,5 +28,4 @@ $(document).ready(function(){
           }
       });
     })
-});
 </script>

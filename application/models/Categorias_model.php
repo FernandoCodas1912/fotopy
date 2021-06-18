@@ -17,7 +17,7 @@ class Categorias_model extends CI_MOdel
         return $resultados->result();
     }
 
-    public function getAllEvento()
+    public function getAllEventos()
     {
         $this->db->where('estado', '1');
         $this->db->where('tipo', '1');
@@ -26,7 +26,7 @@ class Categorias_model extends CI_MOdel
         return $resultados->result();
     }
 
-    public function getAllServicio()
+    public function getAllServicios()
     {
         $this->db->where('estado', '1');
         $this->db->where('tipo', '2');
@@ -35,7 +35,7 @@ class Categorias_model extends CI_MOdel
         return $resultados->result();
     }
 
-    public function getAllProducto()
+    public function getAllProductos()
     {
         $this->db->where('estado', '1');
         $this->db->where('tipo', '3');

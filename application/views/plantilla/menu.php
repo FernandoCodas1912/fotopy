@@ -82,8 +82,8 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span>
                                 Mantenimientos </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Eventos</a></li>
-                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipos de Eventos</a></li>
+                            <!-- <li><a href="<?php echo base_url(); ?>Eventos_controller">Eventos</a></li> -->
+                            <!-- <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipos de Eventos</a></li> -->
                             <li><a href="<?php echo base_url(); ?>Categorias_controller">Categorias </a></li> 
                                 </a></li>
                                 <li><a href="<?php echo base_url(); ?>Productos_controller">Productos </a></li>
