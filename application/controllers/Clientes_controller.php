@@ -20,9 +20,9 @@ class Clientes_controller extends CI_Controller
     public function index()
     {
         $data = [
-            'clientes' => $this->Clientes_model->getClientes(),
-            'ciudades' => $this->Ciudades_model->getCiudades(),
-            'paises' => $this->Paises_model->getPaises(),
+            'clientes' => $this->Clientes_model->getAll(),
+            'ciudades' => $this->Ciudades_model->getAll(),
+            'paises' => $this->Paises_model->getAll(),
         ];
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');
@@ -35,8 +35,8 @@ class Clientes_controller extends CI_Controller
     public function view($id)
     {
         $data = [
-            'clientes' => $this->Clientes_model->getCliente($id),
-            'ciudades' => $this->Ciudades_model->getCiudades(),
+            'clientes' => $this->Clientes_model->getById($id),
+            'ciudades' => $this->Ciudades_model->getAll(),
         ];
         $this->load->view('clientes/view', $data);
     }
@@ -75,9 +75,9 @@ class Clientes_controller extends CI_Controller
     public function edit($id)
     {
         $data = [
-            'clientes' => $this->Clientes_model->getCliente($id),
-            'ciudades' => $this->Ciudades_model->getCiudades(),
-            'paises' => $this->Paises_model->getPaises(),
+            'clientes' => $this->Clientes_model->getById($id),
+            'ciudades' => $this->Ciudades_model->getAll(),
+            'paises' => $this->Paises_model->getAll(),
         ];
         $this->load->view('clientes/edit', $data);
     }
@@ -90,7 +90,7 @@ class Clientes_controller extends CI_Controller
         $edit_nrodocumento = $this->input->post('edit_nrodocumento');
 
         //traemos datos para no duplicarlos
-        $nrodocumentoBd = $this->Clientes_model->getCliente($id);
+        $nrodocumentoBd = $this->Clientes_model->getById($id);
 
         if ($edit_nrodocumento == $nrodocumentoBd->nrodocumento) {
             $unique = '';

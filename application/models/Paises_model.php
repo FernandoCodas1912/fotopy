@@ -1,35 +1,42 @@
 <?php
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Paises_model extends CI_Model
 {
     //estos son metodos q tienen q ver con bd
+    public $tabla = 'paises';
+    public $idTabla = 'id';
 
-    //este metodo es para mostrar todos los servicios
-    public function getPaises()
+    //esta funcion retorna todos los registros de nuestra tabla
+    public function getAll()
     {
-        //	$this->db->where("estServicio", "1");
-        $resultados = $this->db->get("paises");
+        // $this->db->where('estado', '1');
+        $resultados = $this->db->get($this->tabla);
+
         return $resultados->result();
     }
 
-    //esta es la parte para guardar en la bd
-    public function save($data)
+    //esto es una funcion o metodo para mostrar 1 registro por id
+    public function getbyId($id)
     {
-        return $this->db->insert("paises", $data);
-    }
+        $this->db->where($this->idTabla, $id);
+        $resultado = $this->db->get($this->tabla);
 
-    //esto es una funcion o metodo para mostrar 1 servicio por id
-    public function getPais($id)
-    {
-        $this->db->where("id", $id);
-        $resultado = $this->db->get("paises");
         return $resultado->row();
     }
-    //esto es para actualizar los servicios
+
+    //esta funcion guarda en db
+    public function save($data)
+    {
+        return $this->db->insert($this->tabla, $data);
+    }
+
+    //esta funcion actualiza en db
     public function update($id, $data)
     {
-        $this->db->where("id", $id);
-        return $this->db->update("paises", $data);
+        $this->db->where($this->idTabla, $id);
+
+        return $this->db->update($this->tabla, $data);
     }
 }

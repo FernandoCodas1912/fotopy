@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 //se crea el controlador categorias
-class Categorias_controller extends CI_Controller
+class TiposEventos_controller extends CI_Controller
 {
     //constructor
     public function __construct()
@@ -11,6 +11,7 @@ class Categorias_controller extends CI_Controller
         if (!$this->session->userdata('login')) {
             redirect(base_url());
         }
+        //$this->load->model("Servicios_model");
         $this->load->model('Categorias_model');
     }
 
@@ -18,7 +19,8 @@ class Categorias_controller extends CI_Controller
     public function index()
     {
         $data = [
-        'categorias' => $this->Categorias_model->getAll(),
+        /*	'servicios' => $this->Servicios_model->getServicios(),*/
+        'categorias' => $this->Categorias_model->getCategorias(),
         ];
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');
@@ -30,7 +32,7 @@ class Categorias_controller extends CI_Controller
     public function view($id)
     {
         $data = [
-            'categorias' => $this->Categorias_model->getById($id),
+            'categorias' => $this->Categorias_model->getCategoria($id),
          ];
         $this->load->view('categorias/view', $data);
     }
@@ -63,7 +65,7 @@ class Categorias_controller extends CI_Controller
     public function edit($id)
     {
         $data = [
-            'categorias' => $this->Categorias_model->getById($id),
+            'categorias' => $this->Categorias_model->getCategoria($id),
         ];
         $this->load->view('categorias/edit', $data);
     }
@@ -76,9 +78,9 @@ class Categorias_controller extends CI_Controller
         $edit_descripcion = $this->input->post('edit_descripcion');
 
         //traemos datos para no duplicarlos
-        $categoriaBD = $this->Categorias_model->getById($id);
+        $id_bd = $this->Categorias_model->getCategoria($id);
 
-        if ($edit_descripcion == $categoriaBD->descripcion) {
+        if ($edit_descripcion == $id_bd->descripcion) {
             $unique = '';
         } else {
             //si encontro datos, emitira mensaje que ya existe.. llamando a tabla y luego campo

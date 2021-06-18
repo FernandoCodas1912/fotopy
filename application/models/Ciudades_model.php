@@ -1,32 +1,41 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ciudades_model extends CI_Model {
-	
-	
-	//este metodo es para mostrar todos los campos de la tabla
-	public function getCiudades(){
-		$this->db->where("estado", "1");
-		$resultados= $this->db->get("ciudad");
-		return $resultados->result();
-	}
-	
-	//esta es la parte para guardar en la bd
-	public function save($data)
-	{
-		return $this->db->insert("ciudad", $data);
-	}
-	
-	//esto es una funcion o metodo para mostrar 1 registro por id
-	public function getUsuario($id){
-		$this->db->where("id_ciudad",$id);
-		$resultado= $this->db->get("ciudad");
-		return $resultado->row();
-	}
-	//esto es para actualizar los registros
-	public function update($id, $data){
-		$this->db->where("id_ciudad", $id);
-		return $this->db->update("ciudad", $data);
+defined('BASEPATH') or exit('No direct script access allowed');
 
-	}
+class Ciudades_model extends CI_Model
+{
+    public $tabla = 'ciudad';
+    public $idTabla = 'id_ciudad';
+
+    //esta funcion retorna todos los registros de nuestra tabla
+    public function getAll()
+    {
+        $this->db->where('estado', '1');
+        $resultados = $this->db->get($this->tabla);
+
+        return $resultados->result();
+    }
+
+    //esto es una funcion o metodo para mostrar 1 registro por id
+    public function getbyId($id)
+    {
+        $this->db->where($this->idTabla, $id);
+        $resultado = $this->db->get($this->tabla);
+
+        return $resultado->row();
+    }
+
+    //esta funcion guarda en db
+    public function save($data)
+    {
+        return $this->db->insert($this->tabla, $data);
+    }
+
+    //esta funcion actualiza en db
+    public function update($id, $data)
+    {
+        $this->db->where($this->idTabla, $id);
+
+        return $this->db->update($this->tabla, $data);
+    }
 }

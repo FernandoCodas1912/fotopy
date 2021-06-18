@@ -69,7 +69,7 @@
                     <div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>
                 </div>
                 <h5><a
-                        href="#"><?php echo $this->session->userdata("id_usuario") . "-" . $this->session->userdata("username"); ?></a>
+                        href="#"><?php echo $this->session->userdata('id_usuario').'-'.$this->session->userdata('username'); ?></a>
                 </h5>
             </div>
             <!-- End User -->
@@ -82,7 +82,8 @@
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i> <span>
                                 Mantenimientos </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
-                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipo de Evento </a></li>
+                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Eventos</a></li>
+                            <li><a href="<?php echo base_url(); ?>Eventos_controller">Tipos de Eventos</a></li>
                             <li><a href="<?php echo base_url(); ?>Categorias_controller">Categoria de Evento </a></li> 
                                 </a></li>
                                 <li><a href="<?php echo base_url(); ?>Productos_controller">Productos </a></li>
