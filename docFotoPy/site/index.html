@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="None">
+        
+        
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>FotoPy</title>
+        <link href="css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="js/jquery-1.10.2.min.js" defer></script>
+        <script src="js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body class="homepage">
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href=".">FotoPy</a>
+                </div>
+
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href=".">Modulo Wim_partyfiestaxmlimporter</a>
+                            </li>
+                            <li >
+                                <a href="about/">About</a>
+                            </li>
+                            <li >
+                                <a href="license/">License</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="disabled">
+                                <a rel="next" >
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="about/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#modulo-wim_partyfiestaxmlimporter">Modulo Wim_partyfiestaxmlimporter</a></li>
+            <li><a href="#caracteristicas">Caracteristicas</a></li>
+            <li><a href="#instalacion">Instalacion</a></li>
+            <li><a href="#layout-del-modulo">Layout del Modulo</a></li>
+            <li><a href="#diagrama-del-caso-de-uso-general">Diagrama del Caso de Uso General</a></li>
+            <li><a href="#caso-de-uso-del-modulo-especifico">Caso de Uso del modulo especifico</a></li>
+            <li><a href="#diagrama-de-flujo-gral-del-algoritmo">Diagrama de Flujo Gral del Algoritmo</a></li>
+            <li><a href="#informacion-previa">Informacion Previa</a></li>
+            <li><a href="#parametros-y-configuracion">Parametros y Configuracion</a></li>
+            <li><a href="#directorios-y-processed">Directorios y Processed</a></li>
+            <li><a href="#acceso-desde-navegador">Acceso desde Navegador</a></li>
+            <li><a href="#regresar-a-los-scripts">Regresar a los scripts</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="modulo-wim_partyfiestaxmlimporter">Modulo Wim_partyfiestaxmlimporter</h1>
+<p>Este modulo importa o actualiza, categorias, productos, precios, stock e imagenes de productos y sus combinaciones, los inserta a la bd de prestashop</p>
+<h2 id="caracteristicas">Caracteristicas</h2>
+<p>Puede Importar una cantidad casi ilimitada de Items, ya que los divide en partes, la cantidad de registros que puede importar es manualmente programable
+Puede integrar los XML que recibe, ya sea en el directorio del script o entro directorio configurable.</p>
+<ul>
+<li><em>Sin limites</em></li>
+</ul>
+<p>Integre su tienda con cualquier número de mayoristas y proveedores. El importador manejará cada archivo generado correctamente y le permitirá importar datos de manera selectiva desde el archivo a su tienda.</p>
+<ul>
+<li><em>Universal</em></li>
+</ul>
+<p>Es compatible con los archivos XML generados correctamente. La única condición es que el archivo contenga todos los datos requeridos por PrestaShop; p.ej. un nombre de producto o un código de combinación.
+No tiene que preocuparse por la versión de la tienda o la actualización planificada. ¡El módulo está preparado para PrestaShop 1.5, 1.6 y 1.7!</p>
+<ul>
+<li><em>CRON - importaciones sin contacto</em></li>
+</ul>
+<p>El importador genera un enlace para una importación directa (CRON) para cada archivo configurado. Esto permite una automatización completa y al 100% de la importación y la situación en su tienda, sin contacto y durante los días y horas programados. No se preocupe si sus precios e inventarios están actualizados, se ajustarán automáticamente.</p>
+<ul>
+<li><em>Rápido y flexible</em></li>
+</ul>
+<p>El módulo usa el potencial de su servidor .El módulo también admite archivos de gran tamaño Con cualquier cantidad de elementos para importar / actualizar. ¡La velocidad alcanzada por el importador es de hasta 500 productos por segundo! El rendimiento del importador depende de la potencia del servidor. El módulo funciona en servidores FTP clásicos y en máquinas potentes como VPS Linux y nubes como Google Cloud o AWS.</p>
+<h2 id="instalacion">Instalacion</h2>
+<ul>
+<li>Este modulo, no requiere instalacion previa, se ejecuta desde cron o desde navegador</li>
+</ul>
+<h2 id="layout-del-modulo">Layout del Modulo</h2>
+<p>Diagramado UML del Modulo</p>
+<h2 id="diagrama-del-caso-de-uso-general">Diagrama del Caso de Uso General</h2>
+<ul>
+<li>Se observa como influye el modulo situado en el ambiente del sistema, cuyos actores pueden ser tanto el cron, como el usuario que acceda desde el navegador</li>
+</ul>
+<p><img alt="Caso de Uso General" src="DCasoUsoGral.png" /></p>
+<h2 id="caso-de-uso-del-modulo-especifico">Caso de Uso del modulo especifico</h2>
+<ul>
+<li>En este caso se puede observar, que acorde a la frecuencia del cron, se ejecutan los scripts y generan la bitacora de resultados en el directorio /logDir</li>
+</ul>
+<p><img alt="Caso de Uso Especifico del Modulo" src="DcasoUso.png" /></p>
+<h2 id="diagrama-de-flujo-gral-del-algoritmo">Diagrama de Flujo Gral del Algoritmo</h2>
+<ul>
+<li>El procedimiento y flujo basico del modulo</li>
+</ul>
+<p><img alt="flujo del Algoritmo" src="DFlujoAlgoritmo.png" /></p>
+<h2 id="informacion-previa">Informacion Previa</h2>
+<ul>
+<li>Todos los scripts generan bitacora, errorlog y algunos que lo requieren un oklog en el directorio /logDir/filename.txt</li>
+<li>Todos los scripts muestran informacion en pantalla de acuerdo a los resultados obtenidos</li>
+<li>Algunos scripts requieren la creacion previa de tablas, el codigo para generar lo tiene cada scripts</li>
+<li>Todos los scripts se ejecutan 1 vez x dia, excepto el 8 y el 10 que lo hacen cada 12 y 14 minutos, recibe 2 xml</li>
+</ul>
+<h2 id="parametros-y-configuracion">Parametros y Configuracion</h2>
+<ul>
+<li>El script 4 borra la tabla ps_category_product antes de ser generado, a solicitud del Cliente</li>
+<li>Configurar la variable $ExecInLocalServer = TRUE; //es true si el script se ejecuta en el mismo server donde estan los archivos, no usara ftp</li>
+<li>Lista de directorios donde el script busca por *.xml, si hay mas de 1 lo procesa por orden alfabetico</li>
+<li>Si hay mas de 1000 imagenes nuevas o es una nueva importacion, el script 12, debe correrse en forma incremental de 100 en 100, para no colgar el server</li>
+<li>El script 15 pide parametros, segun el cliente, puede haber hasta 10, formato reference_1.jpg</li>
+</ul>
+<h2 id="directorios-y-processed">Directorios y Processed</h2>
+<ul>
+<li>$remote_dir1 = '../../files/NavigationTree/'; // Script 1 y 4. el 4 lo pasa a processed</li>
+<li>$remote_dir2 = '../../files/Products/'; //script 2,3, 5 y 6 el 6 lo pasa a processed</li>
+<li>$remote_dir4 = '../../files/ProductRates/'; script 7 y 9, el 9 lo pasa a processed</li>
+<li>$remote_dir3 = '../../files/Inventory/'; // script 8 y 10 el 10 lo pasa a processed</li>
+</ul>
+<h2 id="acceso-desde-navegador">Acceso desde Navegador</h2>
+<ul>
+<li><p>La url de acceso desde navegador a los scripts es <a href="https://partyfiesta.com/es/es/wim_partyfiestaxmlimporter/">https://partyfiesta.com/es/es/wim_partyfiestaxmlimporter/</a></p></li>
+</ul>
+<h2 id="regresar-a-los-scripts">Regresar a los scripts</h2>
+<ul>
+<li><a href="../../">Ir al inicio </a></li>
+</ul></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = ".",
+                shortcuts = {"search": 83, "next": 78, "help": 191, "previous": 80};
+        </script>
+        <script src="js/base.js" defer></script>
+        <script src="search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2021-06-21 15:34:28
+-->
