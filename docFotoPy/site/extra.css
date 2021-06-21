@@ -1,0 +1,23 @@
+body::before {
+    content: ' ';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    background: none;
+    will-change: transform;
+    z-index: -1;
+}
+
+.navbar {
+	background-image: -webkit-linear-gradient(#0f2537, #0f2537 60%, #0f2537);
+	background-image: linear-gradient(#0f2537, #0f2537 60%, #0f2537);
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #0f2537;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff54b4eb',endColorstr='#ff1d9ce5',GradientType=0);
+	filter: none;
+	-webkit-box-shadow: 0 1px 10px rgb(0 0 0 / 10%);
+	box-shadow: 0 1px 10px rgb(0 0 0 / 10%);
+}
