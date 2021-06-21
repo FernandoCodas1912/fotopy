@@ -278,7 +278,7 @@ function initscrolls(){
       $('.slimscrollleft').slimScroll({
           height: 'auto',
           position: 'right',
-          size: "5px",
+          size: "12px",
           color: '#aaa',
           wheelStep: 5
       });

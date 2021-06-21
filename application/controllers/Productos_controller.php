@@ -81,6 +81,7 @@ class Productos_controller extends CI_Controller
             'categorias' => $this->Categorias_model->getAllProductos(),
         ];
         $this->load->view('productos/edit', $data);
+        $this->load->view('productos/script_productos');
     }
 
     //actualizamos
@@ -148,4 +149,49 @@ class Productos_controller extends CI_Controller
             redirect(base_url().'Productos_controller', 'refresh');
         }
     }
+
+    public function storeCategoria()
+    {
+        $this->form_validation->set_rules('descripcion_categoria', 'Campo descripcion', 'required|is_unique[categoria.descripcion]');
+
+        if ($this->form_validation->run() == true) {
+            $data = [
+                'descripcion' => strtoupper($_POST['descripcion_categoria']),
+                'tipo' => $_POST['tipo_categoria'],
+                'estado' => '1',
+            ];
+
+            if ($this->Categorias_model->save($data)) {
+                echo json_encode(
+                    array(
+                        "status"     => "success",
+                        "message" => "La Categoria " . $this->db->insert_id() . " fue Agregada correctamente",
+                        "id" => $this->db->insert_id(),
+                        "name" => $_POST['descripcion_categoria']
+                    )
+                );
+                   
+              
+            } else {
+                $a = $this->db->affected_rows();
+                $b =  $this->db->insert_id(); 
+                echo json_encode(
+                    array(
+                        "status"     => "error",
+                        "message" => "Error al Guardar la Categoria en la Bd ". $this->db->error() 
+                    )
+                );
+              
+            }
+        } else {
+            echo json_encode(
+                array(
+                    "status"     => "error",
+                    "message" => "Error al Guardar la categoria",
+                )
+            );
+        
+        }
+    }
+
 }

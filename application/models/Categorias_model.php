@@ -58,6 +58,13 @@ class Categorias_model extends CI_MOdel
     {
         return $this->db->insert($this->tabla, $data);
     }
+    
+    //esta funcion guarda en db
+    public function saveFromProduct($data)
+    {
+         $this->db->insert($this->tabla, $data);
+         return $this->db->insert_id(); 
+    }
 
     //esta funcion actualiza en db
     public function update($id, $data)
