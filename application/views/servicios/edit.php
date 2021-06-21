@@ -36,7 +36,7 @@
 
                     <?php foreach ($categorias as $categoria):?>
                     <?php
-                    if ($categorias->id_categoria == $categoria->id_categoria) {
+                    if ($categorias->id_categoria == $servicios->id_categoria) {
                         $selected = 'selected';
                     } else {
                         $selected = '';
