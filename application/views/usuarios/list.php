@@ -182,7 +182,7 @@
 
                                             <option value="" selected="" disabled="">Seleccione</option>
                                             <?php foreach ($perfiles as $perfil):?>
-                                            <option value="<?php echo $perfil->id_perfil_usuario; ?>">
+                                            <option value="<?php echo $perfil->id_usuario_perfil; ?>">
                                                 <?php echo $perfil->descripcion; ?></option>
                                             <?php endforeach; ?>
                                         </select>

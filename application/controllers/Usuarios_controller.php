@@ -67,10 +67,6 @@ class Usuarios_controller extends CI_Controller
                     'date_add' => $FechaAltaUSuario,
                     'estado' => 1,
                     'password' => sha1($_POST['clave']),
-                    //'DirUsuario' 		=>	strtoupper($_POST['DirUsuario']) ,
-                    //'NivelUsuario' 		=>	$_POST['NivelUsuario'] ,
-                    //'NivelUsuario' 		=>	1 ,
-                //	'ClaveUsuario'		=>	md5($_POST['ClaveUsuario'])
                 ];
                 //guardamos los datos en la base de datos
                 if ($this->Usuarios_model->save($data)) {
@@ -190,12 +186,9 @@ class Usuarios_controller extends CI_Controller
         if ($this->form_validation->run() == true) {
             //indicar campos de la tabla a modificar
             $data = [
-                    //'NomApeUsuario' 	=>	strtoupper($_POST['NomApeUsuario']),
                     'username' => $_POST['edit_username'],
-                    //'DirUsuario' 		=>	strtoupper($_POST['DirUsuario']) ,
                     'id_perfil_usuario' => $_POST['edit_id_perfil'],
                     'id_empleado' => $_POST['edit_id_empleado'],
-                    //'UltModUsuario'		=>  $fechaUpdate
                     'estado' => 1,
             ];
             if ($this->Usuarios_model->update($edit_id_usuario, $data)) {

@@ -47,12 +47,7 @@
 							<thead>
 								<tr>
 									<th>Id</th>
-									<!-- <th>Codigo</th> -->
-                                    <th>Perfil</th>
-								<!-- 	<th>Detalle</th>
-									<th>Stock</th>
-									<th>Precio Compra</th>
-									<th>Precio Venta</th> -->
+							        <th>Perfil</th>
 									<th>Estado</th>
 									<th>Acciones</th>
 								</tr>
@@ -61,7 +56,7 @@
 								<?php if (!empty($perfiles)):?>
 									<?php foreach ($perfiles as $perfil):?>
 										<tr>
-											<td><?php echo $perfil->id_perfil_usuario; ?></td>
+											<td><?php echo $perfil->id_usuario_perfil; ?></td>
 											<td><?php echo $perfil->descripcion; ?></td>
 											<?php
 
@@ -82,17 +77,17 @@
 											<td><span class="label <?php echo $label_class; ?>"><?php echo $estado2; ?></span></td>
 											<td>
 												<!-- usa del modelo la funcion correspondiente -->
-												<button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $perfil->id_perfil_usuario; ?>" title="Ver Detalles de la perfil">
+												<button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $perfil->id_usuario_perfil; ?>" title="Ver Detalles de la perfil">
 													<i class="fa fa-eye">
 													</i> Ver
 												</button>
 												<!-- usa del modelo la funcion correspondiente -->
-												<button type="button" class="btn btn-warning btn-sm btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $perfil->id_perfil_usuario; ?>" title="Editar Detalles de la perfil">
+												<button type="button" class="btn btn-warning btn-sm btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $perfil->id_usuario_perfil; ?>" title="Editar Detalles de la perfil">
 													<i class="fa fa-pencil">
 													</i> Editar
 												</button>
 
-												<a href="<?php echo base_url(); ?>Perfiles_controller/delete/<?php echo $perfil->id_perfil_usuario; ?>" class="btn btn-sm btn-danger btn-delete" title="Inactivar perfil">
+												<a href="<?php echo base_url(); ?>Perfiles_controller/delete/<?php echo $perfil->id_usuario_perfil; ?>" class="btn btn-sm btn-danger btn-delete" title="Inactivar perfil">
 													<i class="fa fa-trash-o">
 													</i> Anular
 												</a>

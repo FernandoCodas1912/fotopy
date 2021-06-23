@@ -77,13 +77,13 @@
                                             $tipo = $categoria->tipo;
                                             if ($tipo == 1) {
                                                 $tipo2 = 'Evento';
-                                                $label_class2 = 'label-success';
+                                                $label_class2 = 'label-primary';
                                             } elseif ($tipo == 2) {
                                                 $tipo2 = 'Servicio';
                                                 $label_class2 = 'label-warning';
                                             } else {
                                                 $tipo2 = 'Producto';
-                                                $label_class2 = 'label-danger';
+                                                $label_class2 = 'label-secondary';
                                             }
 
                                             ?>

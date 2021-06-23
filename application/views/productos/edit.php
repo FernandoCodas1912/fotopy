@@ -41,7 +41,7 @@
                         $selected = '';
                     }
                     ?>
-                    <option value="<?php echo $categoria->id_categoria; ?>" <?php echo $selected; ?>>
+                    <option <?php echo $selected; ?> value="<?php echo $categoria->id_categoria; ?>" <?php echo $selected; ?>>
                         <?php echo $categoria->descripcion; ?></option>
                     <?php endforeach; ?>
                 </select>

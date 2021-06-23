@@ -16,7 +16,7 @@ if ($estado == 1) {
 <p>
 	<strong>
 		Id :
-	</strong><?php echo $perfiles->id_perfil_usuario; ?>
+	</strong><?php echo $perfiles->id_usuario_perfil; ?>
 </p>
 
 <p>

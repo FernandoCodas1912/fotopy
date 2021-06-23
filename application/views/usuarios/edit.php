@@ -41,14 +41,14 @@
                 <option value="" selected="" disabled="">Seleccione</option>
                 <?php foreach ($perfiles as $perfil):?>
                     <?php
-                    if ($usuarios->id_perfil_usuario == $perfil->id_perfil_usuario) {
+                    if ($usuarios->id_perfil_usuario == $perfil->id_usuario_perfil) {
                         $selected = 'selected';
                     } else {
                         $selected = '';
                     }
                     ?>
                
-                  <option value="<?php echo $perfil->id_perfil_usuario; ?>"<?php echo $selected; ?>> <?php echo $perfil->descripcion; ?></option>
+                  <option value="<?php echo $perfil->id_usuario_perfil; ?>"<?php echo $selected; ?>> <?php echo $perfil->descripcion; ?></option>
               <?php endforeach; ?>
           </select>
       </div>

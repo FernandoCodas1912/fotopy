@@ -187,6 +187,12 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a  target="_blank" href="<?php echo base_url(); ?>docFotoPy/site" class="waves-effect"><i
+                                class="fa fa-file"></i> <span>
+                                Documentacion </span> </a>
+                    </li>
                 </ul>
                 <div class="clearfix"></div>
             </div>

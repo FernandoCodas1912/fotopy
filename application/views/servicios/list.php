@@ -161,21 +161,27 @@
 
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="projectinput5">Categoria</label>
-                                        <select id="projectinput5" name="id_categoria" class="form-control" required="">
+                                        <div class="input-group">
 
-                                            <option value="" selected="" disabled="">Seleccione</option>
-                                            <?php foreach ($categorias as $categoria):?>
-                                            <option value="<?php echo $categoria->id_categoria; ?>">
-                                                <?php echo $categoria->descripcion; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                            <select id="id_categoria" name="id_categoria" class="form-control"
+                                                required="">
+
+                                                <option value="" selected="" disabled="">Seleccione</option>
+                                                <?php foreach ($categorias as $categoria):?>
+                                                <option value="<?php echo $categoria->id_categoria; ?>">
+                                                    <?php echo $categoria->descripcion; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <a class="input-group-addon btn btn-success" id="btn_add_categoria"> <i
+                                                    class="fa fa-plus"></i></a>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="projectinput5">Impuesto</label>
                                         <select id="projectinput5" name="impuesto" class="form-control" required="">
@@ -278,3 +284,48 @@
         </div><!-- end div class modal dialog-->
     </div><!-- end div class modal-->
     <!-- end Modal editar-->
+
+
+
+
+    <!-- MODAL AGREGAR CATEGORIAS-->
+    <div class="modal" id="modal-agregar-categoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal-cat" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel2">NUEVA CATEGORIA</h5>
+                </div>
+                <div class="modal-body">
+                    <form class="form" method="POST" id="formAddCategory" name="formAdd">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label for="timesheetinput1">Nombre de la Categoria</label>
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" id="timesheetinput1" class="form-control"
+                                        placeholder="Descripcion completa de la Categoria" name="descripcion_categoria"
+                                        required="">
+                                    <input type="hidden" name="tipo_categoria" value="3">
+                                    <div class="form-control-position">
+                                        <i class="icon-android-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- end div class FORM body-->
+                </div><!-- end div class MODAL body-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-fill" id="btnSaveCat"><i
+                            class="icon-check2"></i>Guardar</button>
+                    <button type="reset" class="btn btn-warning btn-fill"><i class="icon-cube"></i>Limpiar</button>
+                    <button type="button" class="btn btn-danger btn-fill" id="closeModalCat" data-dismiss="modal"><i
+                            class="icon-cross2"></i>Cerrar</button>
+                </div>
+                </form>
+            </div><!-- end div class modal content-->
+        </div><!-- end div class modal dialog-->
+    </div><!-- end div class modal-->
+    <!-- end MODAL AGREGAR CATEGORIAS-->
