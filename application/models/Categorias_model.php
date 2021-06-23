@@ -5,13 +5,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 //esta funcion retorna todos los registros de nuestra tabla
 class Categorias_model extends CI_MOdel
 {
-    public $tabla = 'categoria';
+    public $tabla = 'categorias';
     public $idTabla = 'id_categoria';
 
     //esta funcion retorna todos los registros de nuestra tabla
     public function getAll()
     {
-     //   $this->db->where('estado', '1');
+        //   $this->db->where('estado', '1');
         $resultados = $this->db->get($this->tabla);
 
         return $resultados->result();
@@ -58,12 +58,12 @@ class Categorias_model extends CI_MOdel
     {
         return $this->db->insert($this->tabla, $data);
     }
-    
+
     //esta funcion guarda en db
     public function saveFromProduct($data)
     {
-         $this->db->insert($this->tabla, $data);
-         return $this->db->insert_id(); 
+        $this->db->insert($this->tabla, $data);
+        return $this->db->insert_id();
     }
 
     //esta funcion actualiza en db

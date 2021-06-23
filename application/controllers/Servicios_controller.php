@@ -34,14 +34,14 @@ class Servicios_controller extends CI_Controller
     {
         $data = [
             'servicio' => $this->Servicios_model->getById($id),
-         ];
+        ];
         $this->load->view('servicios/view', $data);
     }
 
     public function store()
     {
         $this->form_validation->set_rules('descripcion', 'Descripción', 'required');
-        $this->form_validation->set_rules('codigobarra', 'Codigo', 'required|is_unique[producto_servicio.codigobarra]');
+        $this->form_validation->set_rules('codigobarra', 'Codigo', 'required|is_unique[productos_servicios.codigobarra]');
 
         //este metodo retorna un valor verdadero
         if ($this->form_validation->run() == true) {
@@ -59,10 +59,10 @@ class Servicios_controller extends CI_Controller
             ];
             if ($this->Servicios_model->save($data)) {
                 $this->session->set_flashdata('success', 'Datos Guardados');
-                redirect(base_url().'Servicios_controller', 'refresh');
+                redirect(base_url() . 'Servicios_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'No se pudo guardar la informacion, ya existe un servicio con el codigo ingresado');
-                redirect(base_url().'Servicios_controller', 'refresh');
+                redirect(base_url() . 'Servicios_controller', 'refresh');
             }
         } else {
             $this->store();
@@ -93,11 +93,11 @@ class Servicios_controller extends CI_Controller
             $unique = '';
         } else {
             //si encontro datos, emitira mensaje que ya existe.. llamando a tabla y luego campo
-            $unique = '|is_unique[producto_servicio.codigobarra]';
+            $unique = '|is_unique[productos_servicios.codigobarra]';
         }
 
         //validar
-        $this->form_validation->set_rules('edit_codigobarra', 'Codigo', 'required'.$unique);
+        $this->form_validation->set_rules('edit_codigobarra', 'Codigo', 'required' . $unique);
 
         if ($this->form_validation->run() == true) {
             //indicar campos de la tabla a modificar
@@ -116,15 +116,15 @@ class Servicios_controller extends CI_Controller
             ];
             if ($this->Servicios_model->update($id, $data)) {
                 $this->session->set_flashdata('success', 'Actualizado correctamente!');
-                redirect(base_url().'Servicios_controller', 'refresh');
+                redirect(base_url() . 'Servicios_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'Errores al Intentar Actualizar en la Bd!');
-                redirect(base_url().'Servicios_controller', 'refresh');
+                redirect(base_url() . 'Servicios_controller', 'refresh');
             }
         } else {
             //si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
             $this->session->set_flashdata('error', 'Errores de Validacion al Intentar Actualizar!, el codigo esta duplicado');
-            redirect(base_url().'Servicios_controller', 'refresh');
+            redirect(base_url() . 'Servicios_controller', 'refresh');
         }
     }
 
@@ -132,16 +132,16 @@ class Servicios_controller extends CI_Controller
     public function delete($id)
     {
         $data = [
-        'estado' => '3',
-        'date_mod' => date('Y-m-d H:i:s'),
+            'estado' => '3',
+            'date_mod' => date('Y-m-d H:i:s'),
         ];
         if ($this->Servicios_model->update($id, $data)) {
             $this->session->set_flashdata('success', 'Anulado correctamente!');
             //retornamos a la vista para que se refresque
-            redirect(base_url().'Servicios_controller', 'refresh');
+            redirect(base_url() . 'Servicios_controller', 'refresh');
         } else {
             $this->session->set_flashdata('error', 'Errores al Intentar Anular!');
-            redirect(base_url().'Servicios_controller', 'refresh');
+            redirect(base_url() . 'Servicios_controller', 'refresh');
         }
     }
 
@@ -165,18 +165,15 @@ class Servicios_controller extends CI_Controller
                         "name" => $_POST['descripcion_categoria']
                     )
                 );
-                   
-              
             } else {
                 $a = $this->db->affected_rows();
-                $b =  $this->db->insert_id(); 
+                $b =  $this->db->insert_id();
                 echo json_encode(
                     array(
                         "status"     => "error",
-                        "message" => "Error al Guardar la Categoria en la Bd ". $this->db->error() 
+                        "message" => "Error al Guardar la Categoria en la Bd " . $this->db->error()
                     )
                 );
-              
             }
         } else {
             echo json_encode(
@@ -185,7 +182,6 @@ class Servicios_controller extends CI_Controller
                     "message" => "Error al Guardar la categoria",
                 )
             );
-        
         }
     }
 }

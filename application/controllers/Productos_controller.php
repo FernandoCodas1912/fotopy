@@ -34,7 +34,7 @@ class Productos_controller extends CI_Controller
     {
         $data = [
             'producto' => $this->Productos_model->getById($id),
-         ];
+        ];
 
         $this->load->view('productos/view', $data);
     }
@@ -42,7 +42,7 @@ class Productos_controller extends CI_Controller
     public function store()
     {
         $this->form_validation->set_rules('descripcion', 'Descripción', 'required');
-        $this->form_validation->set_rules('codigobarra', 'Codigo', 'required|is_unique[producto_servicio.codigobarra]');
+        $this->form_validation->set_rules('codigobarra', 'Codigo', 'required|is_unique[productos_servicios.codigobarra]');
 
         //este metodo retorna un valor verdadero
         if ($this->form_validation->run() == true) {
@@ -62,14 +62,14 @@ class Productos_controller extends CI_Controller
             ];
             if ($this->Productos_model->save($data)) {
                 $this->session->set_flashdata('success', 'Datos Guardados');
-                redirect(base_url().'Productos_controller', 'refresh');
+                redirect(base_url() . 'Productos_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'No se pudo guardar la informacion');
-                redirect(base_url().'Productos_controller', 'refresh');
+                redirect(base_url() . 'Productos_controller', 'refresh');
             }
         } else {
             $this->session->set_flashdata('error', 'No se pudo guardar la informacion por errores de validacion, el codigo ingresado ya existe');
-            redirect(base_url().'Productos_controller', 'refresh');
+            redirect(base_url() . 'Productos_controller', 'refresh');
         }
     }
 
@@ -98,11 +98,11 @@ class Productos_controller extends CI_Controller
             $unique = '';
         } else {
             //si encontro datos, emitira mensaje que ya existe.. llamando a tabla y luego campo
-            $unique = '|is_unique[producto_servicio.codigobarra]';
+            $unique = '|is_unique[productos_servicios.codigobarra]';
         }
 
         //validar
-        $this->form_validation->set_rules('edit_codigobarra', 'Codigo', 'required'.$unique);
+        $this->form_validation->set_rules('edit_codigobarra', 'Codigo', 'required' . $unique);
 
         if ($this->form_validation->run() == true) {
             //indicar campos de la tabla a modificar
@@ -121,15 +121,15 @@ class Productos_controller extends CI_Controller
             ];
             if ($this->Productos_model->update($id, $data)) {
                 $this->session->set_flashdata('success', 'Actualizado correctamente!');
-                redirect(base_url().'Productos_controller', 'refresh');
+                redirect(base_url() . 'Productos_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'Errores al intentar actualizar en la Base de Datos');
-                redirect(base_url().'Productos_controller', 'refresh');
+                redirect(base_url() . 'Productos_controller', 'refresh');
             }
         } else {
             //si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
             $this->session->set_flashdata('error', 'Errores de validación al intentar actualizar, ya existe un producto con el mismo codigo');
-            redirect(base_url().'Productos_controller', 'refresh');
+            redirect(base_url() . 'Productos_controller', 'refresh');
         }
     }
 
@@ -137,16 +137,16 @@ class Productos_controller extends CI_Controller
     public function delete($id)
     {
         $data = [
-        'estado' => '3',
-        'date_mod' => date('Y-m-d H:i:s'),
+            'estado' => '3',
+            'date_mod' => date('Y-m-d H:i:s'),
         ];
         if ($this->Productos_model->update($id, $data)) {
             $this->session->set_flashdata('success', 'Anulado correctamente');
             //retornamos a la vista para que se refresque
-            redirect(base_url().'Productos_controller', 'refresh');
+            redirect(base_url() . 'Productos_controller', 'refresh');
         } else {
             $this->session->set_flashdata('error', 'Errores al intentar anular');
-            redirect(base_url().'Productos_controller', 'refresh');
+            redirect(base_url() . 'Productos_controller', 'refresh');
         }
     }
 
@@ -170,18 +170,15 @@ class Productos_controller extends CI_Controller
                         "name" => $_POST['descripcion_categoria']
                     )
                 );
-                   
-              
             } else {
                 $a = $this->db->affected_rows();
-                $b =  $this->db->insert_id(); 
+                $b =  $this->db->insert_id();
                 echo json_encode(
                     array(
                         "status"     => "error",
-                        "message" => "Error al Guardar la Categoria en la Bd ". $this->db->error() 
+                        "message" => "Error al Guardar la Categoria en la Bd " . $this->db->error()
                     )
                 );
-              
             }
         } else {
             echo json_encode(
@@ -190,8 +187,6 @@ class Productos_controller extends CI_Controller
                     "message" => "Error al Guardar la categoria",
                 )
             );
-        
         }
     }
-
 }

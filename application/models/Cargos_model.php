@@ -1,20 +1,12 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
 //esta funcion retorna todos los registros de nuestra tabla
-class Movimientos_model extends CI_MOdel
+class Cargos_model extends CI_MOdel
 {
-    public $tabla = 'movimientos';
-    public $idTabla = 'id_movimiento';
+    public $tabla = 'cargos';
+    public $idTabla = 'id_cargo';
     //esta funcion retorna todos los registros de nuestra tabla
-    public function getAperturaCierreCaja($id)
-    {
-        $this->db->where($this->idTabla, $id);
-        $resultado = $this->db->get($this->tabla);
-
-        return $resultado->row();
-    }
     public function getAll()
     {
         $this->db->where('estado', '1');

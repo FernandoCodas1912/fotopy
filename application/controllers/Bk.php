@@ -1,5 +1,5 @@
 ﻿<?php
-error_reporting(1);
+error_reporting(E_ALL);
 //require("application/libraries/PHPMailer/PHPMailerAutoload.php");
 ini_set("memory_limit", "128M");
 

@@ -15,7 +15,7 @@ class Auth extends CI_Controller
     {
         //si ya esta logueado, que me cargue el controlador Dashboard
         if ($this->session->userdata('login')) {
-            redirect(base_url().'Dashboard_controller'); //llama al controlador
+            redirect(base_url() . 'Dashboard_controller'); //llama al controlador
         } else {
             //si login es !true, entonces q me diriga al login
             $this->load->view('plantilla/header');
@@ -41,11 +41,11 @@ class Auth extends CI_Controller
                 'id_usuario' => $res->id_usuario,
                 'username' => $res->username,
                 'login' => true,
-                ];
+            ];
             $this->session->set_userdata($data);
             $this->session->set_flashdata('success', 'Usuario Logueado Satisfactoriamente!');
             //y me rediriga al controlador Dashboard
-            redirect(base_url().'Dashboard_controller');
+            redirect(base_url() . 'Dashboard_controller');
         }
     }
 

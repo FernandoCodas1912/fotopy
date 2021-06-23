@@ -147,16 +147,16 @@ class Cobranzas_controller extends CI_Controller
 		}
 	}
 	protected function updateComprobante($tipocomprobante, $nrocomprobante)
-    {
-        $data = array(
-            'ultimo_nro' => $nrocomprobante,
-        );
+	{
+		$data = array(
+			'ultimo_nro' => $nrocomprobante,
+		);
 
-        if (!$this->Comprobantes_model->update($tipocomprobante, $data)) {
+		if (!$this->Comprobantes_model->update($tipocomprobante, $data)) {
 
 			$this->session->set_flashdata('error', 'Ultimo Nro Comprobante ' . $nrocomprobante . ' con errores!');
-        }
-    }
+		}
+	}
 	protected function save_detalles($id_venta, $productos, $cantidades, $precios, $importes)
 	{
 		for ($i = 0; $i < count($cantidades); $i++) {

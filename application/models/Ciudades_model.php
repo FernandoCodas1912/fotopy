@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ciudades_model extends CI_Model
 {
-    public $tabla = 'ciudad';
+    public $tabla = 'ciudades';
     public $idTabla = 'id_ciudad';
 
     //esta funcion retorna todos los registros de nuestra tabla

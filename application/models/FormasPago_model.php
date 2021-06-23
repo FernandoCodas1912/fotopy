@@ -1,12 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Eventos_model extends CI_Model
+class FormasPago_model extends CI_Model
 {
-	//estos son metodos q tienen q ver con bd
 
-	public $tabla = 'eventos';
-	public $idTabla = 'id_evento';
+	public $tabla = 'formas_pago';
+	public $idTabla = 'id_formapago';
 
 	//esta funcion retorna todos los registros de nuestra tabla
 	public function getAll()

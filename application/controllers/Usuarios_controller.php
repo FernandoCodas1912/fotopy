@@ -53,7 +53,7 @@ class Usuarios_controller extends CI_Controller
             //aqui se valida el formulario, reglas, primero el campo, segundo alias del campo, tercero la validacion
             $this->form_validation->set_rules('id_empleado', 'Empleado', 'required');
             $this->form_validation->set_rules('id_perfil', 'Tipo usuario', 'required');
-            $this->form_validation->set_rules('username', 'Nombre de usuario', 'required|is_unique[usuario.username]');
+            $this->form_validation->set_rules('username', 'Nombre de usuario', 'required|is_unique[usuarios.username]');
             $this->form_validation->set_rules('clave', 'Clave del Usuario', 'required|min_length[6]');
             $this->form_validation->set_rules('repetirclave', 'Repetir Clave', 'required|min_length[6]|matches[clave]');
 
@@ -73,7 +73,7 @@ class Usuarios_controller extends CI_Controller
                     //si todo esta bien, emitimos mensaje
                     $this->session->set_flashdata('success', 'Usuario registrado correctamente!');
                     //redireccionamos al controlador y refrescamos
-                    redirect(base_url().'Usuarios_controller', 'refresh');
+                    redirect(base_url() . 'Usuarios_controller', 'refresh');
                 } else {
                     //si hubo errores, mostramos mensaje
                     $this->session->set_flashdata('error', 'Usuario no registrado error bd!');
@@ -96,8 +96,6 @@ class Usuarios_controller extends CI_Controller
 
             //traemos datos para compararlo
             $usuarioDb = $this->Usuarios_model->getUsuario($id_usuario);
-            //    var_dump($usuarioDb);
-            $claveBD = $usuarioDb->password;
             //Buscar si coincide con la clave anterior para continuar
             if (sha1($claveAnterior) == $usuarioDb->password) {
                 // echo 'ok si coincide';
@@ -116,14 +114,14 @@ class Usuarios_controller extends CI_Controller
                 //se reciben las variables y se guardan
                 $data = [
                     'date_mod' => date('Y-m-d H:i:s'),
-                   'password' => sha1($_POST['clave_nueva']),
+                    'password' => sha1($_POST['clave_nueva']),
                 ];
                 //guardamos los datos en la base de datos
                 if ($this->Usuarios_model->update($id_usuario, $data)) {
                     //si todo esta bien, emitimos mensaje
                     $this->session->set_flashdata('success', 'Clave Actualizada correctamente!');
                     //redireccionamos al controlador y refrescamos
-                    redirect(base_url().'Usuarios_controller', 'refresh');
+                    redirect(base_url() . 'Usuarios_controller', 'refresh');
                 } else {
                     //si hubo errores, mostramos mensaje
                     $this->session->set_flashdata('error', 'Clave no actualizada error en  bd!');
@@ -178,25 +176,25 @@ class Usuarios_controller extends CI_Controller
             $unique = '';
         } else {
             //si encontro datos, emitira mensaje que ya existe.. llamando a tabla y luego campo
-            $unique = '|is_unique[usuario.username]';
+            $unique = '|is_unique[usuarios.username]';
         }
         //validar
-        $this->form_validation->set_rules('edit_username', 'Nombre de Usuario', 'required'.$unique);
+        $this->form_validation->set_rules('edit_username', 'Nombre de Usuario', 'required' . $unique);
 
         if ($this->form_validation->run() == true) {
             //indicar campos de la tabla a modificar
             $data = [
-                    'username' => $_POST['edit_username'],
-                    'id_perfil_usuario' => $_POST['edit_id_perfil'],
-                    'id_empleado' => $_POST['edit_id_empleado'],
-                    'estado' => 1,
+                'username' => $_POST['edit_username'],
+                'id_perfil_usuario' => $_POST['edit_id_perfil'],
+                'id_empleado' => $_POST['edit_id_empleado'],
+                'estado' => 1,
             ];
             if ($this->Usuarios_model->update($edit_id_usuario, $data)) {
                 $this->session->set_flashdata('success', 'Actualizado correctamente!');
-                redirect(base_url().'Usuarios_controller', 'refresh');
+                redirect(base_url() . 'Usuarios_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'Errores al Intentar Actualizar!');
-                redirect(base_url().'Usuarios_controller/edit/'.$edit_id_usuario);
+                redirect(base_url() . 'Usuarios_controller/edit/' . $edit_id_usuario);
             }
         } else {
             //si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
@@ -213,10 +211,10 @@ class Usuarios_controller extends CI_Controller
         if ($this->Usuarios_model->update($id, $data)) {
             //retornamos a la vista para que se refresque
             $this->session->set_flashdata('success', 'Anulado correctamente!');
-            redirect(base_url().'Usuarios_controller', 'refresh');
+            redirect(base_url() . 'Usuarios_controller', 'refresh');
         } else {
             $this->session->set_flashdata('error', 'Errores al Intentar Anular!');
-            redirect(base_url().'Usuarios_controller');
+            redirect(base_url() . 'Usuarios_controller');
         }
     }
 }
