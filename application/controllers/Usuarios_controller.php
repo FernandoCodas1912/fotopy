@@ -21,9 +21,9 @@ class Usuarios_controller extends CI_Controller
     {
         //cargamos un array usando el modelo
         $data = [
-            'usuarios' => $this->Usuarios_model->getUsuarios(),
-            'perfiles' => $this->Perfiles_model->getPerfiles(),
-            'empleados' => $this->Empleados_model->getEmpleados(),
+            'usuarios' => $this->Usuarios_model->getAll(),
+            'perfiles' => $this->Perfiles_model->getAll(),
+            'empleados' => $this->Empleados_model->getAll(),
         ];
         //llamamos a las vistas para mostrar
         $this->load->view('plantilla/header');
@@ -143,8 +143,8 @@ class Usuarios_controller extends CI_Controller
 
         $data = [
             'usuarios' => $this->Usuarios_model->getUsuario($id),
-            'perfiles' => $this->Perfiles_model->getPerfiles(),
-            'empleados' => $this->Empleados_model->getEmpleados(),
+            'perfiles' => $this->Perfiles_model->getAll(),
+            'empleados' => $this->Empleados_model->getAll(),
         ];
         $this->load->view('usuarios/edit', $data);
     }
@@ -156,8 +156,8 @@ class Usuarios_controller extends CI_Controller
 
         $data = [
             'usuarios' => $this->Usuarios_model->getUsuario($id),
-            'perfiles' => $this->Perfiles_model->getPerfiles(),
-            'empleados' => $this->Empleados_model->getEmpleados(),
+            'perfiles' => $this->Perfiles_model->getAll(),
+            'empleados' => $this->Empleados_model->getAll(),
         ];
         $this->load->view('usuarios/cambio_clave', $data);
     }
