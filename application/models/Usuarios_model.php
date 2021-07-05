@@ -27,10 +27,11 @@ class Usuarios_model extends CI_Model
     //este metodo es para mostrar todos los campos de la tabla
     public function getAll()
     {
-        $this->db->select('u.*, t.descripcion as perfil, e.nomape as nombre'); //selecc campos
+        $this->db->select('u.*, t.descripcion as perfil, e.nomape as nombre, c.descripcion as caja'); //selecc campos
         $this->db->from('usuarios u'); //desde tabla con alias
         $this->db->join('usuarios_perfiles t', 'u.id_perfil_usuario=t.id_usuario_perfil'); //une los campos por su pk=fk
         $this->db->join('empleados e', 'e.id_empleado=u.id_empleado'); //une los campos por su pk=fk
+        $this->db->join('cajas c', 'c.id_caja=u.id_caja', "LEFT"); //une los campos por su pk=fk
         //$this->db->where("u.estado", "1");
         $resultados = $this->db->get();
 
@@ -46,10 +47,11 @@ class Usuarios_model extends CI_Model
     //esto es una funcion o metodo para mostrar 1 reg por id
     public function getById($id)
     {
-        $this->db->select('u.*, t.descripcion as perfil, e.nomape as nombre'); //selecc campos
+        $this->db->select('u.*, t.descripcion as perfil, e.nomape as nombre, c.descripcion as caja'); //selecc campos
         $this->db->from('usuarios u'); //desde tabla con alias
         $this->db->join('usuarios_perfiles t', 'u.id_perfil_usuario=t.id_usuario_perfil'); //une los campos por su pk=fk
         $this->db->join('empleados e', 'e.id_empleado=u.id_empleado'); //une los campos por su pk=fk
+        $this->db->join('cajas c', 'c.id_caja=u.id_caja', "LEFT"); //une los campos por su pk=fk
         $this->db->where($this->idTabla, $id);
         $resultado = $this->db->get();
 

@@ -40,6 +40,7 @@ class Auth extends CI_Controller
             $data = [
                 'id_usuario' => $res->id_usuario,
                 'username' => $res->username,
+                'id_caja' => $res->id_caja,
                 'login' => true,
             ];
             $this->session->set_userdata($data);

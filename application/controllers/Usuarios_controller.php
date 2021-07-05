@@ -14,6 +14,7 @@ class Usuarios_controller extends CI_Controller
         $this->load->model('Usuarios_model'); // esto abre el modelo
         $this->load->model('Perfiles_model'); // esto abre el modelo
         $this->load->model('Empleados_model'); // esto abre el modelo
+        $this->load->model('Cajas_model'); // esto abre el modelo
     }
 
     //esta funcion es la primera que se carga
@@ -24,11 +25,11 @@ class Usuarios_controller extends CI_Controller
             'usuarios' => $this->Usuarios_model->getAll(),
             'perfiles' => $this->Perfiles_model->getAll(),
             'empleados' => $this->Empleados_model->getAll(),
+            'cajas' => $this->Cajas_model->getAll(),
         ];
         //llamamos a las vistas para mostrar
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');
-
         $this->load->view('usuarios/list', $data);
         $this->load->view('plantilla/footer_plugins');
         $this->load->view('usuarios/script_usuarios');
@@ -38,7 +39,7 @@ class Usuarios_controller extends CI_Controller
     public function view($id)
     {
         $data = [
-            'usuarios' => $this->Usuarios_model->getUsuario($id),
+            'usuarios' => $this->Usuarios_model->getById($id),
         ];
         //abrimos la vista view
         $this->load->view('usuarios/view', $data);
@@ -64,6 +65,7 @@ class Usuarios_controller extends CI_Controller
                     'id_empleado' => $_POST['id_empleado'],
                     'username' => $_POST['username'],
                     'id_perfil_usuario' => $_POST['id_perfil'],
+                    'id_caja' => $_POST['id_caja'],
                     'date_add' => $FechaAltaUSuario,
                     'estado' => 1,
                     'password' => sha1($_POST['clave']),
@@ -142,9 +144,10 @@ class Usuarios_controller extends CI_Controller
         //recargamos datos en array, usando el modelo. ver en modelo, Servicios_model
 
         $data = [
-            'usuarios' => $this->Usuarios_model->getUsuario($id),
+            'usuarios' => $this->Usuarios_model->getById($id),
             'perfiles' => $this->Perfiles_model->getAll(),
             'empleados' => $this->Empleados_model->getAll(),
+            'cajas' => $this->Cajas_model->getAll(),
         ];
         $this->load->view('usuarios/edit', $data);
     }
@@ -155,7 +158,7 @@ class Usuarios_controller extends CI_Controller
         //recargamos datos en array, usando el modelo. ver en modelo, Servicios_model
 
         $data = [
-            'usuarios' => $this->Usuarios_model->getUsuario($id),
+            'usuarios' => $this->Usuarios_model->getById($id),
             'perfiles' => $this->Perfiles_model->getAll(),
             'empleados' => $this->Empleados_model->getAll(),
         ];
@@ -170,7 +173,7 @@ class Usuarios_controller extends CI_Controller
         $edit_username = $this->input->post('edit_username');
 
         //traemos datos para no duplicarlos
-        $Username_actual = $this->Usuarios_model->getUsuario($edit_id_usuario);
+        $Username_actual = $this->Usuarios_model->getById($edit_id_usuario);
 
         if ($edit_username == $Username_actual->username) {
             $unique = '';
@@ -185,7 +188,7 @@ class Usuarios_controller extends CI_Controller
             //indicar campos de la tabla a modificar
             $data = [
                 'username' => $_POST['edit_username'],
-                'id_perfil_usuario' => $_POST['edit_id_perfil'],
+                'id_caja' => $_POST['edit_id_caja'],
                 'id_empleado' => $_POST['edit_id_empleado'],
                 'estado' => 1,
             ];
@@ -207,6 +210,7 @@ class Usuarios_controller extends CI_Controller
     {
         $data = [
             'estado' => '3',
+            'date_mod' => date('Y-m-d H:i:s'),
         ];
         if ($this->Usuarios_model->update($id, $data)) {
             //retornamos a la vista para que se refresque
