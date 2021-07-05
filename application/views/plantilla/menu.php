@@ -114,6 +114,8 @@
                                     Eventos</a>
                             </li>
 
+                            <li><a href="<?php echo base_url(); ?>Cajas_controller" class="waves-effect">Cajas</a>
+                            </li>
                             <li><a href="<?php echo base_url(); ?>Clientes_controller" class="waves-effect">Clientes</a>
                             </li>
 

@@ -40,31 +40,29 @@
                 <div class="card-box">
                     <div class="col-md-2 pull-right">
                         <a href="" class="btn btn-success btn-md btn-block" data-toggle="modal"
-                            data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nuevo Tipo de Evento</span>
+                            data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nueva caja</span>
                         </a>
                     </div>
-                    <h4 class="header-title m-t-0 m-b-30"> Listado de Tipos de Eventos</h4>
+                    <h4 class="header-title m-t-0 m-b-30"> Listado de Cajas</h4>
                     <div class="table-responsive">
                         <table class="table" id="example3">
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Descripcion</th>
-                                    <th>Observaciones</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($tipo_eventos)) : ?>
-                                <?php foreach ($tipo_eventos as $tipo_evento) : ?>
+                                <?php if (!empty($cajas)) : ?>
+                                <?php foreach ($cajas as $caja) : ?>
                                 <tr>
-                                    <td><?php echo $tipo_evento->id_tipoevento; ?></td>
-                                    <td><?php echo $tipo_evento->descripcion; ?></td>
-                                    <td><?php echo $tipo_evento->observacion; ?></td>
+                                    <td><?php echo $caja->id_caja; ?></td>
+                                    <td><?php echo $caja->descripcion; ?></td>
                                     <?php
 
-                                            $estado = $tipo_evento->estado;
+                                            $estado = $caja->estado;
                                             if ($estado == 1) {
                                                 $estado2 = 'Activo';
                                                 $label_class = 'label-success';
@@ -83,7 +81,7 @@
                                     <td>
                                         <!-- usa del modelo la funcion correspondiente -->
                                         <button type="button" class="btn btn-success btn-sm btn-ver" data-toggle="modal"
-                                            data-target="#modal-ver" value="<?php echo $tipo_evento->id_tipoevento; ?>"
+                                            data-target="#modal-ver" value="<?php echo $caja->id_caja; ?>"
                                             title="Ver Detalles del tipo de evento">
                                             <i class="fa fa-eye">
                                             </i> Ver
@@ -91,13 +89,13 @@
                                         <!-- usa del modelo la funcion correspondiente -->
                                         <button type="button" class="btn btn-warning btn-sm btn-editar"
                                             data-toggle="modal" data-target="#modal-editar"
-                                            value="<?php echo $tipo_evento->id_tipoevento; ?>"
+                                            value="<?php echo $caja->id_caja; ?>"
                                             title="Editar Detalles del tipo de evento">
                                             <i class="fa fa-pencil">
                                             </i> Editar
                                         </button>
 
-                                        <a href="<?php echo base_url(); ?>Tipo_eventos_controller/delete/<?php echo $tipo_evento->id_tipoevento; ?>"
+                                        <a href="<?php echo base_url(); ?>Cajas_controller/delete/<?php echo $caja->id_caja; ?>"
                                             class="btn btn-sm btn-danger btn-delete" title="Inactivar">
                                             <i class="fa fa-trash-o">
                                             </i> Anular
@@ -124,33 +122,23 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 class="modal-title" id="exampleModalLabel2">NUEVO TIPO DE EVENTO</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Nueva Caja</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form" action="<?php echo base_url(); ?>Tipo_eventos_controller/store" method="POST"
+                    <form class="form" action="<?php echo base_url(); ?>Cajas_controller/store" method="POST"
                         id="formAdd" name="formAdd">
                         <div class="form-body">
                             <div class="form-group">
                                 <label for="timesheetinput1">Descripcion</label>
                                 <div class="position-relative has-icon-left">
                                     <input type="text" id="timesheetinput1" class="form-control"
-                                        placeholder="Descripcion completa del tipo de evento" name="descripcion"
-                                        required="">
+                                        placeholder="Descripcion o nombre de la caja" name="descripcion" required="">
                                     <div class="form-control-position">
                                         <i class="icon-android-cart"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="timesheetinput1">Observacion</label>
-                                <div class="position-relative has-icon-left">
-                                    <input type="text" id="timesheetinput1" class="form-control"
-                                        placeholder="Observacion del tipo de evento" name="observacion" required="">
-                                    <div class="form-control-position">
-                                        <i class="icon-android-cart"></i>
-                                    </div>
-                                </div>
-                            </div>
+
 
                         </div><!-- end div class FORM body-->
                 </div><!-- end div class MODAL body-->
@@ -174,7 +162,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h5 class="modal-title">DETALLES DEL TIPO DE EVENTO</h5>
+                    <h5 class="modal-title">DETALLES DE LA CAJA</h5>
                 </div>
                 <div class="modal-body">
                     <!--/ CARGA CONTENIDO DESDE VISTA -->
@@ -196,9 +184,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL TIPO DE EVENTO</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">FICHA DE LA CAJA</h5>
                 </div>
-                <form action="<?php echo base_url(); ?>Tipo_eventos_controller/update" method="POST" id="formEdit"
+                <form action="<?php echo base_url(); ?>Cajas_controller/update" method="POST" id="formEdit"
                     name="formEdit">
                     <div class="modal-body">
                         <!-- AQUI SE CARGA DESDE EL CONTROLADOR -->
