@@ -1,16 +1,16 @@
 <div class="form-group">
-    <label for="timesheetinput1">Cliente</label>
+    <label for="timesheetinput1">Contacto</label>
     <select id="projectinput5" name="id_cliente" class="form-control" required="">
 
         <option value="" selected="" disabled="">Seleccione</option>
-        <?php foreach ($clientes as $cliente):?>
-          <?php
-          if ($cliente->id_cliente == $reservas->id_cliente) {
-              $selected = 'selected';
-          } else {
-              $selected = '';
-          }
-          ?>
+        <?php foreach ($clientes as $cliente) : ?>
+        <?php
+            if ($cliente->id_cliente == $reservas->id_cliente) {
+                $selected = 'selected';
+            } else {
+                $selected = '';
+            }
+            ?>
         <option value="<?php echo $cliente->id_cliente; ?>" <?php echo $selected; ?>>
             <?php echo $cliente->razonsocial; ?></option>
         <?php endforeach; ?>
@@ -22,17 +22,34 @@
     <label for="projectinput5">Servicio Solicitado </label>
     <select id="projectinput5" name="id_producto" value="<?php echo $reservas->id_producto; ?>" class="form-control"
         required="">
-        <!--   <option value="none" selected="" disabled="">Seleccione</option> -->
-        <?php foreach ($servicios as $servicio):?>
+        <?php foreach ($servicios as $servicio) : ?>
         <?php
-          if ($servicio->id_producto == $reservas->id_producto) {
-              $selected = 'selected';
-          } else {
-              $selected = '';
-          }
-          ?>
+            if ($servicio->id_producto == $reservas->id_producto) {
+                $selected = 'selected';
+            } else {
+                $selected = '';
+            }
+            ?>
         <option value="<?php echo $servicio->id_producto; ?>" <?php echo $selected; ?>>
             <?php echo $servicio->descripcion; ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="projectinput5"> Evento </label>
+    <select id="projectinput5" name="id_tipoevento" value="<?php echo $reservas->id_tipoevento; ?>" class="form-control"
+        required="">
+        <?php foreach ($tipo_eventos as $tipo_evento) : ?>
+        <?php
+            if ($tipo_evento->id_tipoevento == $reservas->id_tipoevento) {
+                $selected = 'selected';
+            } else {
+                $selected = '';
+            }
+            ?>
+        <option value="<?php echo $tipo_evento->id_tipoevento; ?>" <?php echo $selected; ?>>
+            <?php echo $tipo_evento->descripcion; ?></option>
         <?php endforeach; ?>
     </select>
 </div>

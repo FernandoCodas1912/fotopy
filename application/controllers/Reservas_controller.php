@@ -15,6 +15,7 @@ class Reservas_controller extends CI_Controller
         $this->load->model('Categorias_model');
         $this->load->model('Reservas_model');
         $this->load->model('Clientes_model');
+        $this->load->model('Tipo_eventos_model');
     }
 
     //carga una vista llamada list
@@ -23,6 +24,7 @@ class Reservas_controller extends CI_Controller
         $data = [
             'reservas' => $this->Reservas_model->getAll(),
             'servicios' => $this->Servicios_model->getAll(),
+            'tipo_eventos' => $this->Tipo_eventos_model->getAll(),
             'clientes' => $this->Clientes_model->getAll(),
         ];
         $this->load->view('plantilla/header');
@@ -47,19 +49,20 @@ class Reservas_controller extends CI_Controller
         //este metodo retorna un valor verdadero
         if ($this->form_validation->run() == true) {
             $data = [
-                    'id_producto' => $this->input->post('id_producto'),
-                    'id_cliente' => $this->input->post('id_cliente'),
-                    'fecha_evento' => $_POST['fecha_evento'],
-                    'hora_evento' => $this->input->post('hora_evento'),
-                    'lugar_evento' => strtoupper($_POST['lugar_evento']),
-                    'estado' => '1',
-                ];
+                'id_producto' => $this->input->post('id_producto'),
+                'id_cliente' => $this->input->post('id_cliente'),
+                'id_tipoevento' => $this->input->post('id_tipoevento'),
+                'fecha_evento' => $_POST['fecha_evento'],
+                'hora_evento' => $this->input->post('hora_evento'),
+                'lugar_evento' => strtoupper($_POST['lugar_evento']),
+                'estado' => '1',
+            ];
             if ($this->Reservas_model->save($data)) {
                 $this->session->set_flashdata('success', 'Datos Guardados');
-                redirect(base_url().'Reservas_controller', 'refresh');
+                redirect(base_url() . 'Reservas_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'No se pudo guardar la informacion');
-                redirect(base_url().'Reservas_controller', 'refresh');
+                redirect(base_url() . 'Reservas_controller', 'refresh');
             }
         } else {
             $this->store();
@@ -70,10 +73,11 @@ class Reservas_controller extends CI_Controller
     public function edit($id)
     {
         $data = [
-                'servicios' => $this->Servicios_model->getAll(),
-                'clientes' => $this->Clientes_model->getAll(),
-                'reservas' => $this->Reservas_model->getById($id),
-            ];
+            'servicios' => $this->Servicios_model->getAll(),
+            'clientes' => $this->Clientes_model->getAll(),
+            'tipo_eventos' => $this->Tipo_eventos_model->getAll(),
+            'reservas' => $this->Reservas_model->getById($id),
+        ];
         $this->load->view('reservas/edit', $data); //esto abre la vista edit de la carpeta views/reservas
     }
 
@@ -88,24 +92,25 @@ class Reservas_controller extends CI_Controller
         if ($this->form_validation->run() == true) {
             //indicar campos de la tabla a modificar
             $data = [
-                    'id_producto' => $this->input->post('id_producto'),
-                    'id_cliente' => $this->input->post('id_cliente'),
-                    'fecha_evento' => $this->input->post('fecha_evento'),
-                    'hora_evento' => $this->input->post('hora_evento'),
-                    'lugar_evento' => strtoupper($_POST['lugar_evento']),
-                    'estado' => '1',
-                ];
+                'id_producto' => $this->input->post('id_producto'),
+                'id_cliente' => $this->input->post('id_cliente'),
+                'id_tipoevento' => $this->input->post('id_tipoevento'),
+                'fecha_evento' => $this->input->post('fecha_evento'),
+                'hora_evento' => $this->input->post('hora_evento'),
+                'lugar_evento' => strtoupper($_POST['lugar_evento']),
+                'estado' => '1',
+            ];
             if ($this->Reservas_model->update($id, $data)) {
                 $this->session->set_flashdata('success', 'Actualizado correctamente!');
-                redirect(base_url().'Reservas_controller', 'refresh');
+                redirect(base_url() . 'Reservas_controller', 'refresh');
             } else {
                 $this->session->set_flashdata('error', 'Errores al Intentar Actualizar en la Bd!');
-                redirect(base_url().'Reservas_controller', 'refresh');
+                redirect(base_url() . 'Reservas_controller', 'refresh');
             }
         } else {
             //si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
             $this->session->set_flashdata('error', 'Errores de Validacion al Intentar Actualizar!');
-            redirect(base_url().'Reservas_controller', 'refresh');
+            redirect(base_url() . 'Reservas_controller', 'refresh');
             //$this->edit($id);
         }
     }
@@ -114,15 +119,15 @@ class Reservas_controller extends CI_Controller
     public function delete($id)
     {
         $data = [
-                'estado' => '3',
-            ];
+            'estado' => '3',
+        ];
         if ($this->Reservas_model->update($id, $data)) {
             $this->session->set_flashdata('success', 'Anulado correctamente!');
             //retornamos a la vista para que se refresque
-            redirect(base_url().'Reservas_controller', 'refresh');
+            redirect(base_url() . 'Reservas_controller', 'refresh');
         } else {
             $this->session->set_flashdata('error', 'Errores al Intentar Anular!');
-            redirect(base_url().'Reservas_controller', 'refresh');
+            redirect(base_url() . 'Reservas_controller', 'refresh');
         }
     }
 }
