@@ -110,6 +110,9 @@
                             <li><a href="<?php echo base_url(); ?>Categorias_controller"
                                     class="waves-effect">Categorias</a>
                             </li>
+                            <li><a href="<?php echo base_url(); ?>Tipo_eventos_controller" class="waves-effect">Tipos de
+                                    Eventos</a>
+                            </li>
 
                             <li><a href="<?php echo base_url(); ?>Clientes_controller" class="waves-effect">Clientes</a>
                             </li>
