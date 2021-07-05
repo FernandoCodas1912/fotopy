@@ -6,7 +6,7 @@ class Dashboard_controller extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model("Movimientos_model");
+		$this->load->model("Cajas_model");
 
 		// si no esta logueado redireccionar a base url
 		if (!$this->session->userdata("login")) {
@@ -16,14 +16,16 @@ class Dashboard_controller extends CI_Controller
 
 	public function index()
 	{
+
 		$data = array(
-			'AperturaCierreCaja' => $this->Movimientos_model->getAperturaCierreCaja("0"),
+			'datoscaja' => $this->Cajas_model->getAperturaCierre($this->session->userdata('username')),
 		);
 		//echo var_dump($data);
 		//si ya esta logueado, que me cargue el controlador Dashboard
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu');
 		$this->load->view('reservas/reservas', $data);
+		$this->load->view('cajas/apertura_cierre_caja', $data);
 		$this->load->view('plantilla/footer_plugins');
 	}
 }

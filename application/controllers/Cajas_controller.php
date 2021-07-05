@@ -11,6 +11,7 @@ class Cajas_controller extends CI_Controller
 			redirect(base_url());
 		}
 		$this->load->model("Cajas_model");
+		$this->load->model("Movimientos_model");
 	}
 	//carga una vista llamada list
 	public function index()
@@ -137,19 +138,44 @@ class Cajas_controller extends CI_Controller
 			'estadocaja'       	=> 1,
 
 		);
-		if ($this->Cajas_model->save("aperturacierre", $data)) {
-			echo json_encode(
-				array(
-					"Status"     => "OK",
-					"textStatus" => "La Caja ha sido Abierta sin Errores ",
-				)
+
+		//insertar movimiento de apertura de caja
+
+		if ($this->Cajas_model->saveApertura($data)) {
+
+			//obtener saldo anterior
+			$movimientos = $this->Movimientos_model->getSaldo();
+			$saldo = $movimientos->saldo_movimiento +  $_POST['monto_apertura'];
+
+			//insertar movimiento de apertura de caja
+			$data_movimiento = array(
+				'id_motivo'       	=> 21,
+				'id_caja'       	=> $_POST['id_caja'],
+				'id_usuario'  		=>  $this->session->userdata('id_usuario'),
+				'fecha_hora'    	=> date('Y-m-d H:i:s'),
+				'tipo_movimiento'   	=> 1,
+				'obs_movimiento'     	=> "Apertura de Caja ",
+				'importe_movimiento' 	=> $_POST['monto_apertura'],
+				'saldo_movimiento'      => $saldo,
+				'estado'       			=> 1,
+
 			);
-		} else {
-			echo json_encode(
-				array(
-					"textStatus" => "ERROR EN LA BD",
-				)
-			);
+			if ($this->Movimientos_model->save($data_movimiento)) {
+
+				echo json_encode(
+					array(
+						"status"     => "success",
+						"message" => "La Caja ha sido Abierta sin Errores ",
+					)
+				);
+			} else {
+				echo json_encode(
+					array(
+						"status"     => "error",
+						"message" => "ERROR EN LA BD",
+					)
+				);
+			}
 		}
 	}
 	public function cerrar_caja()

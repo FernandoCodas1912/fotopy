@@ -8,19 +8,20 @@ class Movimientos_model extends CI_MOdel
     public $tabla = 'movimientos';
     public $idTabla = 'id_movimiento';
     //esta funcion retorna todos los registros de nuestra tabla
-    public function getAperturaCierreCaja($id)
-    {
-        $this->db->where($this->idTabla, $id);
-        $resultado = $this->db->get($this->tabla);
 
-        return $resultado->row();
-    }
     public function getAll()
     {
         $this->db->where('estado', '1');
         $resultados = $this->db->get($this->tabla);
 
         return $resultados->result();
+    }
+    public function getSaldo()
+    {
+        $this->db->select('saldo_movimiento'); //selecc campos
+        $this->db->order_by($this->idTabla, "DESC"); //campo de la base de datos
+        $resultado = $this->db->get($this->tabla);
+        return $resultado->row();
     }
 
     //esto es una funcion o metodo para mostrar 1 registro por id
