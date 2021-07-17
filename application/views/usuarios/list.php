@@ -51,7 +51,7 @@
                                     <th>Username</th>
                                     <th>Nombre</th>
                                     <th>Perfil</th>
-                                    <th>Fecha Alta</th>
+                                    <th>Caja</th>
                                     <th>Ult. Modificacion</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
@@ -67,10 +67,11 @@
                                     <td><?php echo $usuario->perfil; ?></td>
                                     <?php
                                             $date_added = $usuario->date_add;
-                                            $date_added = date('d-M-Y H:i:s', strtotime($date_added));
+                                            // $date_added = date('d-M-Y H:i:s', strtotime($date_added));
+                                            $date_added = date('d-m-Y', strtotime($date_added));
 
                                             $date_mod = $usuario->date_mod;
-                                            $date_mod = date('d-M-Y H:i:s', strtotime($date_mod));
+                                            $date_mod = date('d-m-Y', strtotime($date_mod));
 
                                             $estado = $usuario->estado;
 
@@ -86,8 +87,15 @@
                                                     $label_class = 'label-danger';
                                                 }
                                             }
+                                            if (!$usuario->caja) {
+                                                $usuario_caja = 'Sin Caja Asignada';
+                                            } else {
+                                                $usuario_caja = $usuario->caja;
+                                            }
                                             ?>
-                                    <td><?php echo $date_added; ?></td>
+
+
+                                    <td><?php echo $usuario_caja; ?></td>
                                     <td><?php echo $date_mod; ?></td>
                                     <td><span class="label <?php echo $label_class; ?>"><?php echo $estado2; ?></span>
                                     </td>

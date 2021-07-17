@@ -18,7 +18,7 @@ class Dashboard_controller extends CI_Controller
 	{
 
 		$data = array(
-			'datoscaja' => $this->Cajas_model->getAperturaCierre($this->session->userdata('username')),
+			'datoscaja' => $this->Cajas_model->getAperturaCierre($this->session->userdata('username'), $this->session->userdata('id_caja')),
 		);
 		//echo var_dump($data);
 		//si ya esta logueado, que me cargue el controlador Dashboard

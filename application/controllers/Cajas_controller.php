@@ -141,18 +141,23 @@ class Cajas_controller extends CI_Controller
 
 		//insertar movimiento de apertura de caja
 
-		if ($this->Cajas_model->saveApertura($data)) {
+		$idApertura = $this->Cajas_model->saveApertura($data);
 
+		if ($idApertura) {
 			//obtener saldo anterior
-			$movimientos = $this->Movimientos_model->getSaldo();
-			$saldo = $movimientos->saldo_movimiento +  $_POST['monto_apertura'];
-
+			$movimientos = $this->Movimientos_model->getSaldo($this->session->userdata('id_caja'));
+			if ($movimientos) {
+				$saldo = $movimientos->saldo_movimiento +  $_POST['monto_apertura'];
+			} else {
+				$saldo = $_POST['monto_apertura'];
+			}
 			//insertar movimiento de apertura de caja
 			$data_movimiento = array(
-				'id_motivo'       	=> 21,
-				'id_caja'       	=> $_POST['id_caja'],
-				'id_usuario'  		=>  $this->session->userdata('id_usuario'),
-				'fecha_hora'    	=> date('Y-m-d H:i:s'),
+				'id_operacion'       	=> $idApertura,
+				'id_motivo'       		=> 21,
+				'id_caja'       		=> $_POST['id_caja'],
+				'id_usuario'  			=>  $this->session->userdata('id_usuario'),
+				'fecha_hora'    		=> date('Y-m-d H:i:s'),
 				'tipo_movimiento'   	=> 1,
 				'obs_movimiento'     	=> "Apertura de Caja ",
 				'importe_movimiento' 	=> $_POST['monto_apertura'],
@@ -181,27 +186,46 @@ class Cajas_controller extends CI_Controller
 	public function cerrar_caja()
 	{
 		$id_caja =  $_POST['id_caja'];
+		$usuario =  $_POST['usuario_cierre'];
 		$data = array(
 			'id_caja'       	=> $id_caja,
-			'usuario_cierre'  => $_POST['usuario_cierre'],
-			'fecha_cierre'    => date('Y-m-d'),
-			'monto_cierre'    => $_POST['monto_cierre'],
+			'usuario_cierre'  	=> $usuario,
+			'fecha_cierre'    	=> date('Y-m-d'),
+			'monto_cierre'    	=> $_POST['monto_cierre'],
 			'estadocaja'       	=> 2,
 
 		);
-		if ($this->Cajas_model->cierreCaja($id_caja, $data)) {
-			echo json_encode(
-				array(
-					"Status"     => "OK",
-					"textStatus" => "La Caja ha sido Cerrada sin Errores ",
-				)
+
+		if ($this->Cajas_model->cierreCaja($id_caja, $usuario, $data)) {
+
+
+			//insertar movimiento de apertura de caja
+			$data_movimiento = array(
+				'id_motivo'       		=> 19,
+				'id_caja'       		=> $_POST['id_caja'],
+				'id_usuario'  			=>  $this->session->userdata('id_usuario'),
+				'fecha_hora'    		=> date('Y-m-d H:i:s'),
+				'tipo_movimiento'   	=> 2,
+				'obs_movimiento'     	=> "Cierre de Caja ",
+				'importe_movimiento' 	=> $_POST['monto_cierre'],
+				'saldo_movimiento'      => 0,
+				'estado'       			=> 1,
+
 			);
-		} else {
-			echo json_encode(
-				array(
-					"textStatus" => "ERROR EN LA BD",
-				)
-			);
+			if ($this->Movimientos_model->save($data_movimiento)) {
+				echo json_encode(
+					array(
+						"Status"     => "OK",
+						"textStatus" => "La Caja ha sido Cerrada sin Errores ",
+					)
+				);
+			} else {
+				echo json_encode(
+					array(
+						"textStatus" => "ERROR EN LA BD",
+					)
+				);
+			}
 		}
 	}
 }

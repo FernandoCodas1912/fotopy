@@ -33,27 +33,35 @@ class Cajas_model extends CI_MOdel
   //esta funcion guarda apertura en db
   public function saveApertura($data)
   {
-    return $this->db->insert("caja_aperturas_cierres", $data);
+    $this->db->insert("caja_aperturas_cierres", $data);
+    return $this->db->insert_id();
   }
-
+  public function lastID()
+  {
+    return $this->db->insert_id();
+  }
   //esta funcion actualiza en db
   public function update($id, $data)
   {
     $this->db->where($this->idTabla, $id);
-
     return $this->db->update($this->tabla, $data);
   }
 
-  public function getAperturaCierre($username, $tabla = "caja_aperturas_cierres")
+  public function getAperturaCierre($username, $id_caja)
   {
+    $this->db->where("id_caja", $id_caja);
     $this->db->where("usuario_apertura", $username);
-    $resultado = $this->db->get($tabla);
+    $this->db->order_by("id_aperturacierre", "DESC");
+    $resultado = $this->db->get("caja_aperturas_cierres");
     return $resultado->row();
   }
 
-  public function cierreCaja($id_caja, $data, $tabla = "caja_aperturas_cierres")
+
+  public function cierreCaja($id_caja, $usuario, $data)
   {
     $this->db->where("id_caja", $id_caja);
-    return $this->db->update($tabla, $data);
+    $this->db->where("usuario_apertura", $usuario);
+    return  $this->db->update("caja_aperturas_cierres", $data);
+    //	return $this->db->affected_rows();
   }
 }

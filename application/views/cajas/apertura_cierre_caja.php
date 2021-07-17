@@ -77,20 +77,20 @@
 <?php
 $id_caja_user = $this->session->userdata('id_caja');
 if ($id_caja_user != "0") { //solo si tiene caja asignada
-  //ver si tiene datos        
-  //averiguar si esta abierta o no
-  if ($datoscaja) {
-    $estado_caja = $datoscaja->estadocaja; //puede ser 1 o 2
-    if ($estado_caja == 2) { //2 es cerrada
-      $abrir_caja = '1';
+    //ver si tiene datos        
+    //averiguar si esta abierta o no
+    if ($datoscaja) {
+        $estado_caja = $datoscaja->estadocaja; //puede ser 1 o 2
+        if ($estado_caja == 2) { //2 es cerrada
+            $abrir_caja = '1';
+        } else {
+            $abrir_caja = '0';
+        }
     } else {
-      $abrir_caja = '0';
+        $abrir_caja = '1'; //es cajero pero no existe 
     }
-  } else {
-    $abrir_caja = '1'; //es cajero pero no existe 
-  }
 } else {
-  $abrir_caja = '0'; //perfil no es cajero
+    $abrir_caja = '0'; //perfil no es cajero
 }
 ?>
 <script>
@@ -120,8 +120,8 @@ $('#form_ape_caja').on('submit', function(e) {
             Swal.fire({
                 icon: resp.status,
                 title: resp.message,
-                showConfirmButton: false,
-                timer: 1500
+                showConfirmButton: true,
+                timer: 2000
             });
         },
     });

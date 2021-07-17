@@ -10,22 +10,24 @@ class Movimientos_controller extends CI_Controller
 		if (!$this->session->userdata("login")) {
 			redirect(base_url());
 		}
-		//$this->load->model("Servicios_model");
+		$this->load->model("Cajas_model");
 		$this->load->model("Movimientos_model");
 	}
 	//carga una vista llamada list
 	public function index()
 	{
 		$data = array(
-			/*	'servicios' => $this->Servicios_model->getServicios(),*/
-			"categorias" => $this->Movimientos_model->getMovimientos(),
+			"movimientos" => $this->Movimientos_model->getAll(),
+			'cajas' => $this->Cajas_model->getAperturaCierre($this->session->userdata('username'),  $this->session->userdata('id_caja')),
+			'saldo_caja' => $this->Movimientos_model->getSaldo($this->session->userdata('id_caja')),
 
 		);
+		//var_dump($data);
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu');
-		$this->load->view('categorias/list', $data);
+		$this->load->view('movimientos/list', $data);
 		$this->load->view('plantilla/footer_plugins');
-		$this->load->view('categorias/script_categorias');
+		$this->load->view('movimientos/script_movimientos');
 	}
 
 	# insert apertura de caja
@@ -55,17 +57,6 @@ class Movimientos_controller extends CI_Controller
 			);
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 	public function view($id)

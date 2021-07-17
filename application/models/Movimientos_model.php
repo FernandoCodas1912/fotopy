@@ -11,13 +11,19 @@ class Movimientos_model extends CI_MOdel
 
     public function getAll()
     {
-        $this->db->where('estado', '1');
-        $resultados = $this->db->get($this->tabla);
-
+        $this->db->select("m.*, mm.desc_motivo as motivo, u.username as usuario"); //selecc campos
+        $this->db->from("movimientos m"); //desde tabla con alias
+        $this->db->join("movimientos_motivos mm", "m.id_motivo=mm.id_motivo"); //une los campos por su pk=fk
+        $this->db->join("usuarios u", "m.id_usuario=u.id_usuario"); //une los campos por su pk=fk
+        $this->db->where("m.id_caja", $this->session->userdata("id_caja"));
+        $resultados = $this->db->get();
         return $resultados->result();
     }
-    public function getSaldo()
+
+    public function getSaldo($id_caja)
     {
+
+        $this->db->where('id_caja', $id_caja);
         $this->db->select('saldo_movimiento'); //selecc campos
         $this->db->order_by($this->idTabla, "DESC"); //campo de la base de datos
         $resultado = $this->db->get($this->tabla);

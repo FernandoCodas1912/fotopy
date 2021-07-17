@@ -151,7 +151,7 @@
                             </span> <span class="menu-arrow"></span></a>
                         <ul class="list-unstyled">
                             <!-- <li><a href="<?php echo base_url(); ?>Aperturas_controller">Apertura/Cierre Caja </a></li> -->
-                            <li><a href="<?php echo base_url(); ?>Movimientos_controller">Movimientos </a></li>
+                            <li><a href="<?php echo base_url(); ?>Movimientos_controller">Caja y Movimientos </a></li>
                             <li><a href="<?php echo base_url(); ?>Cobros_controller">Gestionar Cobranzas </a></li>
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"> <span>
