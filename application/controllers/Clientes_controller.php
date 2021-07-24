@@ -14,6 +14,7 @@ class Clientes_controller extends CI_Controller
         $this->load->model('Clientes_model');
         $this->load->model('Ciudades_model');
         $this->load->model('Paises_model');
+        $this->load->model("Departamentos_model");
     }
 
     //carga una vista llamada list
@@ -21,6 +22,7 @@ class Clientes_controller extends CI_Controller
     {
         $data = [
             'clientes' => $this->Clientes_model->getAll(),
+            "departamentos" => $this->Departamentos_model->getAll(),
             'ciudades' => $this->Ciudades_model->getAll(),
             'paises' => $this->Paises_model->getAll(),
         ];
@@ -53,6 +55,7 @@ class Clientes_controller extends CI_Controller
                 'telefono' => $this->input->post('telefono'),
                 'direccion' => strtoupper($_POST['direccion']),
                 'email' => $this->input->post('email'),
+                'id_departamento' => $this->input->post('id_departamento'),
                 'id_ciudad' => $this->input->post('id_ciudad'),
                 'id_pais' => $this->input->post('id_pais'),
                 'estado' => '1',
@@ -76,10 +79,12 @@ class Clientes_controller extends CI_Controller
     {
         $data = [
             'clientes' => $this->Clientes_model->getById($id),
+            "departamentos" => $this->Departamentos_model->getAll(),
             'ciudades' => $this->Ciudades_model->getAll(),
             'paises' => $this->Paises_model->getAll(),
         ];
         $this->load->view('clientes/edit', $data);
+        $this->load->view('clientes/script_clientes');
     }
 
     //actualizamos
@@ -111,6 +116,7 @@ class Clientes_controller extends CI_Controller
                 'direccion' => strtoupper($_POST['edit_direccion']),
                 'email' => $this->input->post('edit_email'),
                 'id_ciudad' => $this->input->post('edit_id_ciudad'),
+                'id_departamento' => $this->input->post('edit_id_departamento'),
                 'id_pais' => $this->input->post('edit_id_pais'),
                 'estado' => '1',
                 'date_mod' => date('Y-m-d H:i:s'),

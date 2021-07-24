@@ -22,9 +22,10 @@ class Clientes_model extends CI_Model
     //esto es una funcion o metodo para mostrar 1 registro por id
     public function getById($id)
     {
-        $this->db->select('c.*, cd.descripcion as ciudad, p.nombre as pais'); //selecc campos
+        $this->db->select('c.*, cd.descripcion as ciudad, p.nombre as pais, d.descripcion as departamento'); //selecc campos
         $this->db->from('clientes c'); //desde tabla con alias
         $this->db->join('ciudades cd', 'cd.id_ciudad=c.id_ciudad'); //une los campos por su pk=fk
+        $this->db->join('departamentos d', 'c.id_departamento=d.id_departamento'); //une los campos por su pk=fk
         $this->db->join('paises p', 'p.id=c.id_pais'); //une los campos por su pk=fk
         $this->db->where($this->idTabla, $id);
         $resultado = $this->db->get();

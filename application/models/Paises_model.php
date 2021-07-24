@@ -11,7 +11,7 @@ class Paises_model extends CI_Model
     //esta funcion retorna todos los registros de nuestra tabla
     public function getAll()
     {
-        // $this->db->where('estado', '1');
+        $this->db->where('estado', '1');
         $resultados = $this->db->get($this->tabla);
 
         return $resultados->result();
