@@ -1,60 +1,61 @@
-# Modulo Wim_partyfiestaxmlimporter
+# Modulo PLANIFICACIÓN
 
-Este modulo importa o actualiza, categorias, productos, precios, stock e imagenes de productos y sus combinaciones, los inserta a la bd de prestashop
+En este modulo se observa o actualiza los eventos reservados acompañados de los servicios solicitados por el cliente o contacto, el tipo de evento, detalle del lugar, fecha y hora del evento. Estos datos se encuentran insertos en la BD de fotopy
 
-## Caracteristicas
+## Caracteristicas del Sistema Informático para el gerenciamiento y control de eventos fotográficos de la Empresa «FOTO PRODUCCIONES»
 
-Puede Importar una cantidad casi ilimitada de Items, ya que los divide en partes, la cantidad de registros que puede importar es manualmente programable
-Puede integrar los XML que recibe, ya sea en el directorio del script o entro directorio configurable.
+Puede generar una cantidad casi ilimitada de datos, ya que los divide en partes, la cantidad de registros que puede importar es manualmente programable.
+Puede integrar los XML que recibe, ya sea en el directorio del script o dentro del directorio configurable por el programador del sistema.
 
-- _Sin limites_
+- _Sin límites_
 
-Integre su tienda con cualquier número de mayoristas y proveedores. El importador manejará cada archivo generado correctamente y le permitirá importar datos de manera selectiva desde el archivo a su tienda.
+El sistema manejará cada dato generado correctamente y le permitirá importar datos de manera selectiva en formatos permitidos por el sistema a su escritorio.
 
 - _Universal_
 
-Es compatible con los archivos XML generados correctamente. La única condición es que el archivo contenga todos los datos requeridos por PrestaShop; p.ej. un nombre de producto o un código de combinación.
-No tiene que preocuparse por la versión de la tienda o la actualización planificada. ¡El módulo está preparado para PrestaShop 1.5, 1.6 y 1.7!
+Es compatible con los archivos XML generados correctamente. La única condición es que el archivo contenga todos los datos requeridos por el sistema; p.ej. un nombre de producto o un código de combinación.
+No tiene que preocuparse por la versión del sistema o la actualización planificada. ¡El sistema está preparado para ser responsive!
 
 - _CRON - importaciones sin contacto_
 
-El importador genera un enlace para una importación directa (CRON) para cada archivo configurado. Esto permite una automatización completa y al 100% de la importación y la situación en su tienda, sin contacto y durante los días y horas programados. No se preocupe si sus precios e inventarios están actualizados, se ajustarán automáticamente.
+El sistema genera la posibilidad para una importación directa (CRON) para cada archivo configurado en tiempo. Esto permite una automatización completa y al 100% de la importación y la situación en reporte.
 
 - _Rápido y flexible_
 
-El módulo usa el potencial de su servidor .El módulo también admite archivos de gran tamaño Con cualquier cantidad de elementos para importar / actualizar. ¡La velocidad alcanzada por el importador es de hasta 500 productos por segundo! El rendimiento del importador depende de la potencia del servidor. El módulo funciona en servidores FTP clásicos y en máquinas potentes como VPS Linux y nubes como Google Cloud o AWS.
+El sistema usa el potencial de su servidor. Los módulos también admiten manipulación de datos para posteriormente ser importados o actualizados. 
+El sistema funciona en servidores FTP clásicos y en máquinas potentes como VPS Linux y nubes como Google Cloud, AWS, entre otros.
 
-## Instalacion
+## Instalación
 
-- Este modulo, no requiere instalacion previa, se ejecuta desde cron o desde navegador
+- Este sistema es web por lo que no requiere instalación previa, se ejecuta desde cron o desde cualquier navegador web.
 
-## Layout del Modulo
+## Layout del sistema
 
-Diagramado UML del Modulo
+Diagramado UML
 
 ## Diagrama del Caso de Uso General
 
-- Se observa como influye el modulo situado en el ambiente del sistema, cuyos actores pueden ser tanto el cron, como el usuario que acceda desde el navegador
+- Se observa como influye el modulo situado en el ambiente del sistema, cuyos actores pueden ser tanto el cron, como el usuario que acceda desde el navegador.
 
 ![Caso de Uso General](DCasoUsoGral.png)
 
-## Caso de Uso del modulo especifico
+## Caso de Uso del módulo específico
 
-- En este caso se puede observar, que acorde a la frecuencia del cron, se ejecutan los scripts y generan la bitacora de resultados en el directorio /logDir
+- En este caso se puede observar, que acorde a la frecuencia del cron, se ejecutan los scripts y generan la bitácora de resultados en el directorio.
 
-![Caso de Uso Especifico del Modulo](DcasoUso.png)
+![Caso de Uso Específico del Modulo](DcasoUso.png)
 
 ## Diagrama de Flujo Gral del Algoritmo
 
-- El procedimiento y flujo basico del modulo
+- El procedimiento y flujo básico del módulo
 
 ![flujo del Algoritmo](DFlujoAlgoritmo.png)
 
-## Informacion Previa
+## Información previa
 
-- Todos los scripts generan bitacora, errorlog y algunos que lo requieren un oklog en el directorio /logDir/filename.txt
+- Todos los scripts generan bitácora, errorlog y algunos que lo requieren un oklog en el directorio /logDir/filename.txt
 - Todos los scripts muestran informacion en pantalla de acuerdo a los resultados obtenidos
-- Algunos scripts requieren la creacion previa de tablas, el codigo para generar lo tiene cada scripts
+- Algunos scripts requieren la creación previa de tablas, el código para generar lo tiene cada scripts
 - Todos los scripts se ejecutan 1 vez x dia, excepto el 8 y el 10 que lo hacen cada 12 y 14 minutos, recibe 2 xml
 
 ## Parametros y Configuracion
