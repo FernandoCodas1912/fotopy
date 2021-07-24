@@ -82,7 +82,37 @@
     </div>
 
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="timesheetinput1">Departamento</label>
+            <select id="mod_departamento_evento" name="departamento_evento" class="form-control selectpicker"
+                required="">
+                <?php foreach ($departamentos as $departamento) : ?>
+                <?php
+                    if ($departamento->id_departamento == $reservas->id_departamento) {
+                        $selected = 'selected';
+                    } else {
+                        $selected = '';
+                    }
+                    ?>
+                <option value="<?php echo $departamento->id_departamento; ?>" <?php echo $selected; ?>>
+                    <?php echo $departamento->descripcion; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
 
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="timesheetinput1">Ciudad</label>
+            <select id="ciudad_evento" name="ciudad_evento" class="form-control ciudad" required="">
+                <option value="<?php echo $reservas->id_ciudad ?>"><?php echo $reservas->ciudad_evento ?></option>
+            </select>
+        </div>
+
+    </div>
+</div>
 <div class="form-group">
     <label for="timesheetinput1">Detalle del Lugar del Evento</label>
     <div class="position-relative has-icon-left">

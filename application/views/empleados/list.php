@@ -180,6 +180,42 @@
                                 </div>
                             </div>
 
+
+                            <div class="form-group">
+                                <label for="timesheetinput1">Email</label>
+                                <div class="position-relative has-icon-left">
+                                    <input type="email" id="timesheetinput1" class="form-control" placeholder="Email"
+                                        name="email" required="">
+                                    <div class="form-control-position">
+                                        <i class="icon-android-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="timesheetinput1">Departamento</label>
+                                        <select id="id_departamento" name="id_departamento" class="form-control"
+                                            required="">
+                                            <option value="" selected="" disabled="">Seleccione</option>
+                                            <?php foreach ($departamentos as $departamento) : ?>
+                                            <option value="<?php echo $departamento->id_departamento; ?>">
+                                                <?php echo $departamento->descripcion; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="projectinput5">Ciudad</label>
+                                        <select id="id_ciudad" name="id_ciudad" class="form-control ciudad" required="">
+                                            <option value="">Elija Primero el Departamento</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="timesheetinput1">Direccion</label>
                                 <div class="position-relative has-icon-left">
@@ -190,35 +226,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput1">Email</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="email" id="timesheetinput1" class="form-control"
-                                                placeholder="Email" name="email" required="">
-                                            <div class="form-control-position">
-                                                <i class="icon-android-cart"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="projectinput5">Ciudad</label>
-                                        <select id="projectinput5" name="id_ciudad" class="form-control" required="">
-                                            <option value="" selected="" disabled="">Seleccione</option>
-                                            <?php foreach ($ciudades as $ciudad) : ?>
-                                            <option value="<?php echo $ciudad->id_ciudad; ?>">
-                                                <?php echo $ciudad->descripcion; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="row">
 
                                 <div class="col-md-6">

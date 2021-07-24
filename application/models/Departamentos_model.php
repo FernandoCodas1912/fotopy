@@ -2,10 +2,10 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Ciudades_model extends CI_Model
+class Departamentos_model extends CI_Model
 {
-    public $tabla = 'ciudades';
-    public $idTabla = 'id_ciudad';
+    public $tabla = 'departamentos';
+    public $idTabla = 'id_departamento';
 
     //esta funcion retorna todos los registros de nuestra tabla
     public function getAll()
@@ -37,12 +37,5 @@ class Ciudades_model extends CI_Model
         $this->db->where($this->idTabla, $id);
 
         return $this->db->update($this->tabla, $data);
-    }
-    //esta funcion actualiza en db
-    public function getAllDepartamento($departamento_evento)
-    {
-        $this->db->where("id_departamento", $departamento_evento);
-        $resultados = $this->db->get($this->tabla);
-        return $resultados->result();
     }
 }

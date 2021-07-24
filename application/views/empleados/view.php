@@ -1,16 +1,16 @@
 <?php
 $estado = $empleados->estado;
 if ($estado == 1) {
-	$estado2     = "Activo";
-	$label_class = 'label-success';
+    $estado2     = "Activo";
+    $label_class = 'label-success';
 } else {
-	if ($estado == 2) {
-		$estado2     = "Inactivo";
-		$label_class = 'label-warning';
-	} else {
-		$estado2     = "Anulado";
-		$label_class = 'label-danger';
-	}
+    if ($estado == 2) {
+        $estado2     = "Inactivo";
+        $label_class = 'label-warning';
+    } else {
+        $estado2     = "Anulado";
+        $label_class = 'label-danger';
+    }
 }
 ?>
 <p>
@@ -36,6 +36,16 @@ if ($estado == 1) {
 </p>
 <p>
     <strong>
+        Departamento:
+    </strong><?php echo $empleados->departamento; ?>
+</p>
+<p>
+    <strong>
+        Ciudad:
+    </strong><?php echo $empleados->ciudad; ?>
+</p>
+<p>
+    <strong>
         Direccion:
     </strong><?php echo $empleados->direccion; ?>
 </p>
@@ -54,12 +64,6 @@ if ($estado == 1) {
         Salario:
     </strong><?php echo $empleados->salario; ?>
 </p>
-<p>
-    <strong>
-        Ciudad:
-    </strong><?php echo $empleados->id_ciudad; ?>
-</p>
-
 <p>
     <strong>
         Estado:

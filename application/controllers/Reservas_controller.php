@@ -16,6 +16,8 @@ class Reservas_controller extends CI_Controller
         $this->load->model('Reservas_model');
         $this->load->model('Clientes_model');
         $this->load->model('Tipo_eventos_model');
+        $this->load->model('Ciudades_model');
+        $this->load->model('Departamentos_model');
     }
 
     //carga una vista llamada list
@@ -26,6 +28,8 @@ class Reservas_controller extends CI_Controller
             'servicios' => $this->Servicios_model->getAll(),
             'tipo_eventos' => $this->Tipo_eventos_model->getAll(),
             'clientes' => $this->Clientes_model->getAll(),
+            'ciudades' => $this->Ciudades_model->getAll(),
+            'departamentos' => $this->Departamentos_model->getAll(),
         ];
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');
@@ -54,6 +58,8 @@ class Reservas_controller extends CI_Controller
                 'id_tipoevento' => $this->input->post('id_tipoevento'),
                 'fecha_evento' => $_POST['fecha_evento'],
                 'hora_evento' => $this->input->post('hora_evento'),
+                'ciudad_evento' => $this->input->post('ciudad_evento'),
+                'departamento_evento' => $this->input->post('departamento_evento'),
                 'lugar_evento' => strtoupper($_POST['lugar_evento']),
                 'estado' => '1',
             ];
@@ -77,7 +83,10 @@ class Reservas_controller extends CI_Controller
             'clientes' => $this->Clientes_model->getAll(),
             'tipo_eventos' => $this->Tipo_eventos_model->getAll(),
             'reservas' => $this->Reservas_model->getById($id),
+            'ciudades' => $this->Ciudades_model->getAll(),
+            'departamentos' => $this->Departamentos_model->getAll(),
         ];
+        $this->load->view('reservas/script_reservas');
         $this->load->view('reservas/edit', $data); //esto abre la vista edit de la carpeta views/reservas
     }
 
@@ -96,6 +105,8 @@ class Reservas_controller extends CI_Controller
                 'id_cliente' => $this->input->post('id_cliente'),
                 'id_tipoevento' => $this->input->post('id_tipoevento'),
                 'fecha_evento' => $this->input->post('fecha_evento'),
+                'ciudad_evento' => $this->input->post('ciudad_evento'),
+                'departamento_evento' => $this->input->post('departamento_evento'),
                 'hora_evento' => $this->input->post('hora_evento'),
                 'lugar_evento' => strtoupper($_POST['lugar_evento']),
                 'estado' => '1',

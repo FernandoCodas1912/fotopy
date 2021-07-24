@@ -13,6 +13,7 @@ class Empleados_controller extends CI_Controller
 		$this->load->model("Empleados_model");
 		$this->load->model("Cargos_model");
 		$this->load->model("Ciudades_model");
+		$this->load->model("Departamentos_model");
 	}
 	//carga una vista llamada list
 	public function index()
@@ -21,6 +22,7 @@ class Empleados_controller extends CI_Controller
 			"empleados" => $this->Empleados_model->getAll(),
 			"cargos" => $this->Cargos_model->getAll(),
 			"ciudades" => $this->Ciudades_model->getAll(),
+			"departamentos" => $this->Departamentos_model->getAll(),
 
 		);
 		$this->load->view('plantilla/header');
@@ -51,6 +53,7 @@ class Empleados_controller extends CI_Controller
 				'direccion' 	=> strtoupper($_POST['direccion']),
 				'email' 		=> $_POST['email'],
 				'id_ciudad' 	=> $_POST['id_ciudad'],
+				'id_departamento' 	=> $_POST['id_departamento'],
 				'salario' 		=> $_POST['salario'],
 				'id_cargo' 		=> $_POST['id_cargo'],
 				'estado' 		=> "1"
@@ -76,8 +79,10 @@ class Empleados_controller extends CI_Controller
 			'empleados' => $this->Empleados_model->getById($id),
 			"cargos" => $this->Cargos_model->getAll(),
 			"ciudades" => $this->Ciudades_model->getAll(),
+			"departamentos" => $this->Departamentos_model->getAll(),
 		);
 		$this->load->view('empleados/edit', $data);
+		$this->load->view('empleados/script_empleados');
 	}
 
 	//actualizamos 
@@ -89,7 +94,7 @@ class Empleados_controller extends CI_Controller
 
 		//traemos datos para no duplicarlos
 		$empleado = $this->Empleados_model->getById($id);
-
+		//var_dump($empleado);
 		if ($edit_nrodocumento == $empleado->nrodocumento) {
 			$unique = '';
 		} else {
@@ -108,6 +113,7 @@ class Empleados_controller extends CI_Controller
 				'telefono' 		=> $_POST['edit_telefono'],
 				'direccion' 	=> strtoupper($_POST['edit_direccion']),
 				'email' 		=> $_POST['edit_email'],
+				'id_departamento' 	=> $_POST['id_departamento'],
 				'id_ciudad' 	=> $_POST['edit_id_ciudad'],
 				'salario' 		=> $_POST['edit_salario'],
 				'id_cargo' 		=> $_POST['edit_id_cargo'],
@@ -124,7 +130,6 @@ class Empleados_controller extends CI_Controller
 			//si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
 			$this->session->set_flashdata('error', 'Errores de Validacion al Intentar Actualizar!');
 			redirect(base_url() . "Empleados_controller", "refresh");
-			//$this->edit($id);
 		}
 	}
 

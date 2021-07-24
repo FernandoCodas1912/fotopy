@@ -13,7 +13,9 @@ class Empleados_model extends CI_Model
 		$this->db->select('e.*, cd.descripcion as ciudad, ca.descripcion as cargo'); //selecc campos
 		$this->db->from('empleados e'); //desde tabla con alias
 		$this->db->join('ciudades cd', 'e.id_ciudad=cd.id_ciudad'); //une los campos por su pk=fk
+		$this->db->join('departamentos d', 'e.id_departamento=d.id_departamento'); //une los campos por su pk=fk
 		$this->db->join('cargos ca', 'e.id_cargo=ca.id_cargo'); //une los campos por su pk=fk
+
 		//$this->db->where("c.estado", "1");
 		$resultados = $this->db->get();
 		return $resultados->result();
@@ -22,9 +24,10 @@ class Empleados_model extends CI_Model
 	//esto es una funcion o metodo para mostrar 1 registro por id
 	public function getbyId($id)
 	{
-		$this->db->select('e.*, cd.descripcion as ciudad, ca.descripcion as cargo'); //selecc campos
+		$this->db->select('e.*, cd.descripcion as ciudad, ca.descripcion as cargo, d.descripcion as departamento, d.id_departamento'); //selecc campos
 		$this->db->from('empleados e'); //desde tabla con alias
 		$this->db->join('ciudades cd', 'e.id_ciudad=cd.id_ciudad'); //une los campos por su pk=fk
+		$this->db->join('departamentos d', 'e.id_departamento=d.id_departamento'); //une los campos por su pk=fk
 		$this->db->join('cargos ca', 'e.id_cargo=ca.id_cargo'); //une los campos por su pk=fk
 		$this->db->where($this->idTabla, $id);
 		$resultado = $this->db->get();
