@@ -30,7 +30,12 @@ $(".btn-editar").on("click", function() {
 })
 
 
-$("#departamento_evento").on("change", function() {
+$("#id_departamento").on("change", function() {
+    var id_departamento = $(this).val();
+    buscar_ciudades(id_departamento);
+    // alert("entro change" + id_departamento);
+});
+$("#id_departamentoCliente").on("change", function() {
     var id_departamento = $(this).val();
     buscar_ciudades(id_departamento);
     // alert("entro change" + id_departamento);
@@ -57,4 +62,49 @@ function buscar_ciudades(id_departamento) {
         $(".ciudad").html('<option value="">Elija Primero el Departamento </option>');
     }
 }
+
+
+//esto es para abrir modal agregar categoria
+$("#btn_add_cliente").on("click", function() {
+    $("#modal-agregar").hide();
+    $("#modalAgregarCliente").show();
+})
+
+$("#closeModalCliente").on("click", function() {
+    $("#modal-agregar").show();
+    $("#modalAgregarCliente").hide();
+})
+
+
+
+//esto es para agregar categoria
+
+$("#formAddCliente").on("submit", function(event) {
+    event.preventDefault();
+    var data = $(this).serialize();
+    $.ajax({
+        url: base_url + "Clientes_controller/storeContacto/",
+        type: "POST",
+        data: data,
+        dataType: "JSON",
+        success: function(response) {
+            resp = response; //guardamos resultado para poder preg.
+            Swal.fire({
+                icon: resp.status,
+                title: resp.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            if (resp.status == "success") {
+                $("#modalAgregarCliente").hide();
+                $('#id_cliente').append($('<option>', {
+                    text: resp.razonsocial,
+                    value: resp.id,
+                    selected: true
+                }));
+                $("#modal-agregar").show();
+            }
+        }
+    });
+});
 </script>

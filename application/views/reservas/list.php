@@ -7,39 +7,40 @@
 
         <?php
         if ($this->session->flashdata('success')) : ?>
-            <div class="alert alert-success" role="alert">
-                <button type="button" class="close" data-dismiss="alert">
-                    &times;
-                </button>
-                <strong>
-                    ¡Buen Trabajo!
-                </strong>
-                <p>
-                    <?php echo $this->session->flashdata('success'); ?>
-                </p>
-            </div>
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                &times;
+            </button>
+            <strong>
+                ¡Buen Trabajo!
+            </strong>
+            <p>
+                <?php echo $this->session->flashdata('success'); ?>
+            </p>
+        </div>
 
         <?php endif; ?>
         <?php
         if ($this->session->flashdata('error')) : ?>
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert">
-                    &times;
-                </button>
-                <strong>
-                    ¡Error!
-                </strong>
-                <p>
-                    <?php echo $this->session->flashdata('error'); ?>
-                </p>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">
+                &times;
+            </button>
+            <strong>
+                ¡Error!
+            </strong>
+            <p>
+                <?php echo $this->session->flashdata('error'); ?>
+            </p>
+        </div>
         <?php endif; ?>
         <!-- end row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="card-box">
                     <div class="col-md-2 pull-right">
-                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nueva Reserva</span> </a>
+                        <a href="" class="btn btn-success" data-toggle="modal" data-target="#modal-agregar"><i
+                                class="fa fa-plus"></i> <span> Nueva Reserva</span> </a>
                     </div>
                     <h4 class="header-title m-t-0 m-b-30"> Listado de Reservas</h4>
                     <div class="table-responsive">
@@ -60,17 +61,17 @@
                             </thead>
                             <tbody>
                                 <?php if (!empty($reservas)) : ?>
-                                    <?php foreach ($reservas as $reserva) : ?>
-                                        <tr>
-                                            <td><?php echo $reserva->id_reserva; ?></td>
-                                            <td><?php echo $reserva->cliente; ?></td>
-                                            <td><?php echo $reserva->telefono; ?></td>
-                                            <td><?php echo $reserva->tipo_evento; ?></td>
-                                            <td><?php echo $reserva->id_producto . '-' . $reserva->servicio; ?></td>
-                                            <td><?php echo $reserva->fecha_evento; ?></td>
-                                            <td><?php echo $reserva->hora_evento; ?></td>
-                                            <td><?php echo $reserva->lugar_evento; ?></td>
-                                            <?php
+                                <?php foreach ($reservas as $reserva) : ?>
+                                <tr>
+                                    <td><?php echo $reserva->id_reserva; ?></td>
+                                    <td><?php echo $reserva->cliente; ?></td>
+                                    <td><?php echo $reserva->telefono; ?></td>
+                                    <td><?php echo $reserva->tipo_evento; ?></td>
+                                    <td><?php echo $reserva->id_producto . '-' . $reserva->servicio; ?></td>
+                                    <td><?php echo $reserva->fecha_evento; ?></td>
+                                    <td><?php echo $reserva->hora_evento; ?></td>
+                                    <td><?php echo $reserva->lugar_evento; ?></td>
+                                    <?php
 
                                             $estado = $reserva->estado;
                                             if ($estado == 1) {
@@ -86,27 +87,33 @@
                                                 }
                                             }
                                             ?>
-                                            <td><span class="label <?php echo $label_class; ?>"><?php echo $estado2; ?></span>
-                                            </td>
-                                            <td>
-                                                <!-- usa del modelo la funcion correspondiente -->
-                                                <button type="button" class="btn btn-success btn-xs btn-ver" data-toggle="modal" data-target="#modal-ver" value="<?php echo $reserva->id_reserva; ?>" title="Ver Detalles de la Reserva">
-                                                    <i class="fa fa-eye">
-                                                    </i> Ver
-                                                </button>
-                                                <!-- usa del modelo la funcion correspondiente -->
-                                                <button type="button" class="btn btn-warning btn-xs btn-editar" data-toggle="modal" data-target="#modal-editar" value="<?php echo $reserva->id_reserva; ?>" title="Editar Detalles de la Reserva">
-                                                    <i class="fa fa-pencil">
-                                                    </i> Editar
-                                                </button>
+                                    <td><span class="label <?php echo $label_class; ?>"><?php echo $estado2; ?></span>
+                                    </td>
+                                    <td>
+                                        <!-- usa del modelo la funcion correspondiente -->
+                                        <button type="button" class="btn btn-success btn-xs btn-ver" data-toggle="modal"
+                                            data-target="#modal-ver" value="<?php echo $reserva->id_reserva; ?>"
+                                            title="Ver Detalles de la Reserva">
+                                            <i class="fa fa-eye">
+                                            </i> Ver
+                                        </button>
+                                        <!-- usa del modelo la funcion correspondiente -->
+                                        <button type="button" class="btn btn-warning btn-xs btn-editar"
+                                            data-toggle="modal" data-target="#modal-editar"
+                                            value="<?php echo $reserva->id_reserva; ?>"
+                                            title="Editar Detalles de la Reserva">
+                                            <i class="fa fa-pencil">
+                                            </i> Editar
+                                        </button>
 
-                                                <a href="<?php echo base_url(); ?>Reservas_controller/delete/<?php echo $reserva->id_reserva; ?>" class="btn btn-xs btn-danger btn-delete" title="Anular Reserva">
-                                                    <i class="fa fa-trash-o">
-                                                    </i> Anular
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
+                                        <a href="<?php echo base_url(); ?>Reservas_controller/delete/<?php echo $reserva->id_reserva; ?>"
+                                            class="btn btn-xs btn-danger btn-delete" title="Anular Reserva">
+                                            <i class="fa fa-trash-o">
+                                            </i> Anular
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
                                 <?php endif; ?>
                             </tbody>
                         </table>
@@ -118,7 +125,8 @@
     </div> <!-- container -->
 
     <!-- MODAL AGREGAR-->
-    <div class="modal" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal" id="modal-agregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -128,7 +136,8 @@
                     <h5 class="modal-title" id="exampleModalLabel2">DATOS DE LA RESERVA</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form" action="<?php echo base_url(); ?>Reservas_controller/store" method="POST" id="formAdd" name="formAdd">
+                    <form class="form" action="<?php echo base_url(); ?>Reservas_controller/store" method="POST"
+                        id="formAdd" name="formAdd">
                         <div class="form-body">
                             <!--    <h4 class="form-section"><i class="icon-ios-albums"></i> Datos Basicos</h4> -->
 
@@ -138,8 +147,8 @@
 
                                     <option value="" selected="" disabled="">Seleccione</option>
                                     <?php foreach ($servicios as $servicio) : ?>
-                                        <option value="<?php echo $servicio->id_producto; ?>">
-                                            <?php echo $servicio->descripcion; ?></option>
+                                    <option value="<?php echo $servicio->id_producto; ?>">
+                                        <?php echo $servicio->descripcion; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -149,8 +158,8 @@
 
                                     <option value="" selected="" disabled="">Seleccione</option>
                                     <?php foreach ($tipo_eventos as $tipo_evento) : ?>
-                                        <option value="<?php echo $tipo_evento->id_tipoevento; ?>">
-                                            <?php echo $tipo_evento->descripcion; ?></option>
+                                    <option value="<?php echo $tipo_evento->id_tipoevento; ?>">
+                                        <?php echo $tipo_evento->descripcion; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -158,15 +167,16 @@
                             <div class="form-group">
                                 <label for="timesheetinput1">Contacto</label>
                                 <div class="input-group">
-                                    <select id="projectinput5" name="id_cliente" class="form-control" required="">
+                                    <select id="id_cliente" name="id_cliente" class="form-control" required="">
 
                                         <option value="" selected="" disabled="">Seleccione</option>
                                         <?php foreach ($clientes as $cliente) : ?>
-                                            <option value="<?php echo $cliente->id_cliente; ?>">
-                                                <?php echo $cliente->razonsocial; ?></option>
+                                        <option value="<?php echo $cliente->id_cliente; ?>">
+                                            <?php echo $cliente->razonsocial; ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <a class="input-group-addon btn btn-success" id="btn_add_categoria"> <i class="fa fa-plus"></i></a>
+                                    <a class="input-group-addon btn btn-success" id="btn_add_cliente"> <i
+                                            class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -176,8 +186,10 @@
                                     <div class="form-group">
                                         <label for="projectinput5">Fecha</label>
                                         <div class="input-group">
-                                            <input type="text" autocomplete="off" class="form-control fecha-autoclose" placeholder="mm/dd/yyyy" name="fecha_evento">
-                                            <span class="input-group-addon bg-primary b-0 text-white"><i class="ti-calendar"></i></span>
+                                            <input type="text" autocomplete="off" class="form-control fecha-autoclose"
+                                                placeholder="mm/dd/yyyy" name="fecha_evento">
+                                            <span class="input-group-addon bg-primary b-0 text-white"><i
+                                                    class="ti-calendar"></i></span>
                                         </div>
 
 
@@ -187,9 +199,11 @@
                                     <label>Hora del Evento</label>
                                     <div class="input-group m-b-15">
                                         <div class="bootstrap-timepicker">
-                                            <input id="timepicker" type="text" name="hora_evento" class="form-control hora">
+                                            <input id="timepicker" type="text" name="hora_evento"
+                                                class="form-control hora">
                                         </div>
-                                        <span class="input-group-addon bg-primary b-0 text-white"><i class="glyphicon glyphicon-time"></i></span>
+                                        <span class="input-group-addon bg-primary b-0 text-white"><i
+                                                class="glyphicon glyphicon-time"></i></span>
                                     </div><!-- input-group -->
 
                                 </div>
@@ -199,11 +213,12 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="timesheetinput1">Departamento</label>
-                                        <select id="departamento_evento" name="departamento_evento" class="form-control selectpicker" required="">
+                                        <select id="id_departamento" name="departamento_evento"
+                                            class="form-control selectpicker" required="">
                                             <option value="" selected="" disabled="">Seleccione</option>
                                             <?php foreach ($departamentos as $departamento) : ?>
-                                                <option value="<?php echo $departamento->id_departamento; ?>">
-                                                    <?php echo $departamento->descripcion; ?></option>
+                                            <option value="<?php echo $departamento->id_departamento; ?>">
+                                                <?php echo $departamento->descripcion; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
@@ -211,7 +226,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="timesheetinput1">Ciudad</label>
-                                        <select id="ciudad_evento" name="ciudad_evento" class="form-control ciudad" required="">
+                                        <select id="ciudad_evento" name="ciudad_evento" class="form-control ciudad"
+                                            required="">
                                             <option value="">Elija Primero el Departamento</option>
                                         </select>
                                     </div>
@@ -221,7 +237,9 @@
                             <div class="form-group">
                                 <label for="timesheetinput1">Detalle del Lugar del Evento</label>
                                 <div class="position-relative has-icon-left">
-                                    <input type="text" id="timesheetinput1" class="form-control" placeholder="Descripcion completa del lugar del evento" name="lugar_evento" required="">
+                                    <input type="text" id="timesheetinput1" class="form-control"
+                                        placeholder="Descripcion completa del lugar del evento" name="lugar_evento"
+                                        required="">
                                     <div class="form-control-position">
                                         <i class="icon-android-cart"></i>
                                     </div>
@@ -231,9 +249,11 @@
                         </div><!-- end div class FORM body-->
                 </div><!-- end div class MODAL body-->
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success btn-fill" id="btnEnviarDatos"><i class="icon-check2"></i>Guardar</button>
+                    <button type="submit" class="btn btn-success btn-fill" id="btnEnviarDatos"><i
+                            class="icon-check2"></i>Guardar</button>
                     <button type="reset" class="btn btn-warning btn-fill"><i class="icon-cube"></i>Limpiar</button>
-                    <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal"><i class="icon-cross2"></i>Cerrar</button>
+                    <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal"><i
+                            class="icon-cross2"></i>Cerrar</button>
                 </div>
                 </form>
             </div><!-- end div class modal content-->
@@ -246,7 +266,8 @@
         <div class="modal-dialog modal-xs" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h5 class="modal-title">DETALLES DE LA RESERVA</h5>
                 </div>
                 <div class="modal-body">
@@ -261,7 +282,8 @@
     <!-- end Modal ver-->
 
     <!-- Modal editar-->
-    <div class="modal" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+    <div class="modal" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -270,17 +292,149 @@
                     </button>
                     <h5 class="modal-title" id="exampleModalLabel2">FICHA DE LA RESERVA A EDITAR </h5>
                 </div>
-                <form action="<?php echo base_url(); ?>Reservas_controller/update" method="POST" id="formEdit" name="formEdit">
+                <form action="<?php echo base_url(); ?>Reservas_controller/update" method="POST" id="formEdit"
+                    name="formEdit">
                     <div class="modal-body">
                         <!-- AQUI SE CARGA DESDE EL CONTROLADOR -->
                     </div><!-- end div class modal body-->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success btn-fill" id="btnEnviarDatos"><i class="icon-check2"></i>Guardar</button>
+                        <button type="submit" class="btn btn-success btn-fill" id="btnEnviarDatos"><i
+                                class="icon-check2"></i>Guardar</button>
                         <button type="reset" class="btn btn-warning btn-fill"><i class="icon-cube"></i>Limpiar</button>
-                        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal"><i class="icon-cross2"></i>Cerrar</button>
+                        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal"><i
+                                class="icon-cross2"></i>Cerrar</button>
                     </div>
                 </form>
             </div><!-- end div class modal content-->
         </div><!-- end div class modal dialog-->
     </div><!-- end div class modal-->
     <!-- end Modal editar-->
+
+
+    <!-- MODAL AGREGAR-->
+    <div class="modal" id="modalAgregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel2">DATOS DEL CLIENTE</h5>
+                </div>
+                <div class="modal-body">
+                    <form class="form" method="POST" id="formAddCliente" name="formAddCliente">
+                        <div class="form-body">
+
+                            <div class="form-group">
+                                <label for="timesheetinput1">Nombre o Razon Social</label>
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" id="timesheetinput1" class="form-control"
+                                        placeholder="Nombre de cliente" name="razonsocial" required="">
+                                    <div class="form-control-position">
+                                        <i class="icon-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="timesheetinput1">Nro. Documento</label>
+                                        <div class="position-relative has-icon-left">
+                                            <input type="text" id="timesheetinput1" class="form-control"
+                                                placeholder="Nro. de Documento" name="nrodocumento" required="">
+                                            <div class="form-control-position">
+                                                <i class="icon-slack"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="timesheetinput1">Telefono</label>
+                                        <div class="position-relative has-icon-left">
+                                            <input type="text" id="timesheetinput1" class="form-control"
+                                                placeholder="Nro de Telefono" name="telefono">
+                                            <div class="form-control-position">
+                                                <i class="icon-phone"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="timesheetinput1">Email</label>
+                                        <div class="position-relative has-icon-left">
+                                            <input type="email" id="timesheetinput1" class="form-control"
+                                                placeholder="Email" name="email">
+                                            <div class="form-control-position">
+                                                <i class="icon-mail"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="timesheetinput1">Departamento</label>
+                                        <select id="id_departamentoCliente" name="id_departamento" class="form-control"
+                                            required="">
+                                            <option value="" selected="" disabled="">Seleccione</option>
+                                            <?php foreach ($departamentos as $departamento) : ?>
+                                            <option value="<?php echo $departamento->id_departamento; ?>">
+                                                <?php echo $departamento->descripcion; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label for="projectinput5">Ciudad</label>
+                                            <select id="id_ciudad" name="id_ciudad" class="form-control ciudad"
+                                                required="">
+                                                <option value="">Elija Primero el Departamento</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="projectinput5">Pais</label>
+                                        <select id="projectinput5" name="id_pais" class="form-control" required="">
+                                            <?php foreach ($paises as $pais) : ?>
+                                            <option value="<?php echo $pais->id; ?>">
+                                                <?php echo $pais->nombre; ?>
+                                            </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="timesheetinput1">Direccion</label>
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" id="timesheetinput1" class="form-control" placeholder="Direccion"
+                                        name="direccion">
+                                    <div class="form-control-position">
+                                        <i class="icon-home"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end div class FORM body-->
+                </div><!-- end div class MODAL body-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-fill" id="btnEnviarDatos"><i
+                            class="icon-check2"></i>Guardar</button>
+                    <button type="reset" class="btn btn-warning btn-fill"><i class="icon-cube"></i>Limpiar</button>
+                    <button type="button" id="closeModalCliente" class="btn btn-danger btn-fill" data-dismiss="modal"><i
+                            class="icon-cross2"></i>Cerrar</button>
+                </div>
+                </form>
+            </div><!-- end div class modal content-->
+        </div><!-- end div class modal dialog-->
+    </div><!-- end div class modal-->
+    <!-- end MODAL AGREGAR-->

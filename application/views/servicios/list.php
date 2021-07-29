@@ -6,7 +6,7 @@
     <div class="content">
 
         <?php
-        if ($this->session->flashdata('success')): ?>
+        if ($this->session->flashdata('success')) : ?>
         <div class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 &times;
@@ -21,7 +21,7 @@
 
         <?php endif; ?>
         <?php
-        if ($this->session->flashdata('error')): ?>
+        if ($this->session->flashdata('error')) : ?>
         <div class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 &times;
@@ -58,8 +58,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($servicios)):?>
-                                <?php foreach ($servicios as $servicio):?>
+                                <?php if (!empty($servicios)) : ?>
+                                <?php foreach ($servicios as $servicio) : ?>
                                 <tr>
                                     <td><?php echo $servicio->id_producto; ?></td>
                                     <td><?php echo $servicio->descripcion; ?></td>
@@ -170,7 +170,7 @@
                                                 required="">
 
                                                 <option value="" selected="" disabled="">Seleccione</option>
-                                                <?php foreach ($categorias as $categoria):?>
+                                                <?php foreach ($categorias as $categoria) : ?>
                                                 <option value="<?php echo $categoria->id_categoria; ?>">
                                                     <?php echo $categoria->descripcion; ?></option>
                                                 <?php endforeach; ?>
@@ -308,7 +308,7 @@
                                     <input type="text" id="timesheetinput1" class="form-control"
                                         placeholder="Descripcion completa de la Categoria" name="descripcion_categoria"
                                         required="">
-                                    <input type="hidden" name="tipo_categoria" value="3">
+                                    <input type="hidden" name="tipo_categoria" value="2">
                                     <div class="form-control-position">
                                         <i class="icon-android-cart"></i>
                                     </div>

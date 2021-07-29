@@ -6,7 +6,7 @@
     <div class="content">
 
         <?php
-        if ($this->session->flashdata('success')): ?>
+        if ($this->session->flashdata('success')) : ?>
         <div class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 &times;
@@ -21,7 +21,7 @@
 
         <?php endif; ?>
         <?php
-        if ($this->session->flashdata('error')): ?>
+        if ($this->session->flashdata('error')) : ?>
         <div class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 &times;
@@ -60,8 +60,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (!empty($productos)):?>
-                                <?php foreach ($productos as $producto):?>
+                                <?php if (!empty($productos)) : ?>
+                                <?php foreach ($productos as $producto) : ?>
                                 <tr>
                                     <td><?php echo $producto->id_producto; ?></td>
                                     <td><?php echo $producto->descripcion; ?></td>
@@ -70,7 +70,7 @@
                                     <td><?php echo $producto->precio_compra; ?></td>
                                     <td><?php echo $producto->precio_venta; ?></td>
                                     <td><?php echo $producto->precio_venta; ?></td>
-                                    <td><?php echo $producto->impuesto.'%'; ?></td>
+                                    <td><?php echo $producto->impuesto . '%'; ?></td>
                                     <?php
 
                                             $estado = $producto->estado;
@@ -174,7 +174,7 @@
                                                 required="">
 
                                                 <option value="" selected="" disabled="">Seleccione</option>
-                                                <?php foreach ($categorias as $categoria):?>
+                                                <?php foreach ($categorias as $categoria) : ?>
                                                 <option value="<?php echo $categoria->id_categoria; ?>">
                                                     <?php echo $categoria->descripcion; ?></option>
                                                 <?php endforeach; ?>
@@ -327,8 +327,7 @@
                     <h5 class="modal-title" id="exampleModalLabel2">NUEVA CATEGORIA</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form"  method="POST"
-                        id="formAddCategory" name="formAdd">
+                    <form class="form" method="POST" id="formAddCategory" name="formAdd">
                         <div class="form-body">
                             <div class="form-group">
                                 <label for="timesheetinput1">Nombre de la Categoria</label>

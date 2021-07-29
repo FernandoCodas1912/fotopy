@@ -18,6 +18,7 @@ class Reservas_controller extends CI_Controller
         $this->load->model('Tipo_eventos_model');
         $this->load->model('Ciudades_model');
         $this->load->model('Departamentos_model');
+        $this->load->model('Paises_model');
     }
 
     //carga una vista llamada list
@@ -30,6 +31,8 @@ class Reservas_controller extends CI_Controller
             'clientes' => $this->Clientes_model->getAll(),
             'ciudades' => $this->Ciudades_model->getAll(),
             'departamentos' => $this->Departamentos_model->getAll(),
+            'paises' => $this->Paises_model->getAll(),
+
         ];
         $this->load->view('plantilla/header');
         $this->load->view('plantilla/menu');

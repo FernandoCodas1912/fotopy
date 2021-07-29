@@ -74,7 +74,54 @@ class Clientes_controller extends CI_Controller
             redirect(base_url() . 'Clientes_controller', 'refresh');
         }
     }
+    // se guarda lo que viene desde reservas
+    public function storeContacto()
+    {
+        $this->form_validation->set_rules('razonsocial', 'Nombre del Cliente', 'required');
+        $this->form_validation->set_rules('nrodocumento', 'Nro de Documento', 'required|is_unique[clientes.nrodocumento]');
+        //este metodo retorna un valor verdadero
+        if ($this->form_validation->run() == true) {
+            $data = [
+                'razonsocial' => strtoupper($_POST['razonsocial']),
+                'nrodocumento' => $this->input->post('nrodocumento'),
+                'telefono' => $this->input->post('telefono'),
+                'direccion' => strtoupper($_POST['direccion']),
+                'email' => $this->input->post('email'),
+                'id_departamento' => $this->input->post('id_departamento'),
+                'id_ciudad' => $this->input->post('id_ciudad'),
+                'id_pais' => $this->input->post('id_pais'),
+                'estado' => '1',
+                'date_add' => date('Y-m-d H:i:s'),
+                'date_mod' => date('Y-m-d H:i:s'),
 
+            ];
+            if ($this->Clientes_model->save($data)) {
+                $a = $this->db->affected_rows();
+                echo json_encode(
+                    array(
+                        "status"     => "success",
+                        "message" => "El cliente #" . $this->db->insert_id() . " fue Agregada correctamente",
+                        "id" => $this->db->insert_id(),
+                        "razonsocial" => strtoupper($_POST['razonsocial']),
+                    )
+                );
+            } else {
+                echo json_encode(
+                    array(
+                        "status"     => "error",
+                        "message" => "Error al Guardar el Cliente en la Bd " . $this->db->error()
+                    )
+                );
+            }
+        } else {
+            echo json_encode(
+                array(
+                    "status"     => "error",
+                    "message" => "Error de validacion al Guardar el cliente",
+                )
+            );
+        }
+    }
     //metodo para editar
     public function edit($id)
     {

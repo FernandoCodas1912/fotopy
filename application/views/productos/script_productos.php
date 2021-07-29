@@ -47,7 +47,7 @@ $("#formAddCategory").on("submit", function(event) {
     event.preventDefault();
     var data = $(this).serialize();
     $.ajax({
-        url: base_url + "Productos_controller/storeCategoria/",
+        url: base_url + "Categorias_controller/storeCategoria/",
         type: "POST",
         data: data,
         dataType: "JSON",
