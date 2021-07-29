@@ -12,6 +12,7 @@ class Proveedores_controller extends CI_Controller
 		}
 		$this->load->model("Proveedores_model");
 		$this->load->model("Ciudades_model");
+		$this->load->model("Departamentos_model");
 	}
 	//carga una vista llamada list
 	public function index()
@@ -19,6 +20,8 @@ class Proveedores_controller extends CI_Controller
 		$data = array(
 			'proveedores' => $this->Proveedores_model->getAll(),
 			'ciudades' => $this->Ciudades_model->getAll(),
+			"departamentos" => $this->Departamentos_model->getAll(),
+
 
 		);
 		$this->load->view('plantilla/header');
@@ -33,7 +36,6 @@ class Proveedores_controller extends CI_Controller
 	{
 		$data = array(
 			'proveedores' => $this->Proveedores_model->getById($id),
-			'ciudades' => $this->Ciudades_model->getAll(),
 		);
 		$this->load->view("proveedores/view", $data);
 	}
@@ -52,7 +54,9 @@ class Proveedores_controller extends CI_Controller
 				'telefono' 		=> $this->input->post("telefono"),
 				'direccion' 	=> strtoupper($_POST['direccion']),
 				'email'		 	=> $this->input->post("email"),
+				'date_mod' => date('Y-m-d H:i:s'),
 				'date_add' 		=> date("Y-m-d H:i:s"),
+				'id_departamento' => $this->input->post('id_departamento'),
 				'id_ciudad' 	=> $this->input->post("id_ciudad"),
 				'estado' => "1"
 			);
@@ -74,8 +78,11 @@ class Proveedores_controller extends CI_Controller
 		$data = array(
 			'proveedores' => $this->Proveedores_model->getById($id),
 			'ciudades' => $this->Ciudades_model->getAll(),
+			"departamentos" => $this->Departamentos_model->getAll(),
+
 		);
 		$this->load->view('proveedores/edit', $data);
+		$this->load->view('proveedores/script_proveedores');
 	}
 
 	//actualizamos 
@@ -107,7 +114,9 @@ class Proveedores_controller extends CI_Controller
 				'telefono' 		=> $this->input->post("edit_telefono"),
 				'direccion' 	=> strtoupper($_POST['edit_direccion']),
 				'email'		 	=> $this->input->post("edit_email"),
+				'id_departamento' => $this->input->post('edit_id_departamento'),
 				'id_ciudad' 	=> $this->input->post("edit_id_ciudad"),
+				'date_mod' => date('Y-m-d H:i:s'),
 				'estado' => "1"
 
 			);
@@ -132,6 +141,8 @@ class Proveedores_controller extends CI_Controller
 	{
 		$data = array(
 			'estado' => '3',
+			'date_mod' => date('Y-m-d H:i:s'),
+
 		);
 		if ($this->Proveedores_model->update($id, $data)) {
 			$this->session->set_flashdata('success', 'Anulado correctamente!');

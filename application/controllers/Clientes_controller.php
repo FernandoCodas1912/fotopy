@@ -38,7 +38,6 @@ class Clientes_controller extends CI_Controller
     {
         $data = [
             'clientes' => $this->Clientes_model->getById($id),
-            'ciudades' => $this->Ciudades_model->getAll(),
         ];
         $this->load->view('clientes/view', $data);
     }
@@ -60,6 +59,8 @@ class Clientes_controller extends CI_Controller
                 'id_pais' => $this->input->post('id_pais'),
                 'estado' => '1',
                 'date_add' => date('Y-m-d H:i:s'),
+                'date_mod' => date('Y-m-d H:i:s'),
+
             ];
             if ($this->Clientes_model->save($data)) {
                 $this->session->set_flashdata('success', 'Datos Guardados');

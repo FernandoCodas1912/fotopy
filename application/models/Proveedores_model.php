@@ -19,9 +19,11 @@ class Proveedores_model extends CI_Model
 	//esto es una funcion o metodo para mostrar 1 registro por id
 	public function getById($id)
 	{
-		$this->db->select("p.*, cd.descripcion as ciudad"); //selecc campos
+		$this->db->select("p.*, cd.descripcion as ciudad,d.descripcion as departamento"); //selecc campos
 		$this->db->from("proveedores p"); //desde tabla con alias
 		$this->db->join("ciudades cd", "cd.id_ciudad=p.id_ciudad"); //une los campos por su pk=fk
+		$this->db->join('departamentos d', 'p.id_departamento=d.id_departamento'); //une los campos por su pk=fk
+
 		$this->db->where("id_proveedor", $id);
 		$resultado = $this->db->get();
 		return $resultado->row();
