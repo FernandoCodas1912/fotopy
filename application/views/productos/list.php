@@ -145,9 +145,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="timesheetinput1">Codigo</label>
-                                        <input type="text" min="0" class="form-control"
-                                            placeholder="Codigo de Barra u otro codigo"
-                                            aria-label="Ingrese Codigo Alfanumerico" required name="codigobarra">
+                                        <input type="text" min="0" class="form-control" placeholder="Codigo"
+                                            aria-label="Ingrese Codigo Alfanumerico" required
+                                            value="<?php echo substr(md5(time()), 0, 8); ?>" name="codigobarra">
 
                                     </div>
                                 </div>
