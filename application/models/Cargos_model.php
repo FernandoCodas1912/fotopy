@@ -9,6 +9,13 @@ class Cargos_model extends CI_MOdel
     //esta funcion retorna todos los registros de nuestra tabla
     public function getAll()
     {
+        // $this->db->where('estado', '1');
+        $resultados = $this->db->get($this->tabla);
+
+        return $resultados->result();
+    }
+    public function getAllSelect()
+    {
         $this->db->where('estado', '1');
         $resultados = $this->db->get($this->tabla);
 

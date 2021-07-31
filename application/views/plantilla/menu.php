@@ -126,7 +126,8 @@
                             <li><a href="<?php echo base_url(); ?>Empleados_controller" class="waves-effect">Personal
                                     del Staff </a></li>
 
-                            <!-- <li><a href="<?php echo base_url(); ?>MedioCobros_controller" class="waves-effect">Medio de                                    Cobro</a></li> -->
+                            <li><a href="<?php echo base_url(); ?>Cargos_controller" class="waves-effect">Cargos</a>
+                            </li>
 
                             <!-- <li><a href="<?php echo base_url(); ?>TipoCobros_controller" class="waves-effect">Tipo de
                                     Cobro</a></li> -->

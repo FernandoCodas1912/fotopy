@@ -20,7 +20,7 @@ class Empleados_controller extends CI_Controller
 	{
 		$data = array(
 			"empleados" => $this->Empleados_model->getAll(),
-			"cargos" => $this->Cargos_model->getAll(),
+			"cargos" => $this->Cargos_model->getAllSelect(),
 			"ciudades" => $this->Ciudades_model->getAll(),
 			"departamentos" => $this->Departamentos_model->getAll(),
 
@@ -77,7 +77,7 @@ class Empleados_controller extends CI_Controller
 	{
 		$data = array(
 			'empleados' => $this->Empleados_model->getById($id),
-			"cargos" => $this->Cargos_model->getAll(),
+			"cargos" => $this->Cargos_model->getAllSelect(),
 			"ciudades" => $this->Ciudades_model->getAll(),
 			"departamentos" => $this->Departamentos_model->getAll(),
 		);

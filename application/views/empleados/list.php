@@ -53,8 +53,6 @@
                                     <th>Cargo</th>
                                     <th>Telefono</th>
                                     <th>Email</th>
-                                    <th>Salario</th>
-                                    <th>Ciudad</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -69,8 +67,6 @@
                                     <td><?php echo $empleado->cargo; ?></td>
                                     <td><?php echo $empleado->telefono; ?></td>
                                     <td><?php echo $empleado->email; ?></td>
-                                    <td><?php echo $empleado->salario; ?></td>
-                                    <td><?php echo $empleado->ciudad; ?></td>
                                     <?php
 
                                             $estado = $empleado->estado;
@@ -240,17 +236,24 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="projectinput5">Cargo</label>
-                                        <select id="projectinput5" name="id_cargo" class="form-control" required="">
-                                            <option value="" selected="" disabled="">Seleccione</option>
-                                            <?php foreach ($cargos as $cargo) : ?>
-                                            <option value="<?php echo $cargo->id_cargo; ?>">
-                                                <?php echo $cargo->descripcion; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <div class="input-group">
+                                            <select id="id_cargo" name="id_cargo" class="form-control" required="">
+                                                <option value="" selected="" disabled="">Seleccione</option>
+                                                <?php foreach ($cargos as $cargo) : ?>
+                                                <option value="<?php echo $cargo->id_cargo; ?>">
+                                                    <?php echo $cargo->descripcion; ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <a class="input-group-addon btn btn-success" id="btn_add_cargo"> <i
+                                                    class="fa fa-plus"></i></a>
+                                        </div>
                                     </div>
+
+
                                 </div>
                             </div>
 
@@ -317,3 +320,43 @@
         </div><!-- end div class modal dialog-->
     </div><!-- end div class modal-->
     <!-- end Modal editar-->
+
+    <!-- MODAL AGREGAR cargo-->
+    <div class="modal" id="modalAddCargo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title" id="exampleModalLabel2">Nuevo cargo</h5>
+                </div>
+                <div class="modal-body">
+                    <form class="form" method="POST" id="formAddCargo" name="formAddCargo">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label for="timesheetinput1">Nombre del cargo</label>
+                                <div class="position-relative has-icon-left">
+                                    <input type="text" id="timesheetinput1" class="form-control"
+                                        placeholder="Descripcion completa del cargo" name="descripcion" required="">
+                                    <div class="form-control-position">
+                                        <i class="icon-android-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- end div class FORM body-->
+                </div><!-- end div class MODAL body-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success btn-fill" id="btnAddCargo"><i
+                            class="icon-check2"></i>Guardar</button>
+                    <button type="reset" class="btn btn-warning btn-fill"><i class="icon-cube"></i>Limpiar</button>
+                    <button type="button" id="closeModalCargo" class="btn btn-danger btn-fill" data-dismiss="modal"><i
+                            class="icon-cross2"></i>Cerrar</button>
+                </div>
+                </form>
+            </div><!-- end div class modal content-->
+        </div><!-- end div class modal dialog-->
+    </div><!-- end div class modal-->
+    <!-- end MODAL AGREGAR-->
