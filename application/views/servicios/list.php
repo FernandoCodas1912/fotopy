@@ -143,7 +143,8 @@
                                         <label for="timesheetinput1">Codigo</label>
                                         <input type="text" min="0" class="form-control"
                                             placeholder="Codigo del servicio" aria-label="Ingrese Codigo Alfanumerico"
-                                            required name="codigobarra">
+                                            value="<?php echo substr(md5(time()), 0, 8); ?>" required
+                                            name="codigobarra">
                                     </div>
                                 </div>
                             </div>
