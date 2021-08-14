@@ -20,12 +20,12 @@ class Bk extends CI_Controller
             'format' => 'zip',
             'filename' => $this->db->database,
         );
-        $backup = &$this->dbutil->backup($db_format);
+        $backup = $this->dbutil->backup($db_format);
 
         $dbname = $this->db->database . '_' . date('Y-m-d') . '.zip';
         $save = 'Bd_Backup/' . $dbname;
         write_file($save, $backup);
-        redirect('Dashboard_controller');
+        //    redirect('Dashboard_controller');
 
 
         // //Este bloque es importante
