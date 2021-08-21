@@ -12,13 +12,13 @@ $(document).on("click", ".btn-check", function() {
 $(document).on("click", ".btn-agregar", function() {
     data = $(this).val();
     if (data != '') {
-        infoproducto = data.split("*");
+        infoproducto = data.split("¬");
         html = "<tr>";
         html += "<td><input type='hidden' name='idproductos[]' value='" + infoproducto[0] + "'>" + infoproducto[
             0] + "</td>"; //id
         html += "<td>" + infoproducto[1] + "</td>"; //descripcion
         html +=
-            "<td><input type='text' name='cantidades[]'  id='cant' value='1' required pattern='[0-9]{1,5}' title='Solo numeros positivos' class='col-xs-3 cant'></td>"
+            "<td><input type='text'  name='cantidades[]'  id='cant' value='1' required pattern='[1-9]{1,5}' title='Solo numeros positivos' class='col-xs-3 form-control cant'></td>"
         html += "<td><input type='hidden' pattern='[0-9]{1,5}'  name='precios[]' required value='" +
             infoproducto[2] + "'>" + infoproducto[2] + "</td>"; //precio
         html += "<td><input type='hidden' name='importes[]' value='" + infoproducto[2] + "'><p>" + infoproducto[
@@ -65,7 +65,7 @@ $(document).on("keyup", "#tbventas input.cant", function() {
 $(".btn-generar-print").on("click", function() {
     var base_url = "<?php echo base_url(); ?>";
     var id = $(this).val();
-    //alert(id);
+    //  alert(id);
     $.ajax({
         url: base_url + "Ventas_controller/imprimir/" + id,
         type: "POST",
@@ -137,32 +137,50 @@ function sumar() {
 //  function guardar_venta() {
 $('#datos_factura_ventas').on('submit', function(e) {
     e.preventDefault();
+    var cliente = $("#id_cliente").val();
+    var totales = $("#totales").val();
+    if (!cliente || totales <= 0) {
+        alert('Cliente o Producto no fue agregado');
+        return false;
+    } else {
 
+        var url = base_url + "Ventas_controller/store/";
+        var respuesta = confirm(" ¿Esta Seguro de Guardar la Venta?.. VERIFIQUE TODOS LOS DATOS ");
+        if (respuesta == true) {
+            $("#btnSave").css("display", "none")
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: $('#datos_factura_ventas').serialize(),
+                dataType: "JSON",
+                success: function(response) {
+                    res = response; //guardamos resultado para poder preg.
+                    $("#btnSave").css("display", "block")
+                    if (res.status == "success") {
+                        Swal.fire({
+                            icon: res.status,
+                            title: res.message,
+                            showConfirmButton: true,
+                            timer: 2000
+                        });
 
+                        setTimeout(function() {
+                            location.reload();
+                        }, 2100);
 
-    var url = base_url + "Ventas_controller/store/";
-    //  alert('entro' + url);
-    var respuesta = confirm(" ¿Esta Seguro de Guardar la Venta?.. VERIFIQUE TODOS LOS DATOS ");
-    if (respuesta == true) {
-        $('#modal_fin_venta').modal('show');
-        $("#btnSave").css("display", "none")
-        //       $('#modal_fin_venta').modal('hide');
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al Agregar/Actualizar datos',
+                        });
+                    };
+
+                },
+            });
+        }
     }
-    $(document).on("click", "#btnSave", function() {
-        alert("entro");
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: $('#datos_factura_ventas').serialize(),
-            dataType: "JSON",
-            success: function(data) {
-                $('#modal_fin_venta').modal('hide');
-                var redirect = parent.location.reload(true);
-                setTimeout(redirect, 1000);
-            },
-        });
-    });
 });
+
 
 
 $(document).on("keyup", "#MontoRecibido", function() {

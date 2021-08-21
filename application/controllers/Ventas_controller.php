@@ -13,8 +13,7 @@ class Ventas_controller extends CI_Controller
 			redirect(base_url());
 		}
 		$this->load->model("Ventas_model"); // esto abre el modelo
-		$this->load->model("Tipo_op_model"); // esto abre el modelo
-		$this->load->model("FormaPago_model"); // esto abre el modelo
+		$this->load->model("FormasPago_model"); // esto abre el modelo
 		$this->load->model("Clientes_model"); // esto abre el modelo
 		$this->load->model("Servicios_model"); // esto abre el modelo
 		$this->load->model("Empresas_model"); // esto abre el modelo
@@ -41,10 +40,10 @@ class Ventas_controller extends CI_Controller
 		$data = array(
 			'venta' => $this->Ventas_model->getVenta($id),
 			'detalles' => $this->Ventas_model->getDetalleVenta($id),
-			'formapago' => $this->FormaPago_model->getFormaspagos(),
-			'clientes' => $this->Clientes_model->getClientes(),
-			'servicios' => $this->Servicios_model->getServicios(),
-			//'empresa'=> $this->Empresas_model->getAll(),
+			'formapago' => $this->FormasPago_model->getAll(),
+			'clientes' => $this->Clientes_model->getAll(),
+			'servicios' => $this->Servicios_model->getAll(),
+
 
 		);
 
@@ -52,7 +51,7 @@ class Ventas_controller extends CI_Controller
 		$this->load->view('plantilla/menu');
 		$this->load->view("ventas/view", $data);
 		$this->load->view('plantilla/footer_plugins');
-		//	$this->load->view('ventas/script_ventas');
+		$this->load->view('ventas/script_ventas');
 
 		//abrimos la vista view
 	}
@@ -67,6 +66,7 @@ class Ventas_controller extends CI_Controller
 		);
 
 		$this->load->view("ventas/print", $data);
+		$this->load->view('ventas/script_ventas');
 	}
 	//funcion add para mostrar vistas
 	public function add()
@@ -74,10 +74,10 @@ class Ventas_controller extends CI_Controller
 		//cargamos un array usando el modelo
 		$data = array(
 			//'tipo_operaciones'=> $this->Tipo_op_model->gettipo_operaciones(),
-			'formapago' => $this->FormaPago_model->getFormaspagos(),
-			'clientes' => $this->Clientes_model->getClientes(),
-			'servicios' => $this->Servicios_model->getServicios(),
-			'comprobantes' => $this->Comprobantes_model->getComprobantes(),
+			'formapago' => $this->FormasPago_model->getAll(),
+			'clientes' => $this->Clientes_model->getAll(),
+			'servicios' => $this->Servicios_model->getAll(),
+			'comprobantes' => $this->Comprobantes_model->getAll(),
 		);
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu');
@@ -127,23 +127,28 @@ class Ventas_controller extends CI_Controller
 					$id_venta = $this->Ventas_model->lastID();
 					$this->updateComprobante($tipocomprobante, $nrocomprobante);
 					$this->save_detalles($id_venta, $idproductos, $cantidades, $precios, $importes);
-					//$this->session->set_flashdata('success', 'Venta  registrada..!');
-					redirect(base_url() . "Ventas_controller", "refresh");
+					echo json_encode(
+						array(
+							"status"     => "success",
+							"message" => "La Venta ha sido guardada sin Errores ",
+						)
+					);
 				} else {
-					//si hubo errores, mostramos mensaje
-					$this->session->set_flashdata('error', 'Venta no registrada error bd!');
-					$this->add();
-					//	redirect("usuarios_view/list", "refresh");
+					echo json_encode(
+						array(
+							"status" => "ERROR al intentar guardar la Venta",
+						)
+					);
 				}
 			} else {
 				$this->session->set_flashdata('error', 'Errores en la validacion, reintente!');
 				//si hubo errores en la validacion, rellamamos al metodo add mas arriba detallado
-				$this->add();
+				redirect("Ventas_controller/add", "refresh");
 			}
 		} else {
 			$this->session->set_flashdata('error', 'Cantidad, Cliente o Producto esta Vacio!');
 			//si hubo errores en la validacion, rellamamos al metodo add mas arriba detallado
-			$this->add();
+			redirect("Ventas_controller/add", "refresh");
 		}
 	}
 	protected function updateComprobante($tipocomprobante, $nrocomprobante)
@@ -173,19 +178,11 @@ class Ventas_controller extends CI_Controller
 			$this->Ventas_model->save_detalle($data);
 			$this->updateProducto($productos[$i], $cantidades[$i]);
 			$this->session->set_flashdata('success', 'Venta Nro ' . $id_venta . ' registrado correctamente!');
-			//redirect("Ventas_controller", "refresh");
-			//}
-			//else
-			//{
-			//si hubo errores, mostramos mensaje
-			//	$this->session->set_flashdata('error', 'Venta detalle no registrada error bd!');
-			//	$this->add();
-			//}
 		}
 	}
 	protected function updateProducto($id_producto, $cantidad)
 	{
-		$productoActual = $this->Servicios_model->getServicio($id_producto);
+		$productoActual = $this->Servicios_model->getById($id_producto);
 		$data = array(
 			'stock'		=>  $productoActual->stock - $cantidad,
 		);
@@ -198,7 +195,7 @@ class Ventas_controller extends CI_Controller
 	{
 		//cargamos un array usando el modelo
 		$data = array(
-			'clientes' => $this->Clientes_model->getClientes(),
+			'clientes' => $this->Clientes_model->getAll(),
 		);
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu');
@@ -236,7 +233,7 @@ class Ventas_controller extends CI_Controller
 		$data = array(
 			//'tipo_operaciones'=> $this->Tipo_op_model->gettipo_operaciones(),
 			'reporteventas' => $this->Ventas_model->getReporte($where),
-			'clientes' => $this->Clientes_model->getClientes(),
+			'clientes' => $this->Clientes_model->getAll(),
 			//	'productos'=> $this->Productos_model->getProductos(),
 		);
 		$this->load->view('plantilla/header');
