@@ -69,7 +69,7 @@
                                     <td><?php echo $producto->categoria; ?></td>
                                     <td><?php echo $producto->precio_compra; ?></td>
                                     <td><?php echo $producto->precio_venta; ?></td>
-                                    <td><?php echo $producto->precio_venta; ?></td>
+                                    <td><?php echo $producto->stock; ?></td>
                                     <td><?php echo $producto->impuesto . '%'; ?></td>
                                     <?php
 

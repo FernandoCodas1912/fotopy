@@ -36,12 +36,14 @@
         <?php endif; ?>
         <!-- end row -->
 
-        <?php if (!empty($cajas)) {
-            if ($cajas->estadocaja == 1) {
-                $estadocaja = "Abierta";
-            } else {
-                $estadocaja = "Cerrada";
-            }
+        <?php
+
+        // if (!empty($cajas)) {
+        if ($cajas->estadocaja == 1) {
+            $estadocaja = "Abierta";
+        } else {
+            $estadocaja = "Cerrada";
+        }
 
         ?>
 
@@ -69,14 +71,17 @@
                                     Caja</button>
                             </div>
                             <?php } else {
-                                        echo "<a href='" . base_url() . "'Dashboard_controller' class='btn btn-success btn-md'>Volver a Abrir</a>";
-                                    } ?>
+                                    echo "<a href='" . base_url() . "'Dashboard_controller' class='btn btn-success btn-md'>Volver a Abrir</a>";
+                                } ?>
                         </div>
 
                     </article>
                 </form>
                 <!-- end article -->
-                <?php } ?>
+                <?php
+
+                // } 
+                ?>
                 <div class="card-box">
                     <!-- <div class="col-md-2 pull-right">
                     <a href="" class="btn btn-success btn-md btn-block" data-toggle="modal"

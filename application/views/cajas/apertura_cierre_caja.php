@@ -8,7 +8,37 @@
                 <h5 class="modal-title" id="exampleModalLabel2">La Caja esta Cerrada, Debe Abrirla</h5>
             </div>
             <div class="modal-body" id="impresion" width="300px">
+                <?php
+                if ($this->session->flashdata("success")) : ?>
 
+                <div class="alert alert-success" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        &times;
+                    </button>
+                    <strong>
+                        ¡Buen Trabajo!
+                    </strong>
+                    <p>
+                        <?php echo $this->session->flashdata("success") ?>
+                    </p>
+                </div>
+
+                <?php endif; ?>
+                <?php
+                if ($this->session->flashdata("error")) : ?>
+
+                <div class="alert alert-danger" role="alert">
+                    <button type="button" class="close" data-dismiss="alert">
+                        &times;
+                    </button>
+                    <strong>
+                        ¡Error!
+                    </strong>
+                    <p>
+                        <?php echo $this->session->flashdata("error") ?>
+                    </p>
+                </div>
+                <?php endif; ?>
                 <!-- detalle  -->
                 <div class="form-body">
                     <form class="form" role="form" id="form_ape_caja" name="form_ape_caja" action="#" method="post">

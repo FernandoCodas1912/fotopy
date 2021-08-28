@@ -125,47 +125,45 @@ class Cajas_controller extends CI_Controller
 		}
 	}
 
-
-
 	//esto usado en dashboard para el modal abrir cajas
 	public function abrir_caja()
 	{
+		$importe_movimiento = $_POST['monto_apertura'];
+		$id_caja =  $_POST['id_caja'];
+		$usuario =  $_POST['usuario_ape'];
+
+
 		$data = array(
-			'id_caja'       	=> $_POST['id_caja'],
-			'usuario_apertura'  => $_POST['usuario_ape'],
+			'id_caja'       	=> $id_caja,
+			'usuario_apertura'  => $usuario,
 			'fecha_apertura'    => date('Y-m-d'),
-			'monto_apertura'    => $_POST['monto_apertura'],
+			'monto_apertura'    => $importe_movimiento,
 			'estadocaja'       	=> 1,
 
 		);
-
-		//insertar movimiento de apertura de caja
-
 		$idApertura = $this->Cajas_model->saveApertura($data);
 
+		//insertar movimiento de apertura de caja
 		if ($idApertura) {
-			//obtener saldo anterior
-			$movimientos = $this->Movimientos_model->getSaldo($this->session->userdata('id_caja'));
-			if ($movimientos) {
-				$saldo = $movimientos->saldo_movimiento +  $_POST['monto_apertura'];
-			} else {
-				$saldo = $_POST['monto_apertura'];
-			}
-			//insertar movimiento de apertura de caja
-			$data_movimiento = array(
-				'id_operacion'       	=> $idApertura,
-				'id_motivo'       		=> 21,
-				'id_caja'       		=> $_POST['id_caja'],
-				'id_usuario'  			=>  $this->session->userdata('id_usuario'),
-				'fecha_hora'    		=> date('Y-m-d H:i:s'),
-				'tipo_movimiento'   	=> 1,
-				'obs_movimiento'     	=> "Apertura de Caja ",
-				'importe_movimiento' 	=> $_POST['monto_apertura'],
-				'saldo_movimiento'      => $saldo,
-				'estado'       			=> 1,
+			$id_operacion = $idApertura;
+			$id_motivo = 21; //apertura de caja
+			$tipo_movimiento = 1; //1= es ingreso 2 = es egreso
 
-			);
-			if ($this->Movimientos_model->save($data_movimiento)) {
+			$obs_movimiento = "Apertura de Caja";
+
+			//obtener saldo anterior
+			$movimientos = $this->Movimientos_model->getSaldo($id_caja);
+
+			if ($movimientos) {
+				$saldo = $movimientos->saldo_movimiento +  $importe_movimiento;
+			} else {
+				$saldo = $importe_movimiento;
+			}
+
+			$insertar_movimiento = $this->insertar_movimiento($id_operacion, $id_motivo, $tipo_movimiento, $importe_movimiento, $obs_movimiento, $saldo);
+
+
+			if ($insertar_movimiento) {
 
 				echo json_encode(
 					array(
@@ -183,36 +181,50 @@ class Cajas_controller extends CI_Controller
 			}
 		}
 	}
+
+
+
 	public function cerrar_caja()
 	{
 		$id_caja =  $_POST['id_caja'];
 		$usuario =  $_POST['usuario_cierre'];
+		$importe_movimiento = $_POST['monto_cierre'];
+
 		$data = array(
 			'id_caja'       	=> $id_caja,
 			'usuario_cierre'  	=> $usuario,
 			'fecha_cierre'    	=> date('Y-m-d'),
-			'monto_cierre'    	=> $_POST['monto_cierre'],
+			'monto_cierre'    	=> $importe_movimiento,
 			'estadocaja'       	=> 2,
 
 		);
 
-		if ($this->Cajas_model->cierreCaja($id_caja, $usuario, $data)) {
+
+		$idOperacion = $this->Cajas_model->getAperturaCierre($usuario, $id_caja);
+		$cierre_caja = $this->Cajas_model->cierreCaja($id_caja, $usuario, $data);
+
+		//insertar movimiento de cierre de caja
+		if ($cierre_caja) {
+
+			$id_operacion = $idOperacion->id_aperturacierre;
+			$id_motivo = 19; //cierre de caja
+			$tipo_movimiento = 2; //1= es ingreso 2 = es egreso
+			$obs_movimiento = "Cierre de Caja";
+			$saldo = 0;
+			// //obtener saldo anterior
+			// $movimientos = $this->Movimientos_model->getSaldo($id_caja);
+
+			// if ($movimientos) {
+			// 	$saldo = $movimientos->saldo_movimiento +  $importe_movimiento;
+			// } else {
+			// 	$saldo = $importe_movimiento;
+			// }
 
 
-			//insertar movimiento de apertura de caja
-			$data_movimiento = array(
-				'id_motivo'       		=> 19,
-				'id_caja'       		=> $_POST['id_caja'],
-				'id_usuario'  			=>  $this->session->userdata('id_usuario'),
-				'fecha_hora'    		=> date('Y-m-d H:i:s'),
-				'tipo_movimiento'   	=> 2,
-				'obs_movimiento'     	=> "Cierre de Caja ",
-				'importe_movimiento' 	=> $_POST['monto_cierre'],
-				'saldo_movimiento'      => 0,
-				'estado'       			=> 1,
 
-			);
-			if ($this->Movimientos_model->save($data_movimiento)) {
+			$insertar_movimiento = $this->insertar_movimiento($id_operacion, $id_motivo, $tipo_movimiento, $importe_movimiento, $obs_movimiento, $saldo);
+
+			if ($insertar_movimiento) {
 				echo json_encode(
 					array(
 						"Status"     => "OK",
@@ -226,6 +238,36 @@ class Cajas_controller extends CI_Controller
 					)
 				);
 			}
+		}
+	}
+
+
+
+	//insertamos las operaciones en movimientos
+	public function insertar_movimiento($id_operacion, $id_motivo, $tipo_movimiento, $importe_movimiento, $obs_movimiento, $saldo)
+	{
+		$id_caja = $this->session->userdata('id_caja');
+		$id_usuario = $this->session->userdata('id_usuario');
+
+
+		$data_movimiento = array(
+			'id_operacion'       	=> $id_operacion,
+			'id_motivo'       		=> $id_motivo,
+			'id_caja'       		=> $id_caja,
+			'id_usuario'  			=>  $id_usuario,
+			'fecha_hora'    		=> date('Y-m-d H:i:s'),
+			'tipo_movimiento'   	=> $tipo_movimiento,
+			'obs_movimiento'     	=> $obs_movimiento,
+			'importe_movimiento' 	=> $importe_movimiento,
+			'saldo_movimiento'      => $saldo,
+			'estado'       			=> 1,
+
+		);
+
+		if ($this->Movimientos_model->save($data_movimiento)) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

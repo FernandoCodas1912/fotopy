@@ -49,6 +49,7 @@ class Cajas_model extends CI_MOdel
 
   public function getAperturaCierre($username, $id_caja)
   {
+
     $this->db->where("id_caja", $id_caja);
     $this->db->where("usuario_apertura", $username);
     $this->db->order_by("id_aperturacierre", "DESC");
@@ -61,7 +62,6 @@ class Cajas_model extends CI_MOdel
   {
     $this->db->where("id_caja", $id_caja);
     $this->db->where("usuario_apertura", $usuario);
-    return  $this->db->update("caja_aperturas_cierres", $data);
-    //	return $this->db->affected_rows();
+    return   $resultado = $this->db->update("caja_aperturas_cierres", $data);
   }
 }

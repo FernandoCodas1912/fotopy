@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('#example1').DataTable({
         "language": {
@@ -18,7 +18,6 @@ $(document).ready(function() {
         }
     });
     $('#example2').DataTable({
-
         "language": {
             "lengthMenu": "Mostrar _MENU_ registros por pagina",
             "zeroRecords": "No se encontraron Resultados!",
@@ -39,6 +38,7 @@ $(document).ready(function() {
     $('#example3').DataTable({
         ServerSide: true,
         dom: 'Bfrtip',
+        order: [[3, 'desc'], [0, 'desc']],
         //  "pageLength": 4,
         bDestroy: true,
         buttons: [
@@ -63,6 +63,9 @@ $(document).ready(function() {
             },
         }
     });
+
+
+
     $('#divMiCalendario').datepicker({
         //current:true,
         format: "yyyy-mm-dd",

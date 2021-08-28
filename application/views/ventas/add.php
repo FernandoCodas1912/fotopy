@@ -231,16 +231,36 @@
                             <td>Codigo</td>
                             <td>Descripcion</td>
                             <td>Precio</td>
+                            <td>Stock</td>
+                            <td>Tipo</td>
                             <td>Acciones</td>
                         </thead>
                         <tbody>
                             <?php
-                            if (!empty($servicios)) : ?>
-                            <?php foreach ($servicios as $servicio) : ?>
+                            if (!empty($productos_servicios)) : ?>
+                            <?php foreach ($productos_servicios as $servicio) : ?>
                             <tr>
+                                <?php
+                                        //      var_dump($servicio);
+                                        $tipo = $servicio->tipo;
+                                        if ($tipo == 1) {
+                                            $tipo2 = 'Producto';
+                                            $label_class = 'label-primary';
+                                        } else {
+                                            $tipo2 = 'Servicio';
+                                            $label_class = 'label-secondary';
+                                        }
+
+                                        ?>
+
+
+
                                 <td><?php echo $servicio->id_producto; ?></td>
                                 <td><?php echo $servicio->descripcion; ?></td>
                                 <td><?php echo $servicio->precio_venta; ?></td>
+                                <td><?php echo $servicio->stock; ?></td>
+                                <td><span class="label <?php echo $label_class; ?>"><?php echo $tipo2; ?></span>
+                                </td>
                                 <?php $dataproducto = $servicio->id_producto . "¬" .  ($servicio->descripcion) . "¬" . $servicio->precio_venta;
                                         ?>
                                 <td>

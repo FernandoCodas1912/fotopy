@@ -21,6 +21,16 @@ class Servicios_model extends CI_Model
 
         return $result->result();
     }
+    public function getAllProductosServicios()
+    {
+        $this->db->select('p.*, c.descripcion as categoria');
+        $this->db->from('productos_servicios p'); //desde tabla con alias
+        $this->db->join('categorias c', 'c.id_categoria=p.id_categoria'); //une los campos por su pk=fk
+        $this->db->where('p.estado', '1'); //1 es activo 2 inactivo 3 anulado
+        $result = $this->db->get();
+
+        return $result->result();
+    }
 
     //esto es una funcion o metodo para mostrar 1 registro de la tabla x su id
     public function getById($id)
