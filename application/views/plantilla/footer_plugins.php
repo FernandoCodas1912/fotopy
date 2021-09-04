@@ -24,7 +24,6 @@
          <script src="<?php echo base_url(); ?>assets/js/jquery.scrollTo.min.js"></script>
          <script src="<?php echo base_url(); ?>assets/js/wow.min.js"></script>
 
-
          <!-- App js -->
          <script src="<?php echo base_url(); ?>assets/js/jquery.core.js"></script>
          <script src="<?php echo base_url(); ?>assets/js/jquery.app.js"></script>
@@ -34,10 +33,9 @@
          <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
 
          <!-- BEGIN PAGE SCRIPTS -->
-         <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script>
-         <script src="<?php echo base_url(); ?>assets/plugins/fullcalendar/dist/fullcalendar.min.js"></script>
-         <script src="<?php echo base_url(); ?>assets/pages/jquery.fullcalendar.js"></script>
-         <script src="<?php echo base_url(); ?>assets/plugins/fullcalendar/dist/lang/es.js"></script>
+         <!-- <script src="<?php echo base_url(); ?>assets/plugins/moment/moment.js"></script> -->
+         <!-- <script src="<?php echo base_url(); ?>assets/plugins/fullcalendar/dist/fullcalendar.min.js"></script> -->
+         <!-- <script src="<?php echo base_url(); ?>assets/pages/jquery.fullcalendar.js"></script> -->
          <script src="<?php echo base_url(); ?>assets/plugins/jquery-print/jquery.print.js"></script>
 
          <!-- Datatables-->

@@ -46,9 +46,18 @@
     <link href="<?php echo base_url(); ?>assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet">
 
 
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-clockpicker.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/fullcalendar.min.css">
+
+
     <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/plugins/sweetalertCDN.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/moment.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/fullcalendar.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/es.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap-clockpicker.js"></script>
+
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
     <!-- <link href="<?php echo base_url(); ?>assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
