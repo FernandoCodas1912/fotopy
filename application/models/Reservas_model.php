@@ -23,6 +23,27 @@ class Reservas_model extends CI_Model
         return $resultados->result();
     }
 
+    //mostramos datos para el calendario
+    public function getReservasCalendar()
+    {
+        $this->db->select('
+        r.id_reserva as id,
+        concat(r.fecha_evento, " ", r.hora_evento) as start,
+        r.lugar_evento,
+        p.descripcion as detalle,
+        c.razonsocial as cliente,
+        c.telefono as telefono,
+        t.descripcion as title ');
+        $this->db->from('reservas r'); //desde tabla con alias
+        $this->db->join('productos_servicios p', 'r.id_producto=p.id_producto'); //une los campos por su pk=fk
+        $this->db->join('clientes c', 'r.id_cliente=c.id_cliente'); //une los campos por su pk=fk
+        $this->db->join('tipo_eventos t', 'r.id_tipoevento=t.id_tipoevento'); //une los campos por su pk=fk
+        $this->db->where("p.estado", "1");
+
+        $resultados = $this->db->get();
+        return $resultados->result();
+    }
+
     //esto es una funcion o metodo para mostrar 1 registro de la tabla x su id
     public function getById($id)
     {

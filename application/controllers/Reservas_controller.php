@@ -49,6 +49,12 @@ class Reservas_controller extends CI_Controller
         $this->load->view('reservas/view', $data); //se envia a la vista como reservas
     }
 
+    public function chargeCalendar()
+    {
+        $reservas = $this->Reservas_model->getReservasCalendar();
+        echo json_encode($reservas);
+    }
+
     public function store()
     {
         $this->form_validation->set_rules('id_producto', 'Nombre del Producto o Servicio', 'required');
