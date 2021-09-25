@@ -178,12 +178,14 @@
                         <div class="form-group">
                             <label for="projectinput5">Empleado</label>
                             <select id="projectinput5" name="id_empleado" class="form-control" required>
-
                                 <option value="" selected="" disabled="">Seleccione</option>
-                                <?php foreach ($empleados as $empleado) : ?>
+                                <?php foreach ($empleados as $empleado) :
+                                    if ($empleado->estado != 3) {;
+                                ?>
                                 <option value="<?php echo $empleado->id_empleado; ?>">
                                     <?php echo $empleado->nomape; ?></option>
-                                <?php endforeach; ?>
+                                <?php }
+                                endforeach; ?>
                             </select>
                         </div>
 
@@ -207,10 +209,13 @@
                                     <select id="projectinput5" name="id_perfil" class="form-control" required="">
 
                                         <option value="" selected="" disabled="">Seleccione</option>
-                                        <?php foreach ($perfiles as $perfil) : ?>
+                                        <?php foreach ($perfiles as $perfil) :
+                                            if ($perfil->estado != 3) {;
+                                        ?>
                                         <option value="<?php echo $perfil->id_usuario_perfil; ?>">
                                             <?php echo $perfil->descripcion; ?></option>
-                                        <?php endforeach; ?>
+                                        <?php }
+                                        endforeach; ?>
                                     </select>
                                 </div>
                             </div>

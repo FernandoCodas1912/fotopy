@@ -7,15 +7,17 @@
             <option value="" selected="" disabled="">Seleccione</option>
             <?php foreach ($empleados as $empleado) : ?>
             <?php
-                if ($usuarios->id_empleado == $empleado->id_empleado) {
-                    $selected = 'selected';
-                } else {
-                    $selected = '';
-                }
+                if ($empleado->estado != 3) {;
+                    if ($usuarios->id_empleado == $empleado->id_empleado) {
+                        $selected = 'selected';
+                    } else {
+                        $selected = '';
+                    }
                 ?>
             <option value="<?php echo $empleado->id_empleado; ?>" <?php echo $selected; ?>>
                 <?php echo $empleado->nomape; ?></option>
-            <?php endforeach; ?>
+            <?php }
+            endforeach; ?>
         </select>
     </div>
 
@@ -44,16 +46,18 @@
                     <option value="" selected="" disabled="">Seleccione</option>
                     <?php foreach ($perfiles as $perfil) : ?>
                     <?php
-                        if ($usuarios->id_perfil_usuario == $perfil->id_usuario_perfil) {
-                            $selected = 'selected';
-                        } else {
-                            $selected = '';
-                        }
+                        if ($perfil->estado != 3) {;
+                            if ($usuarios->id_perfil_usuario == $perfil->id_usuario_perfil) {
+                                $selected = 'selected';
+                            } else {
+                                $selected = '';
+                            }
                         ?>
 
                     <option value="<?php echo $perfil->id_usuario_perfil; ?>" <?php echo $selected; ?>>
                         <?php echo $perfil->descripcion; ?></option>
-                    <?php endforeach; ?>
+                    <?php }
+                    endforeach; ?>
                 </select>
             </div>
         </div>
