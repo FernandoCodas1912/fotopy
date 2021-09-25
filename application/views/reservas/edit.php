@@ -1,19 +1,19 @@
 <div class="form-group">
     <label for="timesheetinput1">Contacto</label>
     <select id="projectinput5" name="id_cliente" class="form-control" required="">
-
-        <option value="" selected="" disabled="">Seleccione</option>
         <?php foreach ($clientes as $cliente) : ?>
         <?php
-            if ($cliente->id_cliente == $reservas->id_cliente) {
-                $selected = 'selected';
-            } else {
-                $selected = '';
-            }
+            if ($cliente->estado != 3) {;
+                if ($cliente->id_cliente == $reservas->id_cliente) {
+                    $selected = 'selected';
+                } else {
+                    $selected = '';
+                }
             ?>
         <option value="<?php echo $cliente->id_cliente; ?>" <?php echo $selected; ?>>
             <?php echo $cliente->razonsocial; ?></option>
-        <?php endforeach; ?>
+        <?php }
+        endforeach; ?>
     </select>
 </div>
 
@@ -24,15 +24,17 @@
         required="">
         <?php foreach ($servicios as $servicio) : ?>
         <?php
-            if ($servicio->id_producto == $reservas->id_producto) {
-                $selected = 'selected';
-            } else {
-                $selected = '';
-            }
+            if ($servicio->estado != 3) {;
+                if ($servicio->id_producto == $reservas->id_producto) {
+                    $selected = 'selected';
+                } else {
+                    $selected = '';
+                }
             ?>
         <option value="<?php echo $servicio->id_producto; ?>" <?php echo $selected; ?>>
             <?php echo $servicio->descripcion; ?></option>
-        <?php endforeach; ?>
+        <?php  }
+        endforeach; ?>
     </select>
 </div>
 
@@ -42,15 +44,17 @@
         required="">
         <?php foreach ($tipo_eventos as $tipo_evento) : ?>
         <?php
-            if ($tipo_evento->id_tipoevento == $reservas->id_tipoevento) {
-                $selected = 'selected';
-            } else {
-                $selected = '';
-            }
+            if ($tipo_evento->estado != 3) {;
+                if ($tipo_evento->id_tipoevento == $reservas->id_tipoevento) {
+                    $selected = 'selected';
+                } else {
+                    $selected = '';
+                }
             ?>
         <option value="<?php echo $tipo_evento->id_tipoevento; ?>" <?php echo $selected; ?>>
             <?php echo $tipo_evento->descripcion; ?></option>
-        <?php endforeach; ?>
+        <?php  }
+        endforeach; ?>
     </select>
 </div>
 
@@ -90,15 +94,17 @@
                 required="">
                 <?php foreach ($departamentos as $departamento) : ?>
                 <?php
-                    if ($departamento->id_departamento == $reservas->id_departamento) {
-                        $selected = 'selected';
-                    } else {
-                        $selected = '';
-                    }
+                    if ($departamento->estado != 3) {;
+                        if ($departamento->id_departamento == $reservas->id_departamento) {
+                            $selected = 'selected';
+                        } else {
+                            $selected = '';
+                        }
                     ?>
                 <option value="<?php echo $departamento->id_departamento; ?>" <?php echo $selected; ?>>
                     <?php echo $departamento->descripcion; ?></option>
-                <?php endforeach; ?>
+                <?php  }
+                endforeach; ?>
             </select>
         </div>
     </div>

@@ -112,6 +112,12 @@ class Cajas_controller extends CI_Controller
 	//funcion para borrar
 	public function delete($id)
 	{
+		$cajas = $this->Cajas_model->getById($id);
+		if ($cajas->estado == 3) {
+			$this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+			redirect(base_url() . "Cajas_controller", "refresh");
+		}
+
 		$data = array(
 			'estado' => '3',
 		);

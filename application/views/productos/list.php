@@ -106,7 +106,7 @@
                                             </i> Editar
                                         </button>
 
-                                        <a href="<?php echo base_url(); ?>servicios_controller/delete/<?php echo $producto->id_producto; ?>"
+                                        <a href="<?php echo base_url(); ?>Productos_controller/delete/<?php echo $producto->id_producto; ?>"
                                             class="btn btn-xs btn-danger btn-delete" title="Inactivar producto">
                                             <i class="fa fa-trash-o">
                                             </i> Anular

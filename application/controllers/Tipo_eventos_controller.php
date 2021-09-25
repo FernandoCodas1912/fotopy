@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-//se crea el controlador tipo_evento
+
 class Tipo_eventos_controller extends CI_Controller
 {
 	//constructor
@@ -10,7 +10,6 @@ class Tipo_eventos_controller extends CI_Controller
 		if (!$this->session->userdata("login")) {
 			redirect(base_url());
 		}
-		//$this->load->model("Servicios_model");
 		$this->load->model("Tipo_eventos_model");
 	}
 	//carga una vista llamada list
@@ -107,7 +106,6 @@ class Tipo_eventos_controller extends CI_Controller
 			//si hubieron errores, recargamos la funcion que esta mas arriba, editar y enviamos nuevamente el id como parametro
 			$this->session->set_flashdata('error', 'Errores de Validacion al Intentar Actualizar!');
 			redirect(base_url() . "Tipo_eventos_controller", "refresh");
-			//$this->edit($id);
 		}
 	}
 
@@ -115,6 +113,12 @@ class Tipo_eventos_controller extends CI_Controller
 	//funcion para borrar
 	public function delete($id)
 	{
+		// averiguar primero si ya no esta anulado
+		$evento = $this->Tipo_eventos_model->getById($id);
+		if ($evento->estado == 3) {
+			$this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+			redirect(base_url() . "Tipo_eventos_controller", "refresh");
+		}
 		$data = array(
 			'estado' => '3',
 		);

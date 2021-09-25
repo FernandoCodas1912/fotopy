@@ -34,6 +34,14 @@
             </p>
         </div>
         <?php endif; ?>
+
+        <?php $error = validation_errors();
+
+        var_dump($error);
+        ?>
+
+
+        <?php echo validation_errors(); ?>
         <!-- end row -->
         <div class="row">
             <div class="col-lg-12">
@@ -43,6 +51,7 @@
                                 class="fa fa-plus"></i> <span> Nuevo Usuario</span> </a>
                     </div>
                     <h4 class="header-title m-t-0 m-b-30"> Listado de Usuarios</h4>
+
                     <div class="table-responsive">
                         <table class="table" id="example3">
                             <thead>
@@ -152,92 +161,103 @@
                     <h5 class="modal-title" id="exampleModalLabel2">FICHA DEL USUARIO</h5>
                 </div>
                 <div class="modal-body">
-                    <form class="form" action="<?php echo base_url(); ?>Usuarios_controller/store" method="POST"
-                        id="formAdd" name="formAdd">
-                        <div class="form-body">
-
-                            <div class="form-group">
-                                <label for="projectinput5">Empleado</label>
-                                <select id="projectinput5" name="id_empleado" class="form-control" required>
-
-                                    <option value="" selected="" disabled="">Seleccione</option>
-                                    <?php foreach ($empleados as $empleado) : ?>
-                                    <option value="<?php echo $empleado->id_empleado; ?>">
-                                        <?php echo $empleado->nomape; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput1">Username/Login</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="text" id="timesheetinput1" class="form-control"
-                                                placeholder="Nombre de usuario" name="username" required="">
-                                            <div class="form-control-position">
-                                                <i class="icon-slack"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="projectinput5">Perfil</label>
-                                        <select id="projectinput5" name="id_perfil" class="form-control" required="">
-
-                                            <option value="" selected="" disabled="">Seleccione</option>
-                                            <?php foreach ($perfiles as $perfil) : ?>
-                                            <option value="<?php echo $perfil->id_usuario_perfil; ?>">
-                                                <?php echo $perfil->descripcion; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
+                    <?php
+                    if (!empty(validation_errors())) {
+                        echo '<h5>¡Atención!</h5><span style="color: red;"><small>' . validation_errors() .
+                            '</small></span>';
+                    }
+                    $attributes = array('method' => 'post');
+                    echo form_open('Usuarios_controller/store', $attributes);
+                    ?>
 
 
-                            </div>
+                    <!-- <form class="form" action="<?php echo base_url(); ?>Usuarios_controller/store" method="POST"
+                        id="formAdd" name="formAdd"> -->
+                    <div class="form-body">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput1">Clave</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="password" id="timesheetinput1" class="form-control"
-                                                placeholder="clave" name="clave" required="">
-                                            <div class="form-control-position">
-                                                <i class="icon-lock"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="timesheetinput1">Repetir Clave</label>
-                                        <div class="position-relative has-icon-left">
-                                            <input type="password" id="timesheetinput1" class="form-control"
-                                                placeholder="Repetir clave" name="repetirclave" required="">
-                                            <div class="form-control-position">
-                                                <i class="icon-lock"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="projectinput5">Empleado</label>
+                            <select id="projectinput5" name="id_empleado" class="form-control" required>
+
+                                <option value="" selected="" disabled="">Seleccione</option>
+                                <?php foreach ($empleados as $empleado) : ?>
+                                <option value="<?php echo $empleado->id_empleado; ?>">
+                                    <?php echo $empleado->nomape; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput5">Asignar Caja</label>
-                                    <select id="projectinput5" name="id_caja" class="form-control">
-                                        <option value="" selected="">Seleccione</option>
-                                        <?php foreach ($cajas as $caja) : ?>
-                                        <option value="<?php echo $caja->id_caja; ?>">
-                                            <?php echo $caja->descripcion; ?></option>
+                                    <label for="timesheetinput1">Username/Login</label>
+                                    <div class="position-relative has-icon-left">
+                                        <input type="text" id="timesheetinput1" class="form-control"
+                                            placeholder="Nombre de usuario" name="username" required="">
+                                        <div class="form-control-position">
+                                            <i class="icon-slack"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput5">Perfil</label>
+                                    <select id="projectinput5" name="id_perfil" class="form-control" required="">
+
+                                        <option value="" selected="" disabled="">Seleccione</option>
+                                        <?php foreach ($perfiles as $perfil) : ?>
+                                        <option value="<?php echo $perfil->id_usuario_perfil; ?>">
+                                            <?php echo $perfil->descripcion; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                        </div><!-- end div class FORM body-->
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="timesheetinput1">Clave</label>
+                                    <div class="position-relative has-icon-left">
+                                        <input type="password" id="timesheetinput1" class="form-control"
+                                            placeholder="clave" minlength="6" name="clave" required="">
+                                        <div class="form-control-position">
+                                            <i class="icon-lock"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="timesheetinput1">Repetir Clave</label>
+                                    <div class="position-relative has-icon-left">
+                                        <input type="password" id="timesheetinput1" class="form-control"
+                                            placeholder="Repetir clave" minlength="6" name="repetirclave" required="">
+                                        <div class="form-control-position">
+                                            <i class="icon-lock"></i>
+                                        </div>
+                                    </div>
+                                    <?php echo form_error("repetirclave", "<span class='help-block'>", "</span>"); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="projectinput5">Asignar Caja</label>
+                                <select id="projectinput5" name="id_caja" class="form-control">
+                                    <option value="" selected="">Seleccione</option>
+                                    <?php foreach ($cajas as $caja) : ?>
+                                    <option value="<?php echo $caja->id_caja; ?>">
+                                        <?php echo $caja->descripcion; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div><!-- end div class FORM body-->
                 </div><!-- end div class MODAL body-->
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success btn-fill" id="btnEnviarDatos"><i
@@ -246,7 +266,8 @@
                     <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal"><i
                             class="icon-cross2"></i>Cerrar</button>
                 </div>
-                </form>
+                <!-- </form> -->
+                <?php echo form_close() ?>
             </div><!-- end div class modal content-->
         </div><!-- end div class modal dialog-->
     </div><!-- end div class modal-->

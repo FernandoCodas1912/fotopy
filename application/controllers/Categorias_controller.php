@@ -114,6 +114,12 @@ class Categorias_controller extends CI_Controller
     //funcion para borrar
     public function delete($id)
     {
+        $databd = $this->Categorias_model->getById($id);
+        if ($databd->estado == 3) {
+            $this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+            redirect(base_url() . "Categorias_controller", "refresh");
+        }
+
         $data = [
             'estado' => '3',
         ];

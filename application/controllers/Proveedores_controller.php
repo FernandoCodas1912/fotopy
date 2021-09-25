@@ -139,6 +139,13 @@ class Proveedores_controller extends CI_Controller
 	//funcion para borrar
 	public function delete($id)
 	{
+		// averiguar primero si ya no esta anulado
+		$datadb = $this->Proveedores_model->getById($id);
+		if ($datadb->estado == 3) {
+			$this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+			redirect(base_url() . "Proveedores_controller", "refresh");
+		}
+
 		$data = array(
 			'estado' => '3',
 			'date_mod' => date('Y-m-d H:i:s'),

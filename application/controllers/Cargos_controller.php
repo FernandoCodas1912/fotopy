@@ -112,6 +112,12 @@ class Cargos_controller extends CI_Controller
     //funcion para borrar
     public function delete($id)
     {
+        $databd = $this->Cargos_model->getById($id);
+        if ($databd->estado == 3) {
+            $this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+            redirect(base_url() . "Cargos_controller", "refresh");
+        }
+
         $data = [
             'estado' => '3',
         ];

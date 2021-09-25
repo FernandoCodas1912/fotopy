@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card-box">
-                    <div class="col-md-2 pull-right">
+                    <div class="col-md-3 pull-right">
                         <a href="" class="btn btn-success btn-md btn-block" data-toggle="modal"
                             data-target="#modal-agregar"><i class="fa fa-plus"></i> <span> Nuevo Tipo de Evento</span>
                         </a>

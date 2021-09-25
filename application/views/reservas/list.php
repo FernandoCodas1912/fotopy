@@ -139,28 +139,31 @@
                     <form class="form" action="<?php echo base_url(); ?>Reservas_controller/store" method="POST"
                         id="formAdd" name="formAdd">
                         <div class="form-body">
-                            <!--    <h4 class="form-section"><i class="icon-ios-albums"></i> Datos Basicos</h4> -->
-
                             <div class="form-group">
                                 <label for="timesheetinput1">Servicio Solicitado</label>
                                 <select id="projectinput5" name="id_producto" class="form-control" required="">
-
-                                    <option value="" selected="" disabled="">Seleccione</option>
-                                    <?php foreach ($servicios as $servicio) : ?>
+                                    <option value="" selected="">Seleccione</option>
+                                    <?php foreach ($servicios as $servicio) :
+                                        if ($servicio->estado != 3) {;
+                                    ?>
                                     <option value="<?php echo $servicio->id_producto; ?>">
                                         <?php echo $servicio->descripcion; ?></option>
-                                    <?php endforeach; ?>
+                                    <?php }
+                                    endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="timesheetinput1">Evento</label>
                                 <select id="projectinput5" name="id_tipoevento" class="form-control" required="">
 
-                                    <option value="" selected="" disabled="">Seleccione</option>
-                                    <?php foreach ($tipo_eventos as $tipo_evento) : ?>
+                                    <option value="" selected="">Seleccione</option>
+                                    <?php foreach ($tipo_eventos as $tipo_evento) :
+                                        if ($tipo_evento->estado != 3) {;
+                                    ?>
                                     <option value="<?php echo $tipo_evento->id_tipoevento; ?>">
                                         <?php echo $tipo_evento->descripcion; ?></option>
-                                    <?php endforeach; ?>
+                                    <?php }
+                                    endforeach; ?>
                                 </select>
                             </div>
 
@@ -169,11 +172,14 @@
                                 <div class="input-group">
                                     <select id="id_cliente" name="id_cliente" class="form-control" required="">
 
-                                        <option value="" selected="" disabled="">Seleccione</option>
-                                        <?php foreach ($clientes as $cliente) : ?>
+                                        <option value="" selected="">Seleccione</option>
+                                        <?php foreach ($clientes as $cliente) :
+                                            if ($cliente->estado != 3) {;
+                                        ?>
                                         <option value="<?php echo $cliente->id_cliente; ?>">
                                             <?php echo $cliente->razonsocial; ?></option>
-                                        <?php endforeach; ?>
+                                        <?php }
+                                        endforeach; ?>
                                     </select>
                                     <a class="input-group-addon btn btn-success" id="btn_add_cliente"> <i
                                             class="fa fa-plus"></i></a>
@@ -215,11 +221,14 @@
                                         <label for="timesheetinput1">Departamento</label>
                                         <select id="id_departamento" name="departamento_evento"
                                             class="form-control selectpicker" required="">
-                                            <option value="" selected="" disabled="">Seleccione</option>
-                                            <?php foreach ($departamentos as $departamento) : ?>
+                                            <option value="" selected="">Seleccione</option>
+                                            <?php foreach ($departamentos as $departamento) :
+                                                if ($cliente->estado != 3) {;
+                                            ?>
                                             <option value="<?php echo $departamento->id_departamento; ?>">
                                                 <?php echo $departamento->descripcion; ?></option>
-                                            <?php endforeach; ?>
+                                            <?php }
+                                            endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -380,7 +389,7 @@
                                         <label for="timesheetinput1">Departamento</label>
                                         <select id="id_departamentoCliente" name="id_departamento" class="form-control"
                                             required="">
-                                            <option value="" selected="" disabled="">Seleccione</option>
+                                            <option value="" selected="">Seleccione</option>
                                             <?php foreach ($departamentos as $departamento) : ?>
                                             <option value="<?php echo $departamento->id_departamento; ?>">
                                                 <?php echo $departamento->descripcion; ?></option>

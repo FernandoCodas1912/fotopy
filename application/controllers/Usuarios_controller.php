@@ -52,14 +52,37 @@ class Usuarios_controller extends CI_Controller
             $FechaAltaUSuario = date('Y-m-d H:i:s');
 
             //aqui se valida el formulario, reglas, primero el campo, segundo alias del campo, tercero la validacion
+
+
+
             $this->form_validation->set_rules('id_empleado', 'Empleado', 'required');
             $this->form_validation->set_rules('id_perfil', 'Tipo usuario', 'required');
-            $this->form_validation->set_rules('username', 'Nombre de usuario', 'required|is_unique[usuarios.username]');
+            //  $this->form_validation->set_rules('username', 'Nombre de usuario', 'required|is_unique[usuarios.username]');
             $this->form_validation->set_rules('clave', 'Clave del Usuario', 'required|min_length[6]');
             $this->form_validation->set_rules('repetirclave', 'Repetir Clave', 'required|min_length[6]|matches[clave]');
 
+            $this->form_validation->set_rules('e-mail', 'Email', 'trim|required|valid_email');
+            $this->form_validation->set_rules('cellphone', 'Cellphone Number', 'trim|required|is_natural');
+            $this->form_validation->set_message('required', '%s is required.');
+            $this->form_validation->set_message('valid_email', '%s is not a valid Email Address');
+            $this->form_validation->set_message('is_natural', '%s can only contain numbers.');
+            $this->form_validation->set_error_delimiters('<li>', '</li>');
+
+            $this->form_validation->set_rules(
+                'username',
+                'username',
+                'required|is_unique[usuarios.username]',
+                array(
+                    'required'    => '¡El Campo %s es Requerido!'
+                )
+            );
+
+            if ($this->form_validation->run() == FALSE) {
+                redirect('Usuarios_controller', 'refresh');
+            }
+
             //SI ESTA BIEN VALIDADO
-            if ($this->form_validation->run() == true) {
+            if ($this->form_validation->run() == TRUE) {
                 //se reciben las variables y se guardan
                 $data = [
                     'id_empleado' => $_POST['id_empleado'],
@@ -83,7 +106,7 @@ class Usuarios_controller extends CI_Controller
                 }
             } else {
                 $this->session->set_flashdata('error', 'Errores en la validacion, reintente!');
-                //si hubo errores en la validacion, rellamamos al metodo add mas arriba detallado
+                // si hubo errores en la validacion, rellamamos al metodo add mas arriba detallado
                 redirect('Usuarios_controller', 'refresh');
                 //$this->add();
             }
@@ -208,6 +231,13 @@ class Usuarios_controller extends CI_Controller
     //funcion para borrar
     public function delete($id)
     {
+        // averiguar primero si ya no esta anulado
+        $datadb = $this->Usuarios_model->getById($id);
+        if ($datadb->estado == 3) {
+            $this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+            redirect(base_url() . "Usuarios_controller", "refresh");
+        }
+
         $data = [
             'estado' => '3',
             'date_mod' => date('Y-m-d H:i:s'),

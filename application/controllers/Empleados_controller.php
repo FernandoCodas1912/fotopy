@@ -137,6 +137,12 @@ class Empleados_controller extends CI_Controller
 	//funcion para borrar
 	public function delete($id)
 	{
+		// averiguar primero si ya no esta anulado
+		$datadb = $this->Empleados_model->getById($id);
+		if ($datadb->estado == 3) {
+			$this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+			redirect(base_url() . "Empleados_controller", "refresh");
+		}
 		$data = array(
 			'estado' => '3',
 		);

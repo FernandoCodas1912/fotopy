@@ -235,6 +235,7 @@ class Presupuestos_controller extends CI_Controller
 	public function delete($id)
 	{
 
+
 		$data = array(
 			'detalle_venta' => $this->Ventas_model->getDetalleVenta($id),
 		);

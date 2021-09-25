@@ -6,12 +6,10 @@ class Tipo_eventos_model extends CI_MOdel
 {
     public $tabla = 'tipo_eventos';
     public $idTabla = 'id_tipoevento';
-    //esta funcion retorna todos los registros de nuestra tabla
+
     public function getAll()
     {
-        // $this->db->where('estado', '1');
         $resultados = $this->db->get($this->tabla);
-
         return $resultados->result();
     }
 

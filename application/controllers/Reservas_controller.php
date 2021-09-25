@@ -29,9 +29,8 @@ class Reservas_controller extends CI_Controller
             'servicios' => $this->Servicios_model->getAll(),
             'tipo_eventos' => $this->Tipo_eventos_model->getAll(),
             'clientes' => $this->Clientes_model->getAll(),
-            'ciudades' => $this->Ciudades_model->getAll(),
             'departamentos' => $this->Departamentos_model->getAll(),
-            'paises' => $this->Paises_model->getAll(),
+            //   'paises' => $this->Paises_model->getAll(),
 
         ];
         $this->load->view('plantilla/header');
@@ -138,6 +137,12 @@ class Reservas_controller extends CI_Controller
     //funcion para borrar
     public function delete($id)
     {
+        $datadb = $this->Reservas_model->getById($id);
+        if ($datadb->estado == 3) {
+            $this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+            redirect(base_url() . "Reservas_controller", "refresh");
+        }
+
         $data = [
             'estado' => '3',
         ];

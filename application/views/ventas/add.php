@@ -73,7 +73,7 @@
                                 <!--combo dinamico desde la base de datos-->
                                 <option value="" selected="" disabled="">Seleccione</option>
                                 <?php foreach ($comprobantes as $comprobante) : ?>
-                                <?php if ($comprobante->id_comprobante != 4) { ?>
+                                <?php if ($comprobante->id_comprobante != 4 and $comprobante->estado != 3) { ?>
                                 <?php $datacomprobante = $comprobante->id_comprobante . '*' . $comprobante->ultimo_nro . '*' . $comprobante->serie_comprobante . '*'; ?>
                                 <option value="<?php echo $datacomprobante; ?>">
                                     <?php echo $comprobante->id_comprobante . "-" . $comprobante->descripcion; ?>

@@ -251,6 +251,12 @@ class Cobranzas_controller extends CI_Controller
 	public function delete($id)
 	{
 
+		$databd = $this->Clientes_model->getById($id);
+		if ($databd->estado == 3) {
+			$this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+			redirect(base_url() . "Clientes_controller", "refresh");
+		}
+
 		$data = array(
 			'detalle_venta' => $this->Ventas_model->getDetalleVenta($id),
 		);

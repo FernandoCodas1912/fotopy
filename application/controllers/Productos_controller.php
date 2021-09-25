@@ -136,6 +136,12 @@ class Productos_controller extends CI_Controller
     //funcion para borrar
     public function delete($id)
     {
+        // averiguar primero si ya no esta anulado
+        $datadb = $this->Productos_model->getById($id);
+        if ($datadb->estado == 3) {
+            $this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
+            redirect(base_url() . "Productos_controller", "refresh");
+        }
         $data = [
             'estado' => '3',
             'date_mod' => date('Y-m-d H:i:s'),
