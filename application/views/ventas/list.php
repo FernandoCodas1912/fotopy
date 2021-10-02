@@ -6,7 +6,7 @@
     <div class="content">
 
         <?php
-		if ($this->session->flashdata("success")) : ?>
+        if ($this->session->flashdata("success")) : ?>
         <div class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 &times;
@@ -21,7 +21,7 @@
 
         <?php endif; ?>
         <?php
-		if ($this->session->flashdata("error")) : ?>
+        if ($this->session->flashdata("error")) : ?>
         <div class="alert alert-danger" role="alert">
             <button type="button" class="close" data-dismiss="alert">
                 &times;
@@ -51,7 +51,6 @@
                                     <th>Fecha</th>
                                     <th>Cliente</th>
                                     <th>Total</th>
-                                    <th>F.Pago</th>
                                     <th>T.Comprob.</th>
                                     <th>Cond. Venta</th>
                                     <th>Estado</th>
@@ -60,48 +59,47 @@
                             </thead>
                             <tbody>
                                 <?php
-								if (!empty($ventas)) : ?>
+                                if (!empty($ventas)) : ?>
                                 <?php foreach ($ventas as $venta) : ?>
                                 <tr>
                                     <td><?php echo $venta->id_venta; ?></td>
                                     <?php
-											$fecha = $venta->fecha;
-											$fecha = date('d-m-Y', strtotime($fecha));
-											$estado = $venta->estado;
+                                            $fecha = $venta->fecha;
+                                            $fecha = date('d-m-Y', strtotime($fecha));
+                                            $estado = $venta->estado;
 
-											if ($estado == 1) {
-												$estado2     = "Activo";
-												$label_class = 'label-success';
-											} else {
-												if ($estado == 2) {
-													$estado2     = "Inactivo";
-													$label_class = 'label-warning';
-												} else {
-													$estado2     = "Anulado";
-													$label_class = 'label-danger';
-												}
-											}
-											$tipo =	$venta->tipocomprobante;
-											if ($tipo == 1) {
-												$tipo2     = "Factura";
-												$label_class2 = 'label-success';
-											} else {
-												$tipo2     = "Boleta";
-												$label_class2 = 'label-warning';
-											}
-											$condicion = $venta->condicionventa;
-											if ($condicion == 1) {
-												$condicion2     = "Contado";
-												$label_condicion = 'label-primary';
-											} else {
-												$condicion2     = "Crédito";
-												$label_condicion = 'label-secondary';
-											}
-											?>
+                                            if ($estado == 1) {
+                                                $estado2     = "Activo";
+                                                $label_class = 'label-success';
+                                            } else {
+                                                if ($estado == 2) {
+                                                    $estado2     = "Inactivo";
+                                                    $label_class = 'label-warning';
+                                                } else {
+                                                    $estado2     = "Anulado";
+                                                    $label_class = 'label-danger';
+                                                }
+                                            }
+                                            $tipo =    $venta->tipocomprobante;
+                                            if ($tipo == 1) {
+                                                $tipo2     = "Factura";
+                                                $label_class2 = 'label-success';
+                                            } else {
+                                                $tipo2     = "Boleta";
+                                                $label_class2 = 'label-warning';
+                                            }
+                                            $condicion = $venta->condicionventa;
+                                            if ($condicion == 1) {
+                                                $condicion2     = "Contado";
+                                                $label_condicion = 'label-primary';
+                                            } else {
+                                                $condicion2     = "Crédito";
+                                                $label_condicion = 'label-secondary';
+                                            }
+                                            ?>
                                     <td><?php echo $fecha; ?></td>
                                     <td><?php echo $venta->id_cliente . " - " . $venta->nombre; ?></td>
                                     <td><?php echo $venta->total; ?></td>
-                                    <td><?php echo $venta->formadepago; ?></td>
                                     <td><?php echo $tipo2; ?></td>
                                     <td><span
                                             class="label <?php echo $label_condicion; ?>"><?php echo $condicion2; ?></span>

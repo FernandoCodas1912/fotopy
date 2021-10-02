@@ -8,10 +8,9 @@ class Ventas_model extends CI_Model
 	//este metodo es para mostrar todos los empleado
 	public function getVentas()
 	{
-		$this->db->select("v.*, c.razonsocial as nombre, f.descripcion as formadepago");
+		$this->db->select("v.*, c.razonsocial as nombre");
 		$this->db->from("ventas v");
 		$this->db->join("clientes c", "c.id_cliente=v.id_cliente");
-		$this->db->join("formas_pago f", "f.id_formapago=v.id_formapago");
 		//	$this->db->where("estServicio", "1");
 		$resultados = $this->db->get();
 		return $resultados->result();
@@ -19,10 +18,9 @@ class Ventas_model extends CI_Model
 
 	public function getPresupuestos()
 	{
-		$this->db->select("v.*, c.razonsocial as nombre, f.descripcion as formadepago");
+		$this->db->select("v.*, c.razonsocial as nombre");
 		$this->db->from("ventas v");
 		$this->db->join("clientes c", "c.id_cliente=v.id_cliente");
-		$this->db->join("formas_pago f", "f.id_formapago=v.id_formapago");
 		$this->db->where("tipoventa", "1");
 		$resultados = $this->db->get();
 		return $resultados->result();
@@ -36,10 +34,9 @@ class Ventas_model extends CI_Model
 	//esta es la parte para guardar en la bd
 	public function getVenta($id)
 	{
-		$this->db->select("v.*, c.razonsocial as cliente, c.nrodocumento as nrodocumento, c.telefono as telefono, c.direccion as direccion,f.descripcion as formadepago");
+		$this->db->select("v.*, c.razonsocial as cliente, c.nrodocumento as nrodocumento, c.telefono as telefono, c.direccion as direccion");
 		$this->db->from("ventas v");
 		$this->db->join("clientes c", "c.id_cliente=v.id_cliente");
-		$this->db->join("formas_pago f", "f.id_formapago=v.id_formapago");
 		$this->db->where("v.id_venta", $id);
 		$resultados = $this->db->get();
 		return $resultados->row(); //modifico marcelo row en vez  de result
@@ -84,11 +81,10 @@ class Ventas_model extends CI_Model
 
 	public function getReporte($where)
 	{
-		$this->db->select("v.fecha, v.total, cl.razonsocial, u.username, f.descripcion");
+		$this->db->select("v.fecha, v.total, cl.razonsocial, u.username");
 		$this->db->from("ventas v");
 		$this->db->join("clientes cl", "v.id_cliente=cl.id_cliente");
 		$this->db->join("usuario u", "v.id_usuario=u.id_usuario");
-		$this->db->join("formas_pago f", "v.id_formapago=f.id_formapago");
 		$this->db->where($where);
 		$resultados = $this->db->get();
 		return $resultados->result();

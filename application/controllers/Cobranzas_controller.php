@@ -57,6 +57,57 @@ class Cobranzas_controller extends CI_Controller
 		//abrimos la vista view
 	}
 
+
+	// funcion para realizar cobros
+
+	public function cobrar()
+	{
+		$idpersona = $this->input->post("id_persona");
+		$IdFormaPago = $this->input->post("IdFormaPago");
+		$id_operacion = $this->input->post("id_operacion");
+		$total_operacion = $this->input->post("total_operacion");
+		// procesar, guardar en cobros, guardar en cta cte, generar movimiento
+		//preparamos para insertar movimiento en caja
+		$id_motivo = 13; //ingreso por ventas
+		$tipo_movimiento = 1; //1= es ingreso 2 = es egreso
+		$obs_movimiento = "Ingreso - por Venta # " . $id_operacion;
+		$importe_movimiento = $_POST['totales'];
+
+		// if ($condicion == 1) {
+		// 	//obtener saldo anterior
+		// 	$id_caja = $this->session->userdata('id_caja');
+		// 	$movimientos = $this->Movimientos_model->getSaldo($id_caja);
+
+		// 	if ($movimientos) {
+		// 		$saldo = $movimientos->saldo_movimiento +  $importe_movimiento;
+		// 	} else {
+		// 		$saldo = $importe_movimiento;
+		// 	}
+
+		//	$movimiento =  	$this->insertar_movimiento($id_operacion, $id_motivo, $tipo_movimiento, $importe_movimiento, $obs_movimiento, $saldo);
+		// }
+		$movimiento = 1;
+		if ($movimiento) {
+			// $this->save_detalles($id_venta, $idproductos, $cantidades, $precios, $importes);
+
+			echo json_encode(
+				array(
+					"status"     => "success",
+					"message" => "La Venta ha sido guardada sin Errores ",
+
+				)
+			);
+		} else {
+			echo json_encode(
+				array(
+					"status" => "ERROR al intentar guardar la Venta",
+				)
+			);
+		}
+	}
+
+
+
 	public function imprimir($id)
 	{
 		$data = array(

@@ -3,8 +3,6 @@
     <div class="topbar">
         <!-- LOGO -->
         <div class="topbar-left">
-            <br>
-            <br>
             <img src="<?php echo base_url(); ?>assets/images/1.png" alt="branding logo">
             <!--<a href="<?php echo base_url(); ?>" class="logo"><span>FOTO<span>PY</span></span><i class="zmdi zmdi-layers"></i></a>-->
         </div>
@@ -19,8 +17,12 @@
                             <i class="zmdi zmdi-menu"></i>
                         </button>
                     </li>
+
                     <li>
-                        <h4 class="page-title"></h4>
+                        <a href="<?php echo base_url(); ?>Ventas_controller/add" class="page-title menu_superior">
+                            <i class="fa fa-dollar"></i>
+                            Vender
+                        </a>
                     </li>
                 </ul>
 
@@ -30,15 +32,12 @@
                         <!-- Notification -->
                         <div class="notification-box">
                             <ul class="list-inline m-b-0">
-                                <li>
-                                    <a href="javascript:void(0);" class="right-bar-toggle">
+                                <!-- <li>
+                                    <a href="<?php echo base_url(); ?>Ventas_controller" class="right-bar-toggle">
                                         <i class="zmdi zmdi-notifications-none"></i>
                                     </a>
-                                    <div class="noti-dot">
-                                        <span class="dot"></span>
-                                        <span class="pulse"></span>
-                                    </div>
-                                </li>
+
+                                </li> -->
                                 <li>
                                     <a href="<?php echo base_url(); ?>Auth/logout" class="right-bar-toggle">
                                         <i class="zmdi zmdi-power"></i>
@@ -92,7 +91,7 @@
                             <i class="fa fa-dollar"></i> <span> Ventas </span> </a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url(); ?>Cobros_controller" class="waves-effect">
+                        <a href="<?php echo base_url(); ?>Cobranzas_controller" class="waves-effect">
                             <i class="fa fa-money"></i> <span> Cobranzas </span> </a>
                     </li>
                     <li>

@@ -1,4 +1,9 @@
  <script type="text/javascript">
+$(document).ready(function() {
+    $("#finalizar_venta").css("display", "none");
+
+});
+
 var base_url = "<?php echo base_url(); ?>";
 
 $(document).on("click", ".btn-check", function() {
@@ -134,7 +139,11 @@ function sumar() {
     $("#total_venta").val(total);
 }
 
-//  function guardar_venta() {
+
+
+
+
+// al presionar guardar venta, envia los datos via ajax al controlador
 $('#datos_factura_ventas').on('submit', function(e) {
     e.preventDefault();
     var cliente = $("#id_cliente").val();
@@ -144,15 +153,14 @@ $('#datos_factura_ventas').on('submit', function(e) {
         return false;
     } else {
 
-        var url = base_url + "Ventas_controller/store/";
         var respuesta = confirm(" ¿Esta Seguro de Guardar la Venta?.. VERIFIQUE TODOS LOS DATOS ");
         if (respuesta == true) {
-            $("#btnSave").css("display", "none")
+            //   $("#btnSave").css("display", "none")
             $.ajax({
-                url: url,
-                type: "POST",
+                url: base_url + 'Ventas_controller/store',
+                type: 'POST',
                 data: $('#datos_factura_ventas').serialize(),
-                dataType: "JSON",
+                dataType: 'json',
                 success: function(response) {
                     res = response; //guardamos resultado para poder preg.
                     $("#btnSave").css("display", "block")
@@ -164,9 +172,7 @@ $('#datos_factura_ventas').on('submit', function(e) {
                             timer: 2000
                         });
 
-                        setTimeout(function() {
-                            location.reload();
-                        }, 2100);
+                        realizar_cobro(res.id_venta, cliente, totales);
 
                     } else {
                         Swal.fire({
@@ -175,16 +181,62 @@ $('#datos_factura_ventas').on('submit', function(e) {
                         });
                     };
 
-                },
+                }
             });
         }
     }
 });
 
+function realizar_cobro(id_venta, cliente, total) {
+    // abrimos modal y enviamos datos
+    $("#modal_fin_venta").modal("show");
+    $('#total_operacion').val(total);
+    $('#id_operacion').val(id_venta);
+    $('#id_persona').val(cliente);
+
+}
+
+
+// al presionar guardar venta, envia los datos via ajax al controlador
+$('#form_finalizar_venta').on('submit', function(e) {
+    e.preventDefault();
+    $.ajax({
+        url: base_url + 'Cobranzas_controller/cobrar',
+        type: 'POST',
+        data: $('#form_finalizar_venta').serialize(),
+        dataType: 'json',
+        success: function(response) {
+            res = response; //guardamos resultado para poder preg.
+            $("#finalizar_venta").css("display", "none");
+            if (res.status == "success") {
+                Swal.fire({
+                    icon: res.status,
+                    title: res.message,
+                    showConfirmButton: true,
+                    timer: 2000
+                });
+                $("#finalizar_venta").css("display", "inline");
+
+                // imprimir comprobante de venta
+
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error al Agregar/Actualizar datos',
+                });
+            };
+
+        }
+    });
+
+
+});
+
 
 
 $(document).on("keyup", "#MontoRecibido", function() {
-
+    $("#finalizar_venta").css("display", "inline");
+    condicion = $('#condicion').val();
     total = $('#total_venta').val();
     if (total <= 0) {
         alert('Total de la venta no puede ser CERO');
@@ -195,14 +247,14 @@ $(document).on("keyup", "#MontoRecibido", function() {
     recibido = $('#MontoRecibido').val();
     $('#totalpagado').val(recibido);
     var change = parseFloat(recibido) - parseFloat(total);
-
+    console.log(change);
     if (change == parseFloat(total))
         Status = 1;
     else
     if (change > 0)
         Status = 2;
     else
-    if (change <= 0)
+    if (change < 0)
         Status = 0;
 
     if (!change) {
@@ -210,30 +262,40 @@ $(document).on("keyup", "#MontoRecibido", function() {
             style: 'currency',
             currency: 'PYG'
         }).format(change));
-        $("#btnSave").css("display", "none")
-    }
-    if (change < 0) {
-        change = (new Intl.NumberFormat('es-es', {
-            style: 'currency',
-            currency: 'PYG'
-        }).format(change));
-        $("#btnSave").css("display", "none")
-        $('#ReturnChange').addClass("label label-danger importe");
-        $('#ReturnChange').removeClass("label label-success importe");
-        $('#ReturnChange h1').text(change);
-        $('#ReturnChange').text(change.toFixed(0));
+        $("#ReturnChange").css("display", "none");
+        if (condicion == 1) {
+            $("#finalizar_venta").css("display", "none");
+        }
+
     } else {
-        $("#btnSave").css("display", "inline")
+        console.log(Status);
+        $("#ReturnChange").css("display", "block");
+        if (change < 0) {
+            change = (new Intl.NumberFormat('es-es', {
+                style: 'currency',
+                currency: 'PYG'
+            }).format(change));
+            if (condicion == 1) {
+                $("#finalizar_venta").css("display", "none");
+            }
+            $('#ReturnChange').addClass("label label-danger importe");
+            $('#ReturnChange').removeClass("label label-success importe");
+            $('#ReturnChange h3').text('Falta ' + change);
+            $('#ReturnChange').text(change.toFixed(0));
+        } else {
+            $("#finalizar_venta").css("display", "inline")
 
-        change = (new Intl.NumberFormat('es-es', {
-            style: 'currency',
-            currency: 'PYG'
-        }).format(change));
+            change = (new Intl.NumberFormat('es-es', {
+                style: 'currency',
+                currency: 'PYG'
+            }).format(change));
 
-        $('#ReturnChange').removeClass("label label-danger importe");
-        $('#ReturnChange').addClass("label label-success importe");
-        $('#ReturnChange h1').text(change);
-        $('#ReturnChange span').text(change.toFixed(0));
+            $('#ReturnChange').removeClass("label label-danger importe");
+            $('#ReturnChange').addClass("label label-success importe");
+            $('#ReturnChange h3').text('Vuelto ' + change);
+            $('#ReturnChange span').text(change.toFixed(0));
+        }
     }
+
 });
  </script>

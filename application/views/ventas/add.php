@@ -44,7 +44,6 @@
             <h4 class="header-title m-t-0 m-b-30">Nueva Venta</h4>
             <div class="form-group row">
                 <form class="form-horizontal" role="form" id="datos_factura_ventas" action="#" method="post">
-
                     <div class="form-group">
 
                         <label for="nombre" class="col-md-1 control-label">Cliente</label>
@@ -67,6 +66,16 @@
 
                         </div>
 
+                        <label for="condicion" class="col-md-2 col-xs-12 control-label">Condicion Venta</label>
+                        <div class="col-md-2">
+                            <select class='form-control' name="condicion" id="condicion" required>
+                                <option value="1">Contado</option>
+                                <option value="2" SELECTED>Credito</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
                         <label for="fecha" class="col-md-2 col-sm-12 col-xs-12 control-label">Comprobante</label>
                         <div class="input-group col-md-2 col-sm-12 col-xs-12 pull-left">
                             <select class='form-control' name="id_tipocomprobante" id="id_tipocomprobante" required>
@@ -83,40 +92,22 @@
                             </select>
                         </div>
 
-                    </div>
-
-                    <div class="form-group">
                         <input type="hidden" id="tipo_comprobante" name="tipo_comprobante">
                         <label for="numero_factura" class="col-md-1 col-xs-12 control-label">Serie</label>
-                        <div class="input-group col-sm-12 col-xs-12 col-md-1 pull-left">
+                        <div class="input-group col-sm-12 col-xs-12 col-md-2 pull-left">
                             <input type="text" class="form-control" name="serie_comprobante_venta"
                                 id="serie_comprobante_venta" placeholder="000-000" maxlength="7" value="" readonly
                                 required>
                         </div>
 
                         <label for="numero_factura" class="col-md-2 col-xs-12 control-label">Nro. Comprobante</label>
-                        <div class="input-group col-sm-12 col-xs-12 col-md-1 pull-left">
+                        <div class="input-group col-sm-12 col-xs-12 col-md-2 pull-left">
                             <input type="text" class="form-control" name="nro_op" id="nro_op" placeholder="Nro."
                                 value="" required readonly>
                         </div>
-                        <label for="fp" class="col-md-2 col-xs-12 control-label">Forma de Pago</label>
-                        <div class="col-md-2">
-                            <select class='form-control form-white' name="id_formapago" id="id_formapago" required>
-                                <!--combo dinamico desde la base de datos-->
-                                <?php foreach ($formapago as $pago) : ?>
-                                <option value="<?php echo $pago->id_formapago; ?>">
-                                    <?php echo $pago->id_formapago . "-" . $pago->descripcion; ?> </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
 
-                        <label for="condicion" class="col-md-1 col-xs-12 control-label">Condicion Venta</label>
-                        <div class="col-md-2">
-                            <select class='form-control' name="condicion" id="condicion" required>
-                                <option value="1" SELECTED>Contado</option>
-                                <option value="2">Credito</option>
-                            </select>
-                        </div>
+
+
 
                     </div>
 
@@ -291,13 +282,15 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Finalizar Venta </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="exampleModalLabel2">Finalizar Venta </h5>
                 </div>
 
-                <form method="post" name="formventas" id="formventas" action="#">
+                <form method="post" name="formventas" id="form_finalizar_venta" action="#">
 
+                    <input type="hidden" name="id_persona" id="id_persona">
+                    <input type="hidden" name="id_operacion" id="id_operacion">
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -312,7 +305,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="control-label">Total Venta</label>
-                                <input class="form-control form-white" name="total" id="total_venta" type="text" />
+                                <input class="form-control form-white" name="total_operacion" id="total_operacion"
+                                    type="text" />
                             </div>
 
                         </div>
@@ -322,10 +316,10 @@
                             <div class="col-md-6">
                                 <label class="control-label"> Recibido </label>
                                 <input class="form-control form-white" name="recibido" id="MontoRecibido" autofocus
-                                    type="text" value="0" min="0" pattern="^[0-9]+" />
+                                    type="text" min="0" onfocus="" pattern="^[0-9]+" />
                             </div>
                             <div class="col-md-6" id="ReturnChange">
-                                <h1></h1>
+                                <h3></h3>
                             </div>
 
                         </div>
@@ -335,7 +329,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="btnSave"> <i class="fa fa-save"></i> Terminar
+                        <button type="submit" class="btn btn-success" id="finalizar_venta"> <i class="fa fa-save"></i>
+                            Finalizar
                         </button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i>
                             Cancelar

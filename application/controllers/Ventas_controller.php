@@ -128,12 +128,11 @@ class Ventas_controller extends CI_Controller
 					'nrocomprobante'    =>	$nrocomprobante,
 					'seriecomprobante'  =>	$_POST['serie_comprobante_venta'],
 					'total' 			=>	$_POST['totales'],
-					'id_formapago' 		=>	$_POST['id_formapago'],
 					'tipocomprobante' 	=>  $tipocomprobante,
 					'id_usuario' 		=>	$this->session->userdata('id_usuario'),
 					'tipoventa' 			=>	2, // 1 presupuesto, 2 venta
 					'condicionventa' 		=> $condicion,
-					'estado' 			=>	1
+					'estado' 			=>	2
 				);
 
 
@@ -142,31 +141,12 @@ class Ventas_controller extends CI_Controller
 					$id_venta = $this->Ventas_model->lastID();
 					$this->updateComprobante($tipocomprobante, $nrocomprobante);
 					$this->save_detalles($id_venta, $idproductos, $cantidades, $precios, $importes);
-					//preparamos para insertar movimiento en caja
-					$id_operacion = $id_venta;
-					$id_motivo = 13; //ingreso por ventas
-					$tipo_movimiento = 1; //1= es ingreso 2 = es egreso
-					$obs_movimiento = "Ingreso - por Venta # " . $id_venta;
-					$importe_movimiento = $_POST['totales'];
-
-					if ($condicion == 1) {
-						//obtener saldo anterior
-						$id_caja = $this->session->userdata('id_caja');
-						$movimientos = $this->Movimientos_model->getSaldo($id_caja);
-
-						if ($movimientos) {
-							$saldo = $movimientos->saldo_movimiento +  $importe_movimiento;
-						} else {
-							$saldo = $importe_movimiento;
-						}
-
-						$this->insertar_movimiento($id_operacion, $id_motivo, $tipo_movimiento, $importe_movimiento, $obs_movimiento, $saldo);
-					}
 
 					echo json_encode(
 						array(
 							"status"     => "success",
 							"message" => "La Venta ha sido guardada sin Errores ",
+							"id_venta" => $id_venta,
 						)
 					);
 				} else {
@@ -187,6 +167,9 @@ class Ventas_controller extends CI_Controller
 			redirect("Ventas_controller/add", "refresh");
 		}
 	}
+
+
+
 	protected function updateComprobante($tipocomprobante, $nrocomprobante)
 	{
 		$data = array(
