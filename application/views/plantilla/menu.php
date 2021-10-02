@@ -87,26 +87,30 @@
                         <a href="<?php echo base_url(); ?>Reservas_controller" class="waves-effect">
                             <i class="fa fa-calendar-o"></i> <span> Reservas </span> </a>
                     </li>
-
                     <li>
-                        <a href="<?php echo base_url(); ?>Productos_controller" class="waves-effect">
-                            <i class="fa fa-truck"></i> <span> Productos </span> </a>
+                        <a href="<?php echo base_url(); ?>Ventas_controller" class="waves-effect">
+                            <i class="fa fa-dollar"></i> <span> Ventas </span> </a>
                     </li>
-
                     <li>
-                        <a href="<?php echo base_url(); ?>Servicios_controller" class="waves-effect">
-                            <i class="fa fa-user"></i> <span> Servicios </span> </a>
+                        <a href="<?php echo base_url(); ?>Cobros_controller" class="waves-effect">
+                            <i class="fa fa-money"></i> <span> Cobranzas </span> </a>
                     </li>
-
-
+                    <li>
+                        <a href="<?php echo base_url(); ?>Movimientos_controller" class="waves-effect">
+                            <i class="fa fa-bar-chart"></i> <span> Movimientos </span> </a>
+                    </li>
 
                     <li class="has_sub">
-
                         <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-cogs"></i>
                             <span>Mantenimientos </span> <span class="menu-arrow"></span></a>
-
                         <ul class="list-unstyled">
 
+                            <li><a href="<?php echo base_url(); ?>Productos_controller"
+                                    class="waves-effect">Productos</a>
+                            </li>
+                            <li><a href="<?php echo base_url(); ?>Servicios_controller"
+                                    class="waves-effect">Servicios</a>
+                            </li>
                             <li><a href="<?php echo base_url(); ?>Categorias_controller"
                                     class="waves-effect">Categorias</a>
                             </li>
@@ -129,42 +133,12 @@
                             <li><a href="<?php echo base_url(); ?>Cargos_controller" class="waves-effect">Cargos</a>
                             </li>
 
-                            <!-- <li><a href="<?php echo base_url(); ?>TipoCobros_controller" class="waves-effect">Tipo de
-                                    Cobro</a></li> -->
 
                             <li><a href="<?php echo base_url(); ?>Comprobantes_controller"
                                     class="waves-effect">Comprobantes</a></li>
 
-                            <!-- <li><a href="<?php echo base_url(); ?>Horarios_controller" class="waves-effect">Horario
-                                    Reserva </a></li> -->
-
-                            <!-- <li><a href="<?php echo base_url(); ?>Horarios_controller" class="waves-effect">Horario
-                                    Reserva </a></li> -->
 
                         </ul>
-                    </li>
-
-
-                    <li class="has_sub">
-
-                        <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-money"></i> <span>
-                                Operaciones Contables
-                            </span> <span class="menu-arrow"></span></a>
-                        <ul class="list-unstyled">
-                            <!-- <li><a href="<?php echo base_url(); ?>Aperturas_controller">Apertura/Cierre Caja </a></li> -->
-                            <li><a href="<?php echo base_url(); ?>Movimientos_controller">Caja y Movimientos </a></li>
-                            <li><a href="<?php echo base_url(); ?>Cobros_controller">Gestionar Cobranzas </a></li>
-                            <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"> <span>
-                                        Ventas </span> <span class="menu-arrow"></span></a>
-                                <ul class="list-unstyled">
-                                    <li><a href="<?php echo base_url(); ?>Ventas_controller/add">Nueva Venta </a></li>
-                                    <li><a href="<?php echo base_url(); ?>Ventas_controller">Gestionar Ventas </a></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-
                     </li>
 
                     <li class="has_sub">
@@ -175,15 +149,9 @@
                             <li><a href="<?php echo base_url(); ?>Ventas_controller/reporte">Reporte de Ventas por
                                     Fecha</a>
                             </li>
-                            <a href="javascript:void(0);" class="waves-effect"></i> <span>
-                                    Presupuestos </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url(); ?>Presupuestos_controller" class="waves-effect">
-                                        <span> Impresión de contrato </span> </a></li>
-                            </ul>
+
                     </li>
                 </ul>
-
 
 
                 <li class="has_sub">
@@ -199,9 +167,6 @@
                         </li>
                     </ul>
                 </li>
-
-
-
 
                 <li>
                     <a target="_blank" href="<?php echo base_url(); ?>docFotoPy/site" class="waves-effect"><i
