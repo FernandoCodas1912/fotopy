@@ -13,8 +13,8 @@ class Cobranzas_controller extends CI_Controller
 			redirect(base_url());
 		}
 		$this->load->model("Cobranzas_model"); // esto abre el modelo
-		$this->load->model("Tipo_op_model"); // esto abre el modelo
-		$this->load->model("FormaPago_model"); // esto abre el modelo
+		$this->load->model("Ventas_model"); // esto abre el modelo
+		$this->load->model("FormasPago_model"); // esto abre el modelo
 		$this->load->model("Clientes_model"); // esto abre el modelo
 		$this->load->model("Servicios_model"); // esto abre el modelo
 		$this->load->model("Empresas_model"); // esto abre el modelo
@@ -37,22 +37,24 @@ class Cobranzas_controller extends CI_Controller
 	//funcion vista para mostrar detalles
 	public function view($id)
 	{
-		//$id = $this->input->post("id"); //esto es el id que quiero ver.
-		$data = array(
-			'cobranza' => $this->Cobranzas_model->getCobranza($id),
-			'detalles' => $this->Ventas_model->getDetalleVenta($id),
-			'formapago' => $this->FormaPago_model->getFormaspagos(),
-			'clientes' => $this->Clientes_model->getClientes(),
-			'servicios' => $this->Servicios_model->getServicios(),
-			//'empresa'=> $this->Empresas_model->getAll(),
+		$cobranza = $this->Cobranzas_model->getCobranza($id);
+		$venta = $this->Ventas_model->getVenta($cobranza->id_venta);
+		$otras_cobranzas = $this->Cobranzas_model->getCobranzaByVenta($cobranza->id_venta);
+		$detalle_venta = $this->Ventas_model->getDetalleVenta($cobranza->id_venta);
 
+		$data = array(
+			'cobranza' => $cobranza,
+			'otras_cobranzas' => $otras_cobranzas,
+			'venta' => $venta,
+			'detalles' => $detalle_venta,
+			// 'clientes' => $this->Clientes_model->getById()
 		);
 
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu');
 		$this->load->view("cobranzas/view", $data);
 		$this->load->view('plantilla/footer_plugins');
-		$this->load->view('cobranzas/script_cobranza');
+		$this->load->view('cobranzas/script_cobranzas');
 
 		//abrimos la vista view
 	}
@@ -68,7 +70,7 @@ class Cobranzas_controller extends CI_Controller
 		$total_operacion = $this->input->post("total_operacion");
 		// procesar, guardar en cobros, guardar en cta cte, generar movimiento
 		//preparamos para insertar movimiento en caja
-		$id_motivo = 13; //ingreso por ventas
+		$id_motivo = 15; //Ingreso - Por Cobro de Cuotas Cred.
 		$tipo_movimiento = 1; //1= es ingreso 2 = es egreso
 		$obs_movimiento = "Ingreso - por Venta # " . $id_operacion;
 		$importe_movimiento = $_POST['totales'];
@@ -88,7 +90,6 @@ class Cobranzas_controller extends CI_Controller
 		// }
 		$movimiento = 1;
 		if ($movimiento) {
-			// $this->save_detalles($id_venta, $idproductos, $cantidades, $precios, $importes);
 
 			echo json_encode(
 				array(
@@ -106,18 +107,6 @@ class Cobranzas_controller extends CI_Controller
 		}
 	}
 
-
-
-	public function imprimir($id)
-	{
-		$data = array(
-			'cobranza'	=> $this->Cobranzas_model->getCobranza($id),
-			'detalles'	=> $this->Ventas_model->getDetalleVenta($id),
-			'empresa'	=> $this->Empresas_model->getEmpresa()
-
-		);
-		$this->load->view("cobranzas/print", $data);
-	}
 	//funcion add para mostrar vistas
 	public function add()
 	{
@@ -125,10 +114,11 @@ class Cobranzas_controller extends CI_Controller
 		$data = array(
 			//'tipo_operaciones'=> $this->Tipo_op_model->gettipo_operaciones(),
 			'cobranza' => $this->Cobranzas_model->getCobranzas(),
-			'formapago' => $this->FormaPago_model->getFormaspagos(),
-			'clientes' => $this->Clientes_model->getClientes(),
-			'servicios' => $this->Servicios_model->getServicios(),
-			'comprobantes' => $this->Comprobantes_model->getComprobantes(),
+			'formapago' => $this->FormasPago_model->getAll(),
+			'clientes' => $this->Clientes_model->getClientePendientes(),
+			'ventas' => $this->Ventas_model->getVentas(),
+			'servicios' => $this->Servicios_model->getAll(),
+			'comprobantes' => $this->Comprobantes_model->getAll(),
 		);
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu');
@@ -139,203 +129,166 @@ class Cobranzas_controller extends CI_Controller
 
 	public function store()
 	{
+		//recibimos las variables que necesiten ser formateadas 
 		$id_cliente = $this->input->post("id_cliente");
-		$idproductos = $this->input->post("idproductos");
-		$cantidades = $this->input->post("cantidades");
-		$precios = $this->input->post("precios");
-		$importes = $this->input->post("importes");
-		$tipocomprobante = $this->input->post("tipo_comprobante");
-		$nrocomprobante = $this->input->post("nro_op");
+		$id_venta = $this->input->post("id_venta");
+		$id_formapago = $this->input->post("id_formapago");
+		$monto_entregado = $this->input->post("monto_entregado");
+		$total_venta = $this->input->post("total_venta");
 
-		if (($idproductos != '') and ($id_cliente != '') and ($cantidades != '')) {
-			//recibimos las variables que necesiten ser formateadas 
-			$fecha_mov = date("Y-m-d");
+		if($monto_entregado > 0){
 
-			//aqui se valida el formulario, reglas, primero el campo, segundo alias del campo, tercero la validacion
-			$this->form_validation->set_rules("nro_op", "Nro. Op", "required");
+			if (($id_cliente != '') and ($id_venta != '')) {
+				$fecha_mov = date("Y-m-d");
 
-			//SI ESTA BIEN VALIDADO
-			if ($this->form_validation->run() == TRUE) {
-				//se reciben las variables y se guardan
+				$estado = 2; // total
+				
+				$total_cobrado = $this->Cobranzas_model->getPagos($id_venta);
+				$total_cobrado = $total_cobrado + $monto_entregado;
+				$vuelto = $total_cobrado - $total_venta;
+
+				if($total_cobrado < $total_venta){
+					/**
+					 * solamente si la suma del 
+					 * (monto entregado por el cliente + montos cobrados anteriormente) 
+					 * es menor al total pendiente, 
+					 * el estado del registro es "parcial" y
+					 * el vuelto es cero
+					 */
+					$estado = 1; // parcial
+					$vuelto = 0;
+				}else{
+					// cambiar el estado de la venta a PAGADO
+					// estado 1
+					$data = [
+						'estado' => '3',
+					];
+			
+					$this->Ventas_model->update($id_venta, $data);
+				}
+				// $estado = 3; // anulado
 
 				$data = array(
-					//'DirUsuario' 		=>	strtoupper($_POST['DirUsuario']) ,//esto pasa a mayuscula
-					'id_cliente' 		=>	$_POST['id_cliente'],
-					'fecha' 			=>	$_POST['fecha'],
-					'nrocomprobante'    =>	$nrocomprobante,
-					'seriecomprobante'  =>	$_POST['serie_comprobante_venta'],
-					'total' 			=>	$_POST['totales'],
-					'id_formapago' 		=>	$_POST['id_formapago'],
-					'tipocomprobante' 	=>  $tipocomprobante,
-					'id_usuario' 		=>	$this->session->userdata('id_usuario'),
-					'tipoventa' 			=>	2,
-					'estado' 			=>	1
+					'id_cliente' 	=> $id_cliente,
+					'fecha' 		=> $fecha_mov,
+					'monto' 		=> $monto_entregado,
+					'id_formapago' 	=> $id_formapago,
+					'cajero'	 	=> $this->session->userdata('id_usuario'),
+					'id_venta'		=> $id_venta,
+					'id_formapago'	=> $id_formapago,
+					'estado'		=> $estado,
+					'vuelto'		=> $vuelto
 				);
 
-
 				//guardamos los datos en la base de datos
-				if ($this->Ventas_model->save($data)) {
-					$id_venta = $this->Ventas_model->lastID();
-					$this->updateComprobante($tipocomprobante, $nrocomprobante);
-					$this->save_detalles($id_venta, $idproductos, $cantidades, $precios, $importes);
-					//$this->session->set_flashdata('success', 'Venta  registrada..!');
-					redirect(base_url() . "Ventas_controller", "refresh");
+				if ($this->Cobranzas_model->save($data)) {
+					$id_venta = $this->Cobranzas_model->lastID();
+					//$this->session->set_flashdata('success', 'Cobro registrado!');
+					redirect(base_url() . "Cobranzas_controller", "refresh");
 				} else {
 					//si hubo errores, mostramos mensaje
-					$this->session->set_flashdata('error', 'Venta no registrada error bd!');
+					$this->session->set_flashdata('error', 'Cobro no registrado, error bd!');
 					$this->add();
-					//	redirect("usuarios_view/list", "refresh");
 				}
+	
 			} else {
-				$this->session->set_flashdata('error', 'Errores en la validacion, reintente!');
 				//si hubo errores en la validacion, rellamamos al metodo add mas arriba detallado
+				$this->session->set_flashdata('error', 'Cantidad, Cliente o Producto esta Vacio!');
 				$this->add();
 			}
-		} else {
-			$this->session->set_flashdata('error', 'Cantidad, Cliente o Producto esta Vacio!');
-			//si hubo errores en la validacion, rellamamos al metodo add mas arriba detallado
+		}else{
+			//si el monto entregado por el cliente es menor a cero, rellamamos al metodo add mas arriba detallado
+			$this->session->set_flashdata('error', 'El monto entregado NO puede ser menor a CERO!');
 			$this->add();
 		}
 	}
-	protected function updateComprobante($tipocomprobante, $nrocomprobante)
-	{
-		$data = array(
-			'ultimo_nro' => $nrocomprobante,
-		);
-
-		if (!$this->Comprobantes_model->update($tipocomprobante, $data)) {
-
-			$this->session->set_flashdata('error', 'Ultimo Nro Comprobante ' . $nrocomprobante . ' con errores!');
-		}
-	}
-	protected function save_detalles($id_venta, $productos, $cantidades, $precios, $importes)
-	{
-		for ($i = 0; $i < count($cantidades); $i++) {
-			$data = array(
-				'id_producto'	=> $productos[$i],
-				'id_venta' 		=> $id_venta,
-				'cantidad' 		=> $cantidades[$i],
-				'precio' 		=> $precios[$i],
-				'importe' 		=> $importes[$i],
-				'estado' 		=>	1
-			);
-			//if($this->Ventas_model->save_detalle($data))
-			//	{	
-			$this->Ventas_model->save_detalle($data);
-			$this->updateProducto($productos[$i], $cantidades[$i]);
-			$this->session->set_flashdata('success', 'Venta Nro ' . $id_venta . ' registrado correctamente!');
-			//redirect("Ventas_controller", "refresh");
-			//}
-			//else
-			//{
-			//si hubo errores, mostramos mensaje
-			//	$this->session->set_flashdata('error', 'Venta detalle no registrada error bd!');
-			//	$this->add();
-			//}
-		}
-	}
-	protected function updateProducto($id_producto, $cantidad)
-	{
-		$productoActual = $this->Servicios_model->getServicio($id_producto);
-		$data = array(
-			'stock'		=>  $productoActual->stock - $cantidad,
-		);
-		//actualiza el stock desde el modelo
-		$this->Servicios_model->update($id_producto, $data);
-	}
-
-	//funcion add para mostrar vistas
-	public function reporte()
-	{
-		//cargamos un array usando el modelo
-		$data = array(
-			'clientes' => $this->Clientes_model->getClientes(),
-		);
-		$this->load->view('plantilla/header');
-		$this->load->view('plantilla/menu');
-		$this->load->view('ventas/reporte', $data);
-		$this->load->view('plantilla/footer_plugins');
-		$this->load->view('ventas/script_ventas');
-	}
-	public function generarreporte()
-	{
-		if (isset($_POST['fechaini'])) {
-			$fecha_ini = $_POST['fechaini'];
-		}
-		if (isset($_POST['fechafin'])) {
-			$fecha_fin = $_POST['fechafin'];
-		}
-		if (isset($_POST['id_cliente'])) {
-			$id_cliente = $_POST['id_cliente'];
-		}
 
 
-		//$fecha_ini2=date_format( new DateTime($fecha_ini), 'Y-m-d');
-		//$fecha_fin2=date_format( new DateTime($fecha_fin), 'Y-m-d');
-		$where = "1=1";
-
-		if ($fecha_ini != "") {
-			$where .= " AND v.fecha >='$fecha_ini'";
-		}
-		if ($fecha_fin != "") {
-			$where .= " AND v.fecha <='$fecha_fin'";
-		}
-		if ($id_cliente != "") {
-			$where .= " AND cl.id_cliente ='$id_cliente'";
-		}
-		//cargamos un array usando el modelo
-		$data = array(
-			//'tipo_operaciones'=> $this->Tipo_op_model->gettipo_operaciones(),
-			'reporteventas' => $this->Ventas_model->getReporte($where),
-			'clientes' => $this->Clientes_model->getClientes(),
-			//	'productos'=> $this->Productos_model->getProductos(),
-		);
-		$this->load->view('plantilla/header');
-		$this->load->view('plantilla/menu');
-		$this->load->view('ventas/reporte', $data);
-		$this->load->view('plantilla/footer_plugins');
-		$this->load->view('ventas/script_ventas');
-	}
-
-
-	//funcion para borrar
+	//funcion para anular venta
 	public function delete($id)
 	{
+		$cobranza = $this->Cobranzas_model->getCobranza($id);
+		$pagos = $this->Cobranzas_model->getPagos($cobranza->id_venta, $id);
+		$venta = $this->Ventas_model->getVenta($cobranza->id_venta);
 
-		$databd = $this->Clientes_model->getById($id);
-		if ($databd->estado == 3) {
-			$this->session->set_flashdata('error', 'Ya estaba anulado previamente!');
-			redirect(base_url() . "Clientes_controller", "refresh");
-		}
-
-		$data = array(
-			'detalle_venta' => $this->Ventas_model->getDetalleVenta($id),
-		);
-
-		if ($this->Ventas_model->getDetalleVenta($id)) {
-			//tengo que restar prod
-
-			//$this->session->set_flashdata('success', 'Actualizado correctamente!');
-			//redirect(base_url()."Compras_controller", "refresh");
-		} else {
-			//	$this->session->set_flashdata('error', 'Errores al Intentar Actualizar!');
-			//redirect(base_url()."Compras_controller/edit/".$IdUsuario);
-		}
-		$data = array(
-			'estado' => '3',
-		);
-		if (($this->Ventas_model->update($id, $data)) and ($this->Ventas_model->updatedetalle($id, $data))) {
-			//al anular debe restar el stock sumado
-			//para ello buscar del id compra detalle, traer todos los productos
-
+		$cob_data = [
+			'estado' => 3
+		];
+		
+		if ($this->Cobranzas_model->update($id, $cob_data)) {
+			
+			if($pagos < $venta->total){
+				/**
+				 * si el resto de cobros es inferior al monto de venta, 
+				 * se cambia de estado a 2
+				 * NO PAGADO
+				 */
+				$data = [
+					'estado' => '2',
+				];
+				$this->Ventas_model->update($cobranza->id_venta, $data);
+			}
+			
 			$this->session->set_flashdata('success', 'Anulado correctamente!');
 			//retornamos a la vista para que se refresque
-			redirect(base_url() . "Ventas_controller", "refresh");
-			//echo "Ventas_controller/";
-
+			redirect(base_url() . "Cobranzas_controller", "refresh");
 		} else {
 			$this->session->set_flashdata('error', 'Errores al Intentar Anular!');
-			redirect(base_url() . "Ventas_controller/list/" . $id);
+			redirect(base_url() . "Cobranzas_controller/list/" . $id);
 		}
+	}
+	
+
+	//insertamos las operaciones en movimientos
+	public function insertar_movimiento($id_operacion, $id_motivo, $tipo_movimiento, $importe_movimiento, $obs_movimiento, $saldo)
+	{
+		$id_caja = $this->session->userdata('id_caja');
+		$id_usuario = $this->session->userdata('id_usuario');
+
+		$data_movimiento = array(
+			'id_operacion'       	=> $id_operacion,
+			'id_motivo'       		=> $id_motivo,
+			'id_caja'       		=> $id_caja,
+			'id_usuario'  			=>  $id_usuario,
+			'fecha_hora'    		=> date('Y-m-d H:i:s'),
+			'tipo_movimiento'   	=> $tipo_movimiento,
+			'obs_movimiento'     	=> $obs_movimiento,
+			'importe_movimiento' 	=> $importe_movimiento,
+			'saldo_movimiento'      => $saldo,
+			'estado'       			=> 1,
+
+		);
+
+		if ($this->Movimientos_model->save($data_movimiento)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// ajax para vista de cobranza
+	public function clienteVentas()
+	{
+		$result['status'] = "fail";
+		if (isset($_POST['id_cliente'])) {
+			$id_cliente = $_POST['id_cliente'];
+			$result['status'] = "success";
+			$result['ventas'] = $this->Ventas_model->getVentasByCliente($id_cliente);
+		}
+
+		echo json_encode($result);
+	}
+
+	// ajax para vista de cobranza
+	public function detallesVenta()
+	{
+		$result['status'] = "fail";
+		if (isset($_POST['id_venta'])) {
+			$id_venta = $_POST['id_venta'];
+			$result['status'] = "success";
+			$result['detalles'] = $this->Ventas_model->getDetalleVenta($id_venta);
+		}
+
+		echo json_encode($result);
 	}
 }
