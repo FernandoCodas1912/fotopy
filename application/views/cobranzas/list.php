@@ -39,9 +39,9 @@
 			<div class="col-lg-12">
 				<div class="card-box">
 					<div class="col-md-2 pull-right">
-						<a href="<?php echo base_url();?>Ventas_controller/add" class="btn btn-success"><i class="fa fa-plus"></i> <span>Nueva Venta</span> </a>
+						<a href="<?php echo base_url();?>Cobranzas_controller/add" class="btn btn-success"><i class="fa fa-plus"></i> <span>Nueva Cobranza</span> </a>
 					</div>
-					<h4 class="header-title m-t-0 m-b-30"> Listado de Ventas </h4>
+					<h4 class="header-title m-t-0 m-b-30"> Listado de Cobranzas </h4>
 					<div class="table-responsive">
 						<table class="table" id="example3">
 							<thead>
@@ -49,58 +49,50 @@
 									<th>Op</th>
 									<th>Fecha</th>
 									<th>Cliente</th>
-									<th>Total</th>
+									<th>Abonado</th>
 									<th>F.Pago</th>
-									<th>T.Comprob.</th>
 									<th>Estado</th>
 									<th>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
-								if(!empty($ventas)):?>
-									<?php foreach($ventas as $venta):?>
+								if(!empty($cobranzas)):?>
+									<?php foreach($cobranzas as $cobranza):?>
 										<tr>
-											<td><?php echo $venta->id_venta;?></td>
+											<td><?php echo $cobranza->id_cobro;?></td>
 											<?php 
-											$fecha = $venta->fecha;
+											$fecha = $cobranza->fecha;
 											$fecha = date('d-m-Y', strtotime($fecha));
-											$estado = $venta->estado;
+											$estado = $cobranza->cobro_estado;
 
 											if($estado == 1)
 											{
-												$estado2     = "Activo";$label_class = 'label-success';
+												$estado     = "Parcial";
+												$label_class = 'label-info';
 											}
 											else
 											{
 												if($estado == 2)
 												{
-													$estado2     = "Inactivo";$label_class = 'label-warning';
+													$estado     = "Total";
+													$label_class = 'label-success';
 												}
 												else
 												{
-													$estado2     = "Anulado";$label_class = 'label-danger';
+													$estado     = "Anulado";
+													$label_class = 'label-danger';
 												}
 											}
-											$tipo=	$venta->tipocomprobante;
-											if($tipo == 1)
-											{
-												$tipo2     = "Factura";$label_class2 = 'label-success';
 
-											}
-											else
-											{
-												$tipo2     = "Boleta";$label_class2 = 'label-warning';
-											}
 											?>
 											<td><?php echo $fecha;?></td>
-											<td><?php echo $venta->id_cliente." - ".$venta->nombre;?></td>
-											<td><?php echo $venta->total;?></td>
-											<td><?php echo $venta->formadepago;?></td>
-											<td><?php echo $tipo2;?></td>
-											<td><span class="label <?php echo $label_class;?>"><?php echo $estado2; ?></span></td>
+											<td><?php echo $cobranza->id_cliente." - ".$cobranza->razonsocial;?></td>
+											<td><?php echo $cobranza->monto;?></td>
+											<td><?php echo $cobranza->formadepago;?></td>
+											<td><span class="label <?php echo $label_class;?>"><?php echo $estado; ?></span></td>
 											<td>
-												<a href="<?php echo base_url();?>Ventas_controller/view/<?php echo $venta->id_venta;?>" class="btn btn-sm btn-primary" title="Ver y editar detalles de la venta">
+												<a href="<?php echo base_url();?>Cobranzas_controller/view/<?php echo $cobranza->id_cobro;?>" class="btn btn-sm btn-primary" title="Ver y editar detalles de la cobranza">
 													<i class="fa fa-eye">
 													</i> Ver mas detalles
 												</a>

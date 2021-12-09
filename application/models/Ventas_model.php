@@ -3,7 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Ventas_model extends CI_Model
 {
-	//estos son metodos q tienen q ver con bd
+	//estado de las ventas
+	private $pagado = 1;
+	private $noPagado = 2;
+	private $anulado = 3;
 
 	//este metodo es para mostrar todos los empleado
 	public function getVentas()
@@ -50,6 +53,16 @@ class Ventas_model extends CI_Model
 		//$this->db->join("productos_servicio p", "p=id_producto=dm.fk_id_producto"); 
 		$this->db->where("dv.id_venta", $id); //modifico marcelo
 		//$this->db->where("dm.id_movimiento",$id);
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	//get ventas por cliente
+	public function getVentasByCliente($id_cliente)
+	{
+		$this->db->select("vs.*");
+		$this->db->from("ventas vs");
+		$this->db->where(["vs.id_cliente" => $id_cliente, "vs.estado" => $this->noPagado]);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
