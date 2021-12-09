@@ -84,7 +84,7 @@ class Ventas_model extends CI_Model
 		$this->db->select("v.fecha, v.total, cl.razonsocial, u.username");
 		$this->db->from("ventas v");
 		$this->db->join("clientes cl", "v.id_cliente=cl.id_cliente");
-		$this->db->join("usuario u", "v.id_usuario=u.id_usuario");
+		$this->db->join("usuarios u", "v.id_usuario=u.id_usuario");
 		$this->db->where($where);
 		$resultados = $this->db->get();
 		return $resultados->result();
