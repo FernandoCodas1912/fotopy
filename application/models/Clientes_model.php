@@ -18,6 +18,19 @@ class Clientes_model extends CI_Model
 
         return $resultados->result();
     }
+    
+    //este metodo es para mostrar todos los registros
+    public function getClientePendientes()
+    {
+        $this->db->select('c.*');
+        $this->db->from('clientes c');
+        $this->db->join('ventas vs', 'vs.id_cliente=c.id_cliente');
+        $this->db->where("vs.estado", "2");
+        $this->db->group_by('c.id_cliente');
+        $resultados = $this->db->get();
+
+        return $resultados->result();
+    }
 
     //esto es una funcion o metodo para mostrar 1 registro por id
     public function getById($id)
